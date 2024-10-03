@@ -6,39 +6,22 @@ void menu_principal (void);
 void cadastramento_paciente (void);
 void cadastramento_dentista (void);
 void menu_paciente (void);
+void menu_dentista (void);
 void menu_agendamento (void);
 void agendar (void);
 void informacoes (void);
+void relatorios(void);
 
 int main(int argc, char const *argv[]) {
 	menu_principal();
 	cadastramento_paciente();
 	cadastramento_dentista();
 	menu_paciente();
+    menu_dentista();
 	menu_agendamento();
 	agendar();
     informacoes();
-
-    printf("=================================================================\n");
-    printf("-----                  Area dos Dentistas                   -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Cadastrar dentista                                -----\n");
-    printf("----- 2 - Visualizar dados de um dentista                   -----\n");
-    printf("----- 3 - Editar dentista                                   -----\n");
-    printf("----- 4 - Excluir dentista                                  -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-    printf("=================================================================\n");
-    
-
-    printf("=================================================================\n");
-    printf("-----                  Area de Relatorios                   -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Todos os agendamentos                             -----\n");
-    printf("----- 2 - Todos os pacientes                                -----\n");
-    printf("----- 3 - Todos os dentistas                                -----\n");
-    printf("----- 4 - Todos os agendamentos por dentista                -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-    printf("=================================================================\n");
+    relatorios();
 
     return 0;
 }
@@ -176,3 +159,34 @@ void informacoes (void) {
     printf("=================================================================\n");
 }
 
+void menu_dentista(void) {
+    char op;
+    printf("=================================================================\n");
+    printf("-----                  Area dos Dentistas                   -----\n");
+    printf("=================================================================\n");
+    printf("----- 1 - Cadastrar dentista                                -----\n");
+    printf("----- 2 - Visualizar dados de um dentista                   -----\n");
+    printf("----- 3 - Editar dentista                                   -----\n");
+    printf("----- 4 - Excluir dentista                                  -----\n");
+    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+    printf("=================================================================\n");
+    scanf ("%c", &op);
+    getchar();
+    return op;
+}
+
+void relatorios(void) {
+    char op;
+    printf("=================================================================\n");
+    printf("-----                  Area de Relatorios                   -----\n");
+    printf("=================================================================\n");
+    printf("----- 1 - Todos os agendamentos                             -----\n");
+    printf("----- 2 - Todos os pacientes                                -----\n");
+    printf("----- 3 - Todos os dentistas                                -----\n");
+    printf("----- 4 - Todos os agendamentos por dentista                -----\n");
+    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+    printf("=================================================================\n");
+    scanf ("%c", &op);
+    getchar();
+    return op;
+}
