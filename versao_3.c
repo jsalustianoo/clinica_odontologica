@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
 
 void menu_principal (void) {
     char op;
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("------                Clinica Odontologica                 ------\n");
     printf("=================================================================\n");
     printf("-----                1 - Area de Agendamentos               -----\n");
@@ -38,77 +38,90 @@ void menu_principal (void) {
     printf("-----                5 - Area de Informacoes                -----\n");
     printf("-----                0 - Sair                               -----\n");
     printf("=================================================================\n");
-    printf("-----                Informe a opção desejada:              -----\n");
+    printf("     - Informe a opcao desejada: ");
     scanf ("%c", &op);
     getchar();
-    printf("=================================================================\n");
     return op;
 }
 
 void cadastramento_paciente (void) {
     //variaveis
     char nome, cpf, telefone, doencas, alergias, nascimento;
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("------                 Cadastro de Paciente                ------\n");
     printf("=================================================================\n");
-    printf("     - Nome: \n");
+    printf("     - Nome: ");
     scanf("%s", &nome);
     getchar();
-    printf("     - CPF: \n");
+    printf("     - CPF: ");
     scanf("%s", &cpf);
     getchar();
-    printf("     - Telefone: \n"); 
+    printf("     - Telefone: "); 
     scanf("%s", &telefone);
     getchar();
-    printf("     - Data de nascimento: \n");
+    printf("     - Data de nascimento: ");
     scanf("%s", &nascimento);
     getchar();
-    printf("     - Doenças: \n");
+    printf("     - Doencas preexistentes: ");
     scanf("%s", &doencas);
     getchar();
-    printf("     - Contra indicacao de remedios: \n");
+    printf("     - Contra indicacao de remedios: ");
     scanf("%s", &alergias);
     getchar();
+    printf("\n-----            Paciente cadastrado com sucesso            -----\n");
     printf("=================================================================\n");
-    printf("-----            Paciente cadastrado com sucesso            -----\n");
+}
+
+void menu_dentista(void) {
+    char op;
+    printf("\n=================================================================\n");
+    printf("-----                  Area dos Dentistas                   -----\n");
     printf("=================================================================\n");
+    printf("----- 1 - Cadastrar dentista                                -----\n");
+    printf("----- 2 - Visualizar dados de um dentista                   -----\n");
+    printf("----- 3 - Editar dentista                                   -----\n");
+    printf("----- 4 - Excluir dentista                                  -----\n");
+    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+    printf("=================================================================\n");
+    scanf ("%c", &op);
+    getchar();
+    return op;
 }
 
 void cadastramento_dentista (void) {
     //variaveis
     char nome, cpf, telefone, especialidade, cro;
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("------                 Cadastro de Dentista                ------\n");
     printf("=================================================================\n");
-    printf("     - Nome: \n");
+    printf("     - Nome: ");
     scanf("%s", &nome);
     getchar();
-    printf("     - CPF: \n");
+    printf("     - CPF: ");
     scanf("%s", &cpf);
     getchar();
-    printf("     - Telefone: \n"); 
+    printf("     - Telefone: "); 
     scanf("%s", &telefone);
     getchar();
-    printf("     - Especialidade: \n"); 
+    printf("     - Especialidade: "); 
     scanf("%s", &especialidade);
     getchar();
-    printf("     - Número do CRO: \n"); 
+    printf("     - Numero do CRO: "); 
     scanf("%s", &cro);
     getchar();
-    printf("=================================================================\n");
-    printf("-----            Dentista cadastrado com sucesso            -----\n");
+    printf("\n\n-----            Dentista cadastrado com sucesso            -----\n");
     printf("=================================================================\n");
 }
 
 void menu_paciente (void) {
     char op;
-	printf("=================================================================\n");
-    printf("-----                      Bem-Vindo                        -----\n");
+	printf("\n=================================================================\n");
+    printf("-----                  Area dos pacientes                   -----\n");
     printf("=================================================================\n");
     printf("----- 1 - Agendamentos                                      -----\n");
-	printf("----- 2 - Ver cadastro                                      -----\n");
-    printf("----- 3 - Editar cadastro                                   -----\n");
-    printf("----- 4 - Excluir cadastro                                  -----\n");
+	printf("----- 2 - Perfil                                            -----\n");
+    printf("----- 3 - Editar paciente                                   -----\n");
+    printf("----- 4 - Excluir paciente                                  -----\n");
     printf("----- 0 - Retornar ao Menu Principal                        -----\n");
     printf("=================================================================\n");
     scanf ("%c", &op);
@@ -118,7 +131,7 @@ void menu_paciente (void) {
 
 void menu_agendamento (void) {
     char op;
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("-----                 Area dos Agendamentos                 -----\n");
     printf("=================================================================\n");
     printf("----- 1 - Realizar agendamento                              -----\n");
@@ -133,51 +146,23 @@ void menu_agendamento (void) {
 }
 
 void agendar (void) {
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("------                 Realizar Agendamento                ------\n");
     printf("=================================================================\n");
     printf("     - ID: \n");
     printf("     - Nome: \n");
     printf("     - CPF: \n"); 
     printf("     - Data: \n");
-    printf("     - Horário: \n");
-    printf("     - Situação: \n");
-    printf("     - O que foi feito: \n");
+    printf("     - Horario: \n");
+    printf("     - Situacao: \n");
     printf("     - Pagamento: \n");
+    printf("\n-----           Agendamento realizado com sucesso           -----\n");
     printf("=================================================================\n");
-    printf("-----           Agendamento realizado com sucesso           -----\n");
-    printf("=================================================================\n");
-}
-
-void informacoes (void) {
-    printf("=================================================================\n");
-    printf("-----                  Area de Informacoes                  -----\n");
-    printf("=================================================================\n");
-    printf("-----                   Projeto SIG-Dentistry:                   \n");                   
-    printf("-----       Sistema de Agendamento para Clínicas Dentárias       \n");                   
-    printf("-----    Desenvolvido por: José Salustiano e Raul Araújo    -----\n");
-    printf("=================================================================\n");
-}
-
-void menu_dentista(void) {
-    char op;
-    printf("=================================================================\n");
-    printf("-----                  Area dos Dentistas                   -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Cadastrar dentista                                -----\n");
-    printf("----- 2 - Visualizar dados de um dentista                   -----\n");
-    printf("----- 3 - Editar dentista                                   -----\n");
-    printf("----- 4 - Excluir dentista                                  -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-    printf("=================================================================\n");
-    scanf ("%c", &op);
-    getchar();
-    return op;
 }
 
 void relatorios(void) {
     char op;
-    printf("=================================================================\n");
+    printf("\n=================================================================\n");
     printf("-----                  Area de Relatorios                   -----\n");
     printf("=================================================================\n");
     printf("----- 1 - Todos os agendamentos                             -----\n");
@@ -189,4 +174,14 @@ void relatorios(void) {
     scanf ("%c", &op);
     getchar();
     return op;
+}
+
+void informacoes (void) {
+    printf("\n=================================================================\n");
+    printf("-----                  Area de Informacoes                  -----\n");
+    printf("=================================================================\n");
+    printf("-----                   Projeto SIG-Dentistry:                   \n");                   
+    printf("-----       Sistema de Agendamento para Clinicas Dentarias       \n");                   
+    printf("-----    Desenvolvido por: Jose Salustiano e Raul Araujo    -----\n");
+    printf("=================================================================\n");
 }
