@@ -6,6 +6,9 @@ void menu_principal (void); // Menu Principal
 // Módulo Agendamento
 void menu_agendamento (void);
 void agendar (void);
+void exibir_dados_agendamento (void);
+void editar_agendamento (void);
+void excluir_agendamento (void);
 
 // Módulo Pacientes
 void menu_paciente (void);
@@ -59,6 +62,7 @@ int main() {
 }
 
 void menu_principal (void) {
+    system("clear||cls");
     printf("\n=================================================================\n");
     printf("------                Clinica Odontologica                 ------\n");
     printf("=================================================================\n");
@@ -73,15 +77,41 @@ void menu_principal (void) {
 }
 
 void menu_agendamento (void) {
-    printf("\n=================================================================\n");
-    printf("-----                 Menu Agendamentos                 -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Realizar agendamento                              -----\n");
-    printf("----- 2 - Visualizar agendamentos                           -----\n");
-    printf("----- 3 - Editar agendamento                                -----\n");
-    printf("----- 4 - Excluir agendamento                               -----\n");
-    printf("----- 0 - Retornar ao menu anterior                         -----\n");
-    printf("=================================================================\n");
+    int opcao_agendamento;
+    do{
+        system("clear||cls");
+        printf("\n=================================================================\n");
+        printf("-----                 Menu Agendamentos                 -----\n");
+        printf("=================================================================\n");
+        printf("----- 1 - Realizar agendamento                              -----\n");
+        printf("----- 2 - Visualizar agendamentos                           -----\n");
+        printf("----- 3 - Editar agendamento                                -----\n");
+        printf("----- 4 - Excluir agendamento                               -----\n");
+        printf("----- 0 - Retornar ao menu anterior                         -----\n");
+        printf("=================================================================\n");
+        scanf("%d", &opcao_agendamento);
+        getchar();
+        switch (opcao_agendamento) {
+            case 0:
+                break;
+            case 1:
+                agendar();
+                break;
+            case 2:
+                exibir_dados_agendamento();
+                break;
+            case 3:
+                editar_agendamento();
+                break;
+            case 4:
+                excluir_agendamento();
+                break;
+            default:
+                printf("Numero digitado nao condiz com nenhuma opcao do sistema");
+            break;
+        }
+    }while(opcao_agendamento != 0);
+    
 }
 
 void agendar (void) {
@@ -99,16 +129,83 @@ void agendar (void) {
     printf("=================================================================\n");
 }
 
-void menu_paciente (void) {
+void exibir_dados_agendamento (void) {
+    printf("\n=================================================================\n");
+    printf("------                Dados de um Agendamento                ------\n");
+    printf("=================================================================\n");
+    printf("     - ID: \n");
+    printf("     - Nome: \n");
+    printf("     - CPF: \n"); 
+    printf("     - Data: \n");
+    printf("     - Horario: \n");
+    printf("     - Situacao: \n");
+    printf("     - Pagamento: \n");
+    printf("=================================================================\n");
+}
+void editar_agendamento (void) {
+    printf("\n=================================================================\n");
+    printf("------                  Editar Agendamento                 ------\n");
+    printf("=================================================================\n");
+    printf("     - ID: \n");
+    printf("     - Nome: \n");
+    printf("     - CPF: \n"); 
+    printf("     - Data: \n");
+    printf("     - Horario: \n");
+    printf("     - Situacao: \n");
+    printf("     - Pagamento: \n");
+    printf("\n-----      Dados do Agendamento editados com sucesso!     -----\n");
+    printf("=================================================================\n");
+}
+
+void excluir_agendamento (void) {
 	printf("\n=================================================================\n");
-    printf("-----                  Menu dos Pacientes                   -----\n");
+    printf("-----                  Excluir Agendamento                  -----\n");
     printf("=================================================================\n");
-    printf("----- 1 - Agendamentos                                      -----\n");
-	printf("----- 2 - Perfil                                            -----\n");
-    printf("----- 3 - Editar paciente                                   -----\n");
-    printf("----- 4 - Excluir paciente                                  -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+    printf("     - ID: \n");
+    printf("     - Nome: \n");
+    printf("     - CPF: \n"); 
+    printf("     - Data: \n");
+    printf("     - Horario: \n");
+    printf("     - Situacao: \n");
+    printf("     - Pagamento: \n");                      
     printf("=================================================================\n");
+}
+
+void menu_paciente(void) {
+    int opcao_paciente;
+    do{
+        system("clear||cls");
+        printf("\n=================================================================\n");
+        printf("-----                  Menu dos Pacientes                   -----\n");
+        printf("=================================================================\n");
+        printf("----- 1 - Cadastrar novo paciente                           -----\n");
+        printf("----- 2 - Visualizar dados de um paciente                   -----\n");
+        printf("----- 3 - Editar dados de um paciente                       -----\n");
+        printf("----- 4 - Excluir paciente                                  -----\n");
+        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+        printf("=================================================================\n");
+        scanf("%d", &opcao_paciente);
+        getchar();
+        switch (opcao_paciente) {
+            case 0:
+                break;
+            case 1:
+                cadastro_paciente();
+                break;
+            case 2:
+                exibir_dados_paciente();
+                break;
+            case 3:
+                editar_paciente();
+                break;
+            case 4:
+                excluir_paciente();
+                break;
+            default:
+                printf("Numero digitado nao condiz com nenhuma opcao do sistema");
+            break;
+        }
+    }while(opcao_paciente != 0);
 }
 
 void cadastro_paciente (void) {
@@ -155,9 +252,9 @@ void exibir_dados_paciente (void) {
 
 void editar_paciente (void) {
     //variaveis
-    char nome, cpf, telefone, doencas, alergias, nascimento;
+    char nome[70], cpf[11], telefone[11], doencas[250], alergias[250], nascimento[8];
     printf("\n=================================================================\n");
-    printf("------                 Editar de Paciente                ------\n");
+    printf("------                  Editar de Paciente                 ------\n");
     printf("=================================================================\n");
     printf("     - Nome: ");
     scanf("%s", &nome);
@@ -206,16 +303,41 @@ void excluir_paciente (void) {
 }
 
 void menu_dentista(void) {
-    char op;
-    printf("\n=================================================================\n");
-    printf("-----                  Menu dos Dentistas                   -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Cadastrar novo dentista                           -----\n");
-    printf("----- 2 - Visualizar dados de um dentista                   -----\n");
-    printf("----- 3 - Editar dados de um dentista                       -----\n");
-    printf("----- 4 - Excluir dentista                                  -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-    printf("=================================================================\n");
+    int opcao_dentista;
+    do{
+        system("clear||cls");
+        printf("\n=================================================================\n");
+        printf("-----                  Menu dos Dentistas                   -----\n");
+        printf("=================================================================\n");
+        printf("----- 1 - Cadastrar novo dentista                           -----\n");
+        printf("----- 2 - Visualizar dados de um dentista                   -----\n");
+        printf("----- 3 - Editar dados de um dentista                       -----\n");
+        printf("----- 4 - Excluir dentista                                  -----\n");
+        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+        printf("=================================================================\n");
+        scanf("%d", &opcao_dentista);
+        getchar();
+        switch (opcao_dentista) {
+            case 0:
+                break;
+            case 1:
+                cadastro_dentista();
+                break;
+            case 2:
+                exibir_dados_dentista();
+                break;
+            case 3:
+                editar_dentista();
+                break;
+            case 4:
+                excluir_dentista();
+                break;
+            default:
+                printf("Numero digitado nao condiz com nenhuma opcao do sistema");
+            break;
+        }
+    } while (opcao_dentista != 0);
+
 }
 
 void cadastro_dentista (void) {
@@ -296,7 +418,7 @@ void excluir_dentista (void) {
     printf("Tem certeza que deseja excluir esse dentista?");
     scanf("%d", &confirmacao);
     if (confirmacao != 0 || confirmacao != 1){
-        printf("n\n-----     O numero digitado n�o corresponde a nenhuma funcao!    -----\n");
+        printf("n\n-----     O numero digitado nao corresponde a nenhuma funcao!    -----\n");
     } else if (confirmacao == 0){
         printf("n\n-----     Operacao cancelada!    -----\n");
     } else{
@@ -306,18 +428,27 @@ void excluir_dentista (void) {
 }
 
 void relatorios(void) {
-    printf("\n=================================================================\n");
-    printf("-----                  Area de Relatorios                   -----\n");
-    printf("=================================================================\n");
-    printf("----- 1 - Todos os agendamentos                             -----\n");
-    printf("----- 2 - Todos os pacientes                                -----\n");
-    printf("----- 3 - Todos os dentistas                                -----\n");
-    printf("----- 4 - Todos os agendamentos por dentista                -----\n");
-    printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-    printf("=================================================================\n");
+    int opcao_relatorios;
+    do{
+        system("clear||cls");
+        printf("\n=================================================================\n");
+        printf("-----                  Area de Relatorios                   -----\n");
+        printf("=================================================================\n");
+        printf("----- 1 - Todos os agendamentos                             -----\n");
+        printf("----- 2 - Todos os pacientes                                -----\n");
+        printf("----- 3 - Todos os dentistas                                -----\n");
+        printf("----- 4 - Todos os agendamentos por dentista                -----\n");
+        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
+        printf("=================================================================\n");
+        printf("Opcao desejada: ");
+        scanf("%d", &opcao_relatorios);
+        getchar();
+    } while (opcao_relatorios != 0);
+    
 }
 
 void informacoes (void) {
+    system("clear||cls");
     printf("\n=================================================================\n");
     printf("-----                  Area de Informacoes                  -----\n");
     printf("=================================================================\n");
@@ -325,4 +456,6 @@ void informacoes (void) {
     printf("-----       Sistema de Agendamento para Clinicas Dentarias       \n");                   
     printf("-----    Desenvolvido por: Jose Salustiano e Raul Araujo    -----\n");
     printf("=================================================================\n");
+    getchar();
+    printf("Tecle <ENTER> para continuar...");
 }
