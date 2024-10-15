@@ -246,7 +246,6 @@ void exibir_dados_paciente (void) {
     printf("     - Telefone: "); 
     printf("     - Doencas preexistentes: ");
     printf("     - Contra indicacao de remedios: ");
-    printf("\n-----            Paciente cadastrado com sucesso            -----\n");
     printf("=================================================================\n");
 }
 
@@ -274,7 +273,7 @@ void editar_paciente (void) {
     printf("     - Contra indicacao de remedios: ");
     scanf("%s", &alergias);
     getchar();
-    printf("\n-----            Paciente cadastrado com sucesso            -----\n");
+    printf("\n-----      Dados do(a) Paciente editados com sucesso!     -----\n");
     printf("=================================================================\n");
 }
 
@@ -293,7 +292,7 @@ void excluir_paciente (void) {
     printf("Tem certeza que deseja excluir esse paciente?");
     scanf("%d", &confirmacao);
     if (confirmacao != 0 || confirmacao != 1){
-        printf("n\n-----     O numero digitado n�o corresponde a nenhuma funcao!    -----\n");
+        printf("n\n-----     O numero digitado nao corresponde a nenhuma funcao!    -----\n");
     } else if (confirmacao == 0){
         printf("n\n-----     Operacao cancelada!    -----\n");
     } else{
@@ -374,7 +373,6 @@ void exibir_dados_dentista (void) {
     printf("     - Telefone: "); 
     printf("     - Especialidade: "); 
     printf("     - Numero do CRO: "); 
-    printf("\n-----            Dentista cadastrado com sucesso            -----\n");
     printf("=================================================================\n");
 }
 
@@ -399,7 +397,7 @@ void editar_dentista (void) {
     printf("     - Numero do CRO: "); 
     scanf("%s", &cro);
     getchar();
-    printf("\n\n-----     Dados do(a) dentista editados com sucesso!    -----\n");
+    printf("\n\n-----     Dados do(a) Dentista editados com sucesso!    -----\n");
     printf("=================================================================\n");
 }
 
