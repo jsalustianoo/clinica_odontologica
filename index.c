@@ -248,16 +248,19 @@ void cadastro_paciente (void) {
 }
 
 void exibir_dados_paciente (void) {
-    printf("\n=================================================================\n");
-    printf("------                 Dados de um Paciente                ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    printf("     - Data de nascimento: ");
-    printf("     - CPF: ");
-    printf("     - Telefone: "); 
-    printf("     - Doencas preexistentes: ");
-    printf("     - Contra indicacao de remedios: ");
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("");
+    printf("=================================================================================\n");
+    printf("------                         Dados de um Paciente                        ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                          ------");
+    printf("------      (Data de nascimento):                                            ------");
+    printf("------      (CPF):                                                           ------");
+    printf("------      (Telefone):                                                      ------"); 
+    printf("------      (Doencas preexistentes):                                         ------");
+    printf("------      (Contra indicacao de remedios):                                  ------");
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void editar_paciente (void) {
