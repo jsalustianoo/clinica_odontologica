@@ -186,15 +186,17 @@ void menu_paciente(void) {
     int opcao_paciente;
     do{
         system("clear||cls");
-        printf("\n=================================================================\n");
-        printf("-----                  Menu dos Pacientes                   -----\n");
-        printf("=================================================================\n");
-        printf("----- 1 - Cadastrar novo paciente                           -----\n");
-        printf("----- 2 - Visualizar dados de um paciente                   -----\n");
-        printf("----- 3 - Editar dados de um paciente                       -----\n");
-        printf("----- 4 - Excluir paciente                                  -----\n");
-        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-        printf("=================================================================\n");
+        printf("\n");
+        printf("=================================================================================\n");
+        printf("------                         Menu dos Pacientes                          ------\n");
+        printf("=================================================================================\n");
+        printf("------        (1) - Cadastrar novo paciente                                ------\n");
+        printf("------        (2) - Visualizar dados de um paciente                        ------\n");
+        printf("------        (3) - Editar dados de um paciente                            ------\n");
+        printf("------        (4) - Excluir paciente                                       ------\n");
+        printf("------        (0) - Retornar ao Menu Principal                             ------\n");
+        printf("=================================================================================\n");
+        printf("    - (Opcao desejada): ");
         scanf("%d", &opcao_paciente);
         getchar();
         switch (opcao_paciente) {
@@ -246,6 +248,7 @@ void cadastro_paciente (void) {
     printf("=================================================================================\n");
     printf("------                    Paciente cadastrado com sucesso                   -----\n");
     printf("=================================================================================\n");
+    printf("Tecle <ENTER> para continuar...\n");
     getchar();
 }
 
