@@ -63,7 +63,7 @@ int main() {
 
 void menu_principal (void) {
     system("clear||cls");
-    printf("");
+    printf("\n");
     printf("=================================================================================\n");
     printf("-----                  SIG-Dentistry: Clinica Odontologica                  -----\n");
     printf("=================================================================================\n");
@@ -81,7 +81,7 @@ void menu_agendamento (void) {
     int opcao_agendamento;
     do{
         system("clear||cls");
-        printf("");
+        printf("\n");
         printf("=================================================================================\n");
         printf("-----                           Menu Agendamentos                           -----\n");
         printf("=================================================================================\n");
@@ -119,7 +119,7 @@ void menu_agendamento (void) {
 
 void agendar (void) {
     system("clear||cls");
-    printf("");
+    printf("\n");
     printf("=================================================================================\n");
     printf("------                         Realizar Agendamento                        ------\n");
     printf("=================================================================================\n");
@@ -138,7 +138,7 @@ void agendar (void) {
 
 void exibir_dados_agendamento (void) {
     system("clear||cls");
-    printf("");
+    printf("\n");
     printf("=================================================================================\n");
     printf("------                       Dados de um Agendamento                       ------\n");
     printf("=================================================================================\n");
@@ -218,38 +218,40 @@ void menu_paciente(void) {
         }
     }while(opcao_paciente != 0);
 }
-
 void cadastro_paciente (void) {
-    //variaveis
-    char nome[70], cpf[11], telefone[11], doencas[250], alergias[250], nascimento[8];
-    printf("\n=================================================================\n");
-    printf("------                 Cadastro de Paciente                ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    scanf("%s", &nome);
+    char nome[100], data_nascimento[13], cpf[13], telefone[13], doencas[200], contraindicacao[200];
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                         Cadastro de Paciente                        ------\n");
+    printf("=================================================================================\n");
+    printf("        - (Nome): ");
+    scanf("%s", nome);
     getchar();
-    printf("     - Data de nascimento: ");
-    scanf("%s", &nascimento);
+    printf("        - (Data de nascimento): ");
+    scanf("%s", data_nascimento);
     getchar();
-    printf("     - CPF: ");
-    scanf("%s", &cpf);
+    printf("        - (CPF): ");
+    scanf("%s", cpf);
     getchar();
-    printf("     - Telefone: "); 
-    scanf("%s", &telefone);
+    printf("        - (Telefone): "); 
+    scanf("%s", telefone);
     getchar();
-    printf("     - Doencas preexistentes: ");
-    scanf("%s", &doencas);
+    printf("        - (Doencas preexistentes): ");
+    scanf("%s", doencas);
     getchar();
-    printf("     - Contra indicacao de remedios: ");
-    scanf("%s", &alergias);
+    printf("        - (Contra indicacao de remedios): ");
+    scanf("%s", contraindicacao);
     getchar();
-    printf("\n-----            Paciente cadastrado com sucesso            -----\n");
-    printf("=================================================================\n");
+    printf("=================================================================================\n");
+    printf("------                    Paciente cadastrado com sucesso                   -----\n");
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void exibir_dados_paciente (void) {
     system("clear||cls");
-    printf("");
+    printf("\n");
     printf("=================================================================================\n");
     printf("------                         Dados de um Paciente                        ------\n");
     printf("=================================================================================\n");
@@ -264,29 +266,15 @@ void exibir_dados_paciente (void) {
 }
 
 void editar_paciente (void) {
-    //variaveis
-    char nome[70], cpf[11], telefone[11], doencas[250], alergias[250], nascimento[8];
     printf("\n=================================================================\n");
     printf("------                  Editar de Paciente                 ------\n");
     printf("=================================================================\n");
     printf("     - Nome: ");
-    scanf("%s", &nome);
-    getchar();
     printf("     - Data de nascimento: ");
-    scanf("%s", &nascimento);
-    getchar();
     printf("     - CPF: ");
-    scanf("%s", &cpf);
-    getchar();
     printf("     - Telefone: "); 
-    scanf("%s", &telefone);
-    getchar();
     printf("     - Doencas preexistentes: ");
-    scanf("%s", &doencas);
-    getchar();
     printf("     - Contra indicacao de remedios: ");
-    scanf("%s", &alergias);
-    getchar();
     printf("\n-----      Dados do(a) Paciente editados com sucesso!     -----\n");
     printf("=================================================================\n");
 }
@@ -354,28 +342,17 @@ void menu_dentista(void) {
 }
 
 void cadastro_dentista (void) {
-    //variaveis
-    char nome, cpf, telefone, especialidade, cro;
     printf("\n=================================================================\n");
     printf("------                 Cadastro de Dentista                ------\n");
     printf("=================================================================\n");
     printf("     - Nome: ");
-    scanf("%s", &nome);
-    getchar();
     printf("     - CPF: ");
-    scanf("%s", &cpf);
-    getchar();
     printf("     - Telefone: "); 
-    scanf("%s", &telefone);
-    getchar();
     printf("     - Especialidade: "); 
-    scanf("%s", &especialidade);
-    getchar();
     printf("     - Numero do CRO: "); 
-    scanf("%s", &cro);
-    getchar();
     printf("\n-----            Dentista cadastrado com sucesso            -----\n");
     printf("=================================================================\n");
+    getchar();
 }
 
 void exibir_dados_dentista (void) {
@@ -391,33 +368,24 @@ void exibir_dados_dentista (void) {
 }
 
 void editar_dentista (void) {
-    char nome, cpf, telefone, especialidade, cro; //variaveis
-
-    printf("\n=================================================================\n");
-    printf("------              Editar dados de um Dentista            ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    scanf("%s", &nome);
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                      Editar dados de um Dentista                    ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                          ------");
+    printf("------      (CPF):                                                           ------");
+    printf("------      (Telefone):                                                      ------"); 
+    printf("------      (Especialidade):                                                 ------"); 
+    printf("------      (Numero do CRO):                                                 ------"); 
+    printf("=================================================================================\n");
+    printf("-----               Dados do(a) Dentista editados com sucesso!              -----\n");
+    printf("=================================================================================\n");
     getchar();
-    printf("     - CPF: ");
-    scanf("%s", &cpf);
-    getchar();
-    printf("     - Telefone: "); 
-    scanf("%s", &telefone);
-    getchar();
-    printf("     - Especialidade: "); 
-    scanf("%s", &especialidade);
-    getchar();
-    printf("     - Numero do CRO: "); 
-    scanf("%s", &cro);
-    getchar();
-    printf("\n\n-----     Dados do(a) Dentista editados com sucesso!    -----\n");
-    printf("=================================================================\n");
 }
 
 void excluir_dentista (void) {
     int confirmacao; //variaveis
-    char nome, cpf, telefone, especialidade, cro; //variaveis
 
     printf("\n=================================================================\n");
     printf("------                   Excluir Dentista                  ------\n");
