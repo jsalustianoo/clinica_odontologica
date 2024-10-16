@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu_principal (void); // Menu Principal
+void menu_principal (void); 
 
 // Módulo Agendamento
 void menu_agendamento (void);
@@ -24,8 +24,8 @@ void exibir_dados_dentista (void);
 void editar_dentista (void);
 void excluir_dentista (void);
 
-void informacoes (void); // Módulo Informações
-void relatorios (void); // Módulo Relatórios
+void informacoes (void); 
+void relatorios (void); 
 
 int main() {
     int opcao_principal;
@@ -63,16 +63,17 @@ int main() {
 
 void menu_principal (void) {
     system("clear||cls");
-    printf("\n=================================================================\n");
-    printf("------                Clinica Odontologica                 ------\n");
-    printf("=================================================================\n");
-    printf("-----                1 - Area de Agendamentos               -----\n");
-    printf("-----                2 - Area dos Pacientes                 -----\n");
-    printf("-----                3 - Area dos Dentistas                 -----\n"); 
-    printf("-----                4 - Area de Relatorios                 -----\n");
-    printf("-----                5 - Area de Informacoes                -----\n");
-    printf("-----                0 - Desligar Sistema                   -----\n");
-    printf("=================================================================\n");
+    printf("");
+    printf("=================================================================================\n");
+    printf("-----                  SIG-Dentistry: Clinica Odontologica                  -----\n");
+    printf("=================================================================================\n");
+    printf("-----                      1 - Modulo dos Agendamentos                      -----\n");
+    printf("-----                      2 - Modulo dos Pacientes                         -----\n");
+    printf("-----                      3 - Modulo dos Dentistas                         -----\n"); 
+    printf("-----                      4 - Modulo dos Relatorios                        -----\n");
+    printf("-----                      5 - Modulo das Informacoes                       -----\n");
+    printf("-----                      0 - Fechar sistema                               -----\n");
+    printf("=================================================================================\n");
     printf("     - Opcao desejada: ");
 }
 
@@ -80,15 +81,17 @@ void menu_agendamento (void) {
     int opcao_agendamento;
     do{
         system("clear||cls");
-        printf("\n=================================================================\n");
-        printf("-----                 Menu Agendamentos                 -----\n");
-        printf("=================================================================\n");
-        printf("----- 1 - Realizar agendamento                              -----\n");
-        printf("----- 2 - Visualizar agendamentos                           -----\n");
-        printf("----- 3 - Editar agendamento                                -----\n");
-        printf("----- 4 - Excluir agendamento                               -----\n");
-        printf("----- 0 - Retornar ao menu anterior                         -----\n");
-        printf("=================================================================\n");
+        printf("");
+        printf("=================================================================================\n");
+        printf("-----                           Menu Agendamentos                           -----\n");
+        printf("=================================================================================\n");
+        printf("-----      (1) Realizar agendamento                                         -----\n");
+        printf("-----      (2) Visualizar agendamentos                                      -----\n");
+        printf("-----      (3) Editar agendamento                                           -----\n");
+        printf("-----      (4) Excluir agendamento                                          -----\n");
+        printf("-----      (0) Retornar ao menu anterior                                    -----\n");
+        printf("=================================================================================\n");
+
         scanf("%d", &opcao_agendamento);
         getchar();
         switch (opcao_agendamento) {
@@ -111,22 +114,26 @@ void menu_agendamento (void) {
             break;
         }
     }while(opcao_agendamento != 0);
-    
+
 }
 
 void agendar (void) {
-    printf("\n=================================================================\n");
-    printf("------                 Realizar Agendamento                ------\n");
-    printf("=================================================================\n");
-    printf("     - ID: \n");
-    printf("     - Nome: \n");
-    printf("     - CPF: \n"); 
-    printf("     - Data: \n");
-    printf("     - Horario: \n");
-    printf("     - Situacao: \n");
-    printf("     - Pagamento: \n");
-    printf("\n-----           Agendamento realizado com sucesso           -----\n");
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("");
+    printf("=================================================================================\n");
+    printf("------                         Realizar Agendamento                        ------\n");
+    printf("=================================================================================\n");
+    printf("------      (ID):                                                          ------\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (CPF):                                                         ------\n"); 
+    printf("------      (Data):                                                        ------\n");
+    printf("------      (Horario):                                                     ------\n");
+    printf("------      (Situacao):                                                    ------\n");
+    printf("------      (Pagamento):                                                   ------\n");
+    printf("=================================================================================\n");
+    printf("------                 Agendamento realizado com sucesso!                  ------\n");
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void exibir_dados_agendamento (void) {
