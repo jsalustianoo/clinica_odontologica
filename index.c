@@ -137,17 +137,21 @@ void agendar (void) {
 }
 
 void exibir_dados_agendamento (void) {
-    printf("\n=================================================================\n");
-    printf("------                Dados de um Agendamento                ------\n");
-    printf("=================================================================\n");
-    printf("     - ID: \n");
-    printf("     - Nome: \n");
-    printf("     - CPF: \n"); 
-    printf("     - Data: \n");
-    printf("     - Horario: \n");
-    printf("     - Situacao: \n");
-    printf("     - Pagamento: \n");
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("");
+    printf("=================================================================================\n");
+    printf("------                       Dados de um Agendamento                       ------\n");
+    printf("=================================================================================\n");
+    printf("------      (ID do Agendamento):                                           ------\n");
+    printf("------                                                                     ------\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (CPF):                                                         ------\n"); 
+    printf("------      (Data):                                                        ------\n");
+    printf("------      (Horario):                                                     ------\n");
+    printf("------      (Situacao):                                                    ------\n");
+    printf("------      (Pagamento):                                                   ------\n");
+    printf("=================================================================================\n");
+    getchar();
 }
 void editar_agendamento (void) {
     printf("\n=================================================================\n");
