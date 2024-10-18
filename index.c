@@ -409,14 +409,14 @@ void excluir_dentista (void) {
     printf("     - Telefone: "); 
     printf("     - Especialidade: "); 
     printf("     - Numero do CRO: "); 
-    printf("Tem certeza que deseja excluir esse dentista?");
+    printf("Tem certeza que deseja excluir esse dentista? (S)IM | (N)ÃO ");
     scanf("%d", &confirmacao);
-    if (confirmacao != 0 || confirmacao != 1){
-        printf("n\n-----     O numero digitado nao corresponde a nenhuma funcao!    -----\n");
-    } else if (confirmacao == 0){
-        printf("n\n-----     Operacao cancelada!    -----\n");
+    if (confirmacao == "S" || confirmacao == "s"){
+        printf("n\n-----     Profissional excluído com sucesso!    -----\n");
+    } else if (confirmacao == "N" || confirmacao == "n"){
+        printf("n\n-----     Operação cancelada!    -----\n");
     } else{
-        printf("n\n-----     Dentista excluido com sucesso!    -----\n");
+        printf("n\n-----     Opção inválida!    -----\n");
     }
     printf("=================================================================\n");
 }
