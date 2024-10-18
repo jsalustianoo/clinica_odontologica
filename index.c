@@ -294,14 +294,14 @@ void excluir_paciente (void) {
     printf("     - Telefone: "); 
     printf("     - Doencas preexistentes: ");
     printf("     - Contra indicacao de remedios: ");
-    printf("Tem certeza que deseja excluir esse paciente?");
+    printf("Tem certeza que deseja excluir esse paciente? (S)IM | (N)ÃO");
     scanf("%d", &confirmacao);
-    if (confirmacao != 0 || confirmacao != 1){
-        printf("n\n-----     O numero digitado nao corresponde a nenhuma funcao!    -----\n");
-    } else if (confirmacao == 0){
+    if (confirmacao == "S" || confirmacao == "s"){
+        printf("n\n-----     Paciente excluído com sucesso!    -----\n");
+    } else if (confirmacao == "N" || confirmacao == "n"){
         printf("n\n-----     Operacao cancelada!    -----\n");
     } else{
-        printf("n\n-----     Paciente excluido com sucesso!    -----\n");
+        printf("n\n-----     Opção inválida!    -----\n");
     }
     printf("=================================================================\n");
 }
