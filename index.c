@@ -72,7 +72,7 @@ void menu_principal (void) {
     printf("-----                      3 - Modulo dos Dentistas                         -----\n"); 
     printf("-----                      4 - Modulo dos Relatorios                        -----\n");
     printf("-----                      5 - Modulo das Informacoes                       -----\n");
-    printf("-----                      0 - Fechar sistema                               -----\n");
+    printf("-----                      0 - Desligar sistema                             -----\n");
     printf("=================================================================================\n");
     printf("     - Opcao desejada: ");
 }
@@ -91,7 +91,7 @@ void menu_agendamento (void) {
         printf("-----      (4) Excluir agendamento                                          -----\n");
         printf("-----      (0) Retornar ao menu anterior                                    -----\n");
         printf("=================================================================================\n");
-
+        printf("     - Opcao desejada: ");
         scanf("%d", &opcao_agendamento);
         getchar();
         switch (opcao_agendamento) {
@@ -154,31 +154,35 @@ void exibir_dados_agendamento (void) {
     getchar();
 }
 void editar_agendamento (void) {
-    printf("\n=================================================================\n");
-    printf("------                  Editar Agendamento                 ------\n");
-    printf("=================================================================\n");
-    printf("     - ID: \n");
-    printf("     - Nome: \n");
-    printf("     - CPF: \n"); 
-    printf("     - Data: \n");
-    printf("     - Horario: \n");
-    printf("     - Situacao: \n");
-    printf("     - Pagamento: \n");
-    printf("\n-----      Dados do Agendamento editados com sucesso!     -----\n");
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                          Editar Agendamento                         ------\n");
+    printf("=================================================================================\n");
+    printf("------      (ID):                                                          ------\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (CPF):                                                         ------\n"); 
+    printf("------      (Data):                                                        ------\n");
+    printf("------      (Horario):                                                     ------\n");
+    printf("------      (Situacao):                                                    ------\n");
+    printf("------      (Pagamento):                                                   ------\n");
+    printf("=================================================================================\n");
+    printf("------               Dados do Agendamento editados com sucesso!            ------\n");
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void excluir_agendamento (void) {
 	printf("\n=================================================================\n");
     printf("-----                  Excluir Agendamento                  -----\n");
     printf("=================================================================\n");
-    printf("     - ID: \n");
-    printf("     - Nome: \n");
-    printf("     - CPF: \n"); 
-    printf("     - Data: \n");
-    printf("     - Horario: \n");
-    printf("     - Situacao: \n");
-    printf("     - Pagamento: \n");                      
+    printf("------      (ID):                                          ------\n");
+    printf("------      (Nome):                                        ------\n");
+    printf("------      (CPF):                                         ------\n"); 
+    printf("------      (Data):                                        ------\n");
+    printf("------      (Horario):                                     ------\n");
+    printf("------      (Situacao):                                    ------\n");
+    printf("------      (Pagamento):                                   ------\n");                      
     printf("=================================================================\n");
 }
 
