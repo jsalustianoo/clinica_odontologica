@@ -438,20 +438,23 @@ void cadastro_dentista (void) {
     printf("=================================================================================\n");
     printf("-----                  Dentista cadastrado(a) com sucesso!                  -----\n");
     printf("=================================================================================\n");
-    printf("Tecle <ENTER> para continuar...");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
 void exibir_dados_dentista (void) {
-    printf("\n=================================================================\n");
-    printf("------                 Dados de um Dentista                ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    printf("     - CPF: ");
-    printf("     - Telefone: "); 
-    printf("     - Especialidade: "); 
-    printf("     - Numero do CRO: "); 
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                        Dados de um Dentista                         ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (CPF):                                                         ------\n");
+    printf("------      (Telefone):                                                    ------\n"); 
+    printf("------      (Especialidade):                                               ------\n"); 
+    printf("------      (Numero do CRO):                                               ------\n"); 
+    printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
 }
 
 void editar_dentista (void) {
@@ -468,6 +471,7 @@ void editar_dentista (void) {
     printf("=================================================================================\n");
     printf("-----               Dados do(a) Dentista editados com sucesso!              -----\n");
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
