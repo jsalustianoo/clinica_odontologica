@@ -68,12 +68,12 @@ void menu_principal (void) {
     printf("=================================================================================\n");
     printf("-----                  SIG-Dentistry: Clinica Odontologica                  -----\n");
     printf("=================================================================================\n");
-    printf("-----                      1 - Modulo dos Agendamentos                      -----\n");
-    printf("-----                      2 - Modulo dos Pacientes                         -----\n");
-    printf("-----                      3 - Modulo dos Dentistas                         -----\n"); 
-    printf("-----                      4 - Modulo dos Relatorios                        -----\n");
-    printf("-----                      5 - Modulo das Informacoes                       -----\n");
-    printf("-----                      0 - Desligar sistema                             -----\n");
+    printf("-----                     (1) - Modulo dos Agendamentos                     -----\n");
+    printf("-----                     (2) - Modulo dos Pacientes                        -----\n");
+    printf("-----                     (3) - Modulo dos Dentistas                        -----\n"); 
+    printf("-----                     (4) - Modulo dos Relatorios                       -----\n");
+    printf("-----                     (5) - Modulo das Informacoes                      -----\n");
+    printf("-----                     (0) - Desligar sistema                            -----\n");
     printf("=================================================================================\n");
     printf("     - Opcao desejada: ");
 }
@@ -119,21 +119,38 @@ void menu_agendamento (void) {
 }
 
 void agendar (void) {
+    char id[10], nome[100], cpf[14], data[13], horario[9], situacao[200], pagamento[20];
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Realizar Agendamento                        ------\n");
     printf("=================================================================================\n");
-    printf("------      (ID):                                                          ------\n");
-    printf("------      (Nome):                                                        ------\n");
-    printf("------      (CPF):                                                         ------\n"); 
-    printf("------      (Data):                                                        ------\n");
-    printf("------      (Horario):                                                     ------\n");
-    printf("------      (Situacao):                                                    ------\n");
-    printf("------      (Pagamento):                                                   ------\n");
+    printf("------      (ID): ");
+    scanf("%s", id);
+    getchar();
+    printf("------      (Nome): ");
+    scanf("%s", nome);
+    getchar();
+    printf("------      (CPF): "); 
+    scanf("%s", cpf);
+    getchar();
+    printf("------      (Data): ");
+    scanf("%s", data);
+    getchar();
+    printf("------      (Horario): ");
+    scanf("%s", horario);
+    getchar();
+    printf("------      (Situacao): ");
+    scanf("%s", situacao);
+    getchar();
+    printf("------      (Pagamento): ");
+    scanf("%s", pagamento);
+    getchar();
     printf("=================================================================================\n");
     printf("------                 Agendamento realizado com sucesso!                  ------\n");
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
@@ -152,36 +169,53 @@ void exibir_dados_agendamento (void) {
     printf("------      (Situacao):                                                    ------\n");
     printf("------      (Pagamento):                                                   ------\n");
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 void editar_agendamento (void) {
+    char id[10], nome[100], cpf[14], data[13], horario[9], situacao[200], pagamento[20];
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                          Editar Agendamento                         ------\n");
     printf("=================================================================================\n");
-    printf("------      (ID):                                                          ------\n");
-    printf("------      (Nome):                                                        ------\n");
-    printf("------      (CPF):                                                         ------\n"); 
-    printf("------      (Data):                                                        ------\n");
-    printf("------      (Horario):                                                     ------\n");
-    printf("------      (Situacao):                                                    ------\n");
-    printf("------      (Pagamento):                                                   ------\n");
+    printf("------      (ID): \n");
+    scanf("%s", id);
+    getchar();
+    printf("------      (Nome): \n");
+    scanf("%s", nome);
+    getchar();
+    printf("------      (CPF): \n"); 
+    scanf("%s", cpf);
+    getchar();
+    printf("------      (Data): \n");
+    scanf("%s", data);
+    getchar();
+    printf("------      (Horario): \n");
+    scanf("%s", horario);
+    getchar();
+    printf("------      (Situacao): \n");
+    scanf("%s", situacao);
+    getchar();
+    printf("------      (Pagamento): \n");
+    scanf("%s", pagamento);
     printf("=================================================================================\n");
     printf("------               Dados do Agendamento editados com sucesso!            ------\n");
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
 void excluir_agendamento (void) {
-    char confirmacao; 
+    char confirmacao, id[10], nome[100], cpf[14], data[13], horario[9], situacao[200], pagamento[20];
 
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("-----                          Excluir Agendamento                          -----\n");
     printf("=================================================================================\n");
-    printf("------      (ID):                                                          ------\n");
+    printf("------      (ID): %s                                                       ------\n", id);
     printf("------      (Nome):                                                        ------\n");
     printf("------      (CPF):                                                         ------\n"); 
     printf("------      (Data):                                                        ------\n");
@@ -200,6 +234,7 @@ void excluir_agendamento (void) {
         printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
     }                     
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
@@ -269,7 +304,7 @@ void cadastro_paciente (void) {
     printf("=================================================================================\n");
     printf("------                    Paciente cadastrado com sucesso                   -----\n");
     printf("=================================================================================\n");
-    printf("Tecle <ENTER> para continuar...\n");
+    printf("      Tecle <ENTER> para continuar...\n");
     getchar();
 }
 
@@ -286,28 +321,34 @@ void exibir_dados_paciente (void) {
     printf("------      (Doencas preexistentes):                                         ------");
     printf("------      (Contra indicacao de remedios):                                  ------");
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
 void editar_paciente (void) {
-    printf("\n=================================================================\n");
-    printf("------                  Editar de Paciente                 ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    printf("     - Data de nascimento: ");
-    printf("     - CPF: ");
-    printf("     - Telefone: "); 
-    printf("     - Doencas preexistentes: ");
-    printf("     - Contra indicacao de remedios: ");
-    printf("\n-----      Dados do(a) Paciente editados com sucesso!     -----\n");
-    printf("=================================================================\n");
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                          Editar de Paciente                         ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (Data de nascimento):                                          ------\n");
+    printf("------      (CPF):                                                         ------\n");
+    printf("------      (Telefone):                                                    ------\n"); 
+    printf("------      (Doencas preexistentes):                                       ------\n");
+    printf("------      (Contra indicacao de remedios):                                ------\n");
+    printf("=================================================================================\n");
+    printf("------              Dados do(a) Paciente editados com sucesso!             ------\n");
+    printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
+    getchar();
 }
 
 void excluir_paciente (void) {
     char confirmacao;
 
     system("clear||cls");
-    print("\n");
+    printf("\n");
     printf("=================================================================================\n");
     printf("------                           Excluir Paciente                          ------\n");
     printf("=================================================================================\n");
@@ -329,6 +370,7 @@ void excluir_paciente (void) {
         printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
     }                     
     printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
@@ -425,7 +467,7 @@ void editar_dentista (void) {
 }
 
 void excluir_dentista (void) {
-    int confirmacao; //variaveis
+    char confirmacao; 
 
     printf("\n=================================================================\n");
     printf("------                   Excluir Dentista                  ------\n");
@@ -436,10 +478,10 @@ void excluir_dentista (void) {
     printf("     - Especialidade: "); 
     printf("     - Numero do CRO: "); 
     printf("Tem certeza que deseja excluir esse dentista? (S)IM | (N)ÃO ");
-    scanf("%d", &confirmacao);
-    if (confirmacao == "S" || confirmacao == "s"){
+    scanf(" %c", &confirmacao);
+    if (confirmacao == 'S' || confirmacao == 's'){
         printf("n\n-----     Profissional excluído com sucesso!    -----\n");
-    } else if (confirmacao == "N" || confirmacao == "n"){
+    } else if (confirmacao == 'N' || confirmacao == 'n'){
         printf("n\n-----     Operação cancelada!    -----\n");
     } else{
         printf("n\n-----     Opção inválida!    -----\n");
