@@ -478,24 +478,30 @@ void editar_dentista (void) {
 void excluir_dentista (void) {
     char confirmacao; 
 
-    printf("\n=================================================================\n");
-    printf("------                   Excluir Dentista                  ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    printf("     - CPF: ");
-    printf("     - Telefone: "); 
-    printf("     - Especialidade: "); 
-    printf("     - Numero do CRO: "); 
-    printf("Tem certeza que deseja excluir esse dentista? (S)IM | (N)ÃO ");
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                           Excluir Dentista                          ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                          ------");
+    printf("------      (CPF):                                                           ------");
+    printf("------      (Telefone):                                                      ------"); 
+    printf("------      (Especialidade):                                                 ------"); 
+    printf("------      (Numero do CRO):                                                 ------"); 
+    printf("------                                                                     ------\n"); 
+    printf("------     Tem certeza que deseja excluir esse paciente? (S)IM | (N)AO     ------\n");
+
     scanf(" %c", &confirmacao);
     if (confirmacao == 'S' || confirmacao == 's'){
-        printf("n\n-----     Profissional excluído com sucesso!    -----\n");
+        printf("------                   Paciente excluído com sucesso!                    ------\n");
     } else if (confirmacao == 'N' || confirmacao == 'n'){
-        printf("n\n-----     Operação cancelada!    -----\n");
+        printf("------                        Operacao cancelada!                          ------\n");
     } else{
-        printf("n\n-----     Opção inválida!    -----\n");
-    }
-    printf("=================================================================\n");
+        printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
+    }                     
+    printf("=================================================================================\n");
+    printf("      Tecle <ENTER> para continuar...");
+    getchar();
 }
 
 void relatorios(void) {
