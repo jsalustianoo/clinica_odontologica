@@ -75,7 +75,7 @@ void menu_principal (void) {
     printf("-----                     (5) - Modulo das Informacoes                      -----\n");
     printf("-----                     (0) - Desligar sistema                            -----\n");
     printf("=================================================================================\n");
-    printf("     - Opcao desejada: ");
+    printf("      - (Opcao desejada): ");
 }
 
 void menu_agendamento (void) {
@@ -92,7 +92,7 @@ void menu_agendamento (void) {
         printf("-----      (4) Excluir agendamento                                          -----\n");
         printf("-----      (0) Retornar ao menu anterior                                    -----\n");
         printf("=================================================================================\n");
-        printf("     - Opcao desejada: ");
+        printf("      - (Opcao desejada): ");
         scanf("%d", &opcao_agendamento);
         getchar();
         switch (opcao_agendamento) {
@@ -508,16 +508,17 @@ void relatorios(void) {
     int opcao_relatorios;
     do{
         system("clear||cls");
-        printf("\n=================================================================\n");
-        printf("-----                  Area de Relatorios                   -----\n");
-        printf("=================================================================\n");
-        printf("----- 1 - Todos os agendamentos                             -----\n");
-        printf("----- 2 - Todos os pacientes                                -----\n");
-        printf("----- 3 - Todos os dentistas                                -----\n");
-        printf("----- 4 - Todos os agendamentos por dentista                -----\n");
-        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-        printf("=================================================================\n");
-        printf("Opcao desejada: ");
+        printf("\n");
+        printf("=================================================================================\n");
+        printf("------                         Area de Relatorios                          ------\n");
+        printf("=================================================================================\n");
+        printf("------      (1) - Todos os agendamentos                                    ------\n");
+        printf("------      (2) - Todos os pacientes                                       ------\n");
+        printf("------      (3) - Todos os dentistas                                       ------\n");
+        printf("------      (4) - Todos os agendamentos por dentista                       ------\n");
+        printf("------      (0) - Retornar ao Menu Principal                               ------\n");
+        printf("=================================================================================\n");
+        printf("      - (Opcao desejada): ");
         scanf("%d", &opcao_relatorios);
         getchar();
     } while (opcao_relatorios != 0);
@@ -526,13 +527,14 @@ void relatorios(void) {
 
 void informacoes (void) {
     system("clear||cls");
-    printf("\n=================================================================\n");
-    printf("-----                  Area de Informacoes                  -----\n");
-    printf("=================================================================\n");
-    printf("-----                   Projeto SIG-Dentistry:                   \n");                   
-    printf("-----       Sistema de Agendamento para Clinicas Dentarias       \n");                   
-    printf("-----    Desenvolvido por: Jose Salustiano e Raul Araujo    -----\n");
-    printf("=================================================================\n");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                         Area de Informacoes                         ------\n");
+    printf("=================================================================================\n");
+    printf("------                       Projeto SIG-Dentistry:                        ------\n");                   
+    printf("------           Sistema de Agendamento para Clinicas Dentarias            ------\n");                   
+    printf("------           Desenvolvido por: Jose Salustiano e Raul Araujo           ------\n");
+    printf("=================================================================================\n");
     getchar();
     printf("Tecle <ENTER> para continuar...");
 }
