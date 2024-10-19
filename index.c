@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void menu_principal (void); 
 
@@ -173,17 +174,33 @@ void editar_agendamento (void) {
 }
 
 void excluir_agendamento (void) {
-	printf("\n=================================================================\n");
-    printf("-----                  Excluir Agendamento                  -----\n");
-    printf("=================================================================\n");
-    printf("------      (ID):                                          ------\n");
-    printf("------      (Nome):                                        ------\n");
-    printf("------      (CPF):                                         ------\n"); 
-    printf("------      (Data):                                        ------\n");
-    printf("------      (Horario):                                     ------\n");
-    printf("------      (Situacao):                                    ------\n");
-    printf("------      (Pagamento):                                   ------\n");                      
-    printf("=================================================================\n");
+    char confirmacao; 
+
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("-----                          Excluir Agendamento                          -----\n");
+    printf("=================================================================================\n");
+    printf("------      (ID):                                                          ------\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (CPF):                                                         ------\n"); 
+    printf("------      (Data):                                                        ------\n");
+    printf("------      (Horario):                                                     ------\n");
+    printf("------      (Situacao):                                                    ------\n");
+    printf("------      (Pagamento):                                                   ------\n"); 
+    printf("------                                                                     ------\n"); 
+    printf("------     Tem certeza que deseja excluir esse paciente? (S)IM | (N)AO     ------\n");
+
+    scanf(" %c", &confirmacao);
+    if (confirmacao == 'S' || confirmacao == 's'){
+        printf("------                   Paciente excluído com sucesso!                    ------\n");
+    } else if (confirmacao == 'N' || confirmacao == 'n'){
+        printf("------                        Operacao cancelada!                          ------\n");
+    } else{
+        printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
+    }                     
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void menu_paciente(void) {
@@ -287,27 +304,32 @@ void editar_paciente (void) {
 }
 
 void excluir_paciente (void) {
-    int confirmacao;
+    char confirmacao;
 
-    printf("\n=================================================================\n");
-    printf("------                   Excluir Paciente                  ------\n");
-    printf("=================================================================\n");
-    printf("     - Nome: ");
-    printf("     - Data de nascimento: ");
-    printf("     - CPF: ");
-    printf("     - Telefone: "); 
-    printf("     - Doencas preexistentes: ");
-    printf("     - Contra indicacao de remedios: ");
-    printf("Tem certeza que deseja excluir esse paciente? (S)IM | (N)ÃO");
-    scanf("%d", &confirmacao);
-    if (confirmacao == "S" || confirmacao == "s"){
-        printf("n\n-----     Paciente excluído com sucesso!    -----\n");
-    } else if (confirmacao == "N" || confirmacao == "n"){
-        printf("n\n-----     Operacao cancelada!    -----\n");
+    system("clear||cls");
+    print("\n");
+    printf("=================================================================================\n");
+    printf("------                           Excluir Paciente                          ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome):                                                        ------\n");
+    printf("------      (Data de nascimento):                                          ------\n");
+    printf("------      (CPF):                                                         ------\n");
+    printf("------      (Telefone):                                                    ------\n"); 
+    printf("------      (Doencas preexistentes):                                       ------\n");
+    printf("------      (Contra indicacao de remedios):                                ------\n");
+    printf("------                                                                     ------\n"); 
+    printf("------     Tem certeza que deseja excluir esse paciente? (S)IM | (N)AO     ------\n");
+
+    scanf(" %c", &confirmacao);
+    if (confirmacao == 'S' || confirmacao == 's'){
+        printf("------                   Paciente excluído com sucesso!                    ------\n");
+    } else if (confirmacao == 'N' || confirmacao == 'n'){
+        printf("------                        Operacao cancelada!                          ------\n");
     } else{
-        printf("n\n-----     Opção inválida!    -----\n");
-    }
-    printf("=================================================================\n");
+        printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
+    }                     
+    printf("=================================================================================\n");
+    getchar();
 }
 
 void menu_dentista(void) {
