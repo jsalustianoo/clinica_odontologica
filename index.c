@@ -415,26 +415,30 @@ void menu_dentista(void) {
 
 void cadastro_dentista (void) {
     char nome[100], cpf[13], telefone[13], especialidade[30], cro[12];
-    printf("\n=================================================================\n");
-    printf("------                 Cadastro de Dentista                ------\n");
-    printf("=================================================================\n");
-    printf("\n     - Nome: ");
+    system("clear||cls");
+    printf("\n");
+    printf("=================================================================================\n");
+    printf("------                         Cadastro de Dentista                        ------\n");
+    printf("=================================================================================\n");
+    printf("------      (Nome): ");
     scanf("%s", nome);
     getchar();
-    printf("\n     - CPF: ");
+    printf("------      (CPF): ");
     scanf("%s", cpf);
     getchar();
-    printf("\n     - Telefone: ");
+    printf("------      (Telefone): ");
     scanf("%s", telefone);
     getchar();
-    printf("\n     - Especialidade: ");
+    printf("------      (Especialidade): ");
     scanf("%s", especialidade);
     getchar(); 
-    printf("\n     - Numero do CRO: ");
+    printf("------      (Numero do CRO): ");
     scanf("%s", cro);
     getchar(); 
-    printf("\n-----            Dentista cadastrado com sucesso            -----\n");
-    printf("=================================================================\n");
+    printf("=================================================================================\n");
+    printf("-----                  Dentista cadastrado(a) com sucesso!                  -----\n");
+    printf("=================================================================================\n");
+    printf("Tecle <ENTER> para continuar...");
     getchar();
 }
 
