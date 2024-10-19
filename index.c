@@ -215,7 +215,7 @@ void excluir_agendamento (void) {
     printf("=================================================================================\n");
     printf("-----                          Excluir Agendamento                          -----\n");
     printf("=================================================================================\n");
-    printf("------      (ID): %s                                                       ------\n", id);
+    printf("------      (ID):                                                          ------\n");
     printf("------      (Nome):                                                        ------\n");
     printf("------      (CPF):                                                         ------\n"); 
     printf("------      (Data):                                                        ------\n");
@@ -378,15 +378,16 @@ void menu_dentista(void) {
     int opcao_dentista;
     do{
         system("clear||cls");
-        printf("\n=================================================================\n");
-        printf("-----                  Menu dos Dentistas                   -----\n");
-        printf("=================================================================\n");
-        printf("----- 1 - Cadastrar novo dentista                           -----\n");
-        printf("----- 2 - Visualizar dados de um dentista                   -----\n");
-        printf("----- 3 - Editar dados de um dentista                       -----\n");
-        printf("----- 4 - Excluir dentista                                  -----\n");
-        printf("----- 0 - Retornar ao Menu Principal                        -----\n");
-        printf("=================================================================\n");
+        printf("\n");
+        printf("=================================================================================\n");
+        printf("-----                          Menu dos Dentistas                           -----\n");
+        printf("=================================================================================\n");
+        printf("------      (1) - Cadastrar novo dentista                                  ------\n");
+        printf("------      (2) - Visualizar dados de um dentista                          ------\n");
+        printf("------      (3) - Editar dados de um dentista                              ------\n");
+        printf("------      (4) - Excluir dentista                                         ------\n");
+        printf("------      (0) - Retornar ao Menu Principal                               ------\n");
+        printf("=================================================================================\n");
         scanf("%d", &opcao_dentista);
         getchar();
         switch (opcao_dentista) {
