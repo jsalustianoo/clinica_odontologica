@@ -32,7 +32,7 @@ int main() {
                 informacoes();
                 break;
             default:
-                printf("Numero digitado nao condiz com nenhuma opcao do sistema");
+                printf("Número digitado não condiz com nenhuma opção do sistema");
             break;
         }
     } while(opcao_principal != 0);
@@ -44,13 +44,13 @@ void menu_principal (void) {
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
-    printf("-----                  SIG-Dentistry: Clinica Odontologica                  -----\n");
+    printf("-----                  SIG-Dentistry: Clínica Odontológica                  -----\n");
     printf("=================================================================================\n");
-    printf("-----                     (1) - Modulo dos Agendamentos                     -----\n");
-    printf("-----                     (2) - Modulo dos Pacientes                        -----\n");
-    printf("-----                     (3) - Modulo dos Dentistas                        -----\n"); 
-    printf("-----                     (4) - Modulo dos Relatorios                       -----\n");
-    printf("-----                     (5) - Modulo das Informacoes                      -----\n");
+    printf("-----                     (1) - Módulo dos Agendamentos                     -----\n");
+    printf("-----                     (2) - Módulo dos Pacientes                        -----\n");
+    printf("-----                     (3) - Módulo dos Dentistas                        -----\n"); 
+    printf("-----                     (4) - Módulo dos Relatorios                       -----\n");
+    printf("-----                     (5) - Módulo das Informacoes                      -----\n");
     printf("-----                     (0) - Desligar sistema                            -----\n");
     printf("=================================================================================\n");
     printf("      - (Opcao desejada): ");
@@ -60,11 +60,11 @@ void informacoes (void) {
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
-    printf("------                         Area de Informacoes                         ------\n");
+    printf("------                         Área de Informações                         ------\n");
     printf("=================================================================================\n");
     printf("------                       Projeto SIG-Dentistry:                        ------\n");                   
-    printf("------           Sistema de Agendamento para Clinicas Dentarias            ------\n");                   
-    printf("------           Desenvolvido por: Jose Salustiano e Raul Araujo           ------\n");
+    printf("------           Sistema de Agendamento para Clínicas Dentárias            ------\n");                   
+    printf("------           Desenvolvido por: José Salustiano e Raul Araujo           ------\n");
     printf("=================================================================================\n");
     getchar();
     printf("Tecle <ENTER> para continuar...");
