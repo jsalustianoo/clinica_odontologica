@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "validacoes/validacoes.h"
 
 void menu_principal (void);
 

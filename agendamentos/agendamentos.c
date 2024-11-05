@@ -53,8 +53,7 @@ void agendar (void) {
     printf("------      (ID): ");
     scanf("%s", id);
     getchar();
-    printf("------      (Nome): ");
-    scanf("%s", nome);
+    solicitar_nome(nome);
     getchar();
     printf("------      (CPF): "); 
     scanf("%s", cpf);
@@ -159,4 +158,22 @@ void excluir_agendamento (void) {
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
+}
+
+// Peguei do Projeto de João Roberto
+void solicitar_nome(char *nome) {
+    int valido = 0; // Inicializando como não válido
+    do {
+        printf("------      (Nome): ");
+        scanf(" %[^\n]", nome);
+        getchar();
+        if (validarNome(nome)==1) { 
+            valido = 1; // Marca como válido
+        } else {
+            printf("------      (Entrada inválida, digite apenas letras e espaços)                          \n");
+            printf("------      (DIGITE ENTER para continuar                                            \n");
+            valido = 0; // Marca como não válido
+            while (getchar() != '\n'); // Limpar o buffer
+        }
+    } while (!valido); // até ser valido
 }
