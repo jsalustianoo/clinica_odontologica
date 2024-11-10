@@ -15,7 +15,7 @@ int main() {
         getchar();
         switch (opcao_principal){
             case 0:
-                printf("Desligando sistema...");
+                printf("< Desligando Sistema > ...");
                 exit(0);
             case 1:
                 menu_agendamento();
@@ -50,11 +50,11 @@ void menu_principal (void) {
     printf("-----                     (1) - Módulo dos Agendamentos                     -----\n");
     printf("-----                     (2) - Módulo dos Pacientes                        -----\n");
     printf("-----                     (3) - Módulo dos Dentistas                        -----\n"); 
-    printf("-----                     (4) - Módulo dos Relatorios                       -----\n");
-    printf("-----                     (5) - Módulo das Informacoes                      -----\n");
-    printf("-----                     (0) - Desligar sistema                            -----\n");
+    printf("-----                     (4) - Módulo dos Relatórios                       -----\n");
+    printf("-----                     (5) - Módulo das Informações                      -----\n");
+    printf("-----                     (0) - Desligar Sistema                            -----\n");
     printf("=================================================================================\n");
-    printf("      - (Opcao desejada): ");
+    printf("      - (Opção desejada): ");
 }
 
 void informacoes (void) {

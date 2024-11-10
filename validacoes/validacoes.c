@@ -5,7 +5,8 @@
 #include <ctype.h>
 #include <stdint.h>
 
-// Validar Letra - Peguei do Projeto de Flavius Gorgonio
+// <-- VALIDAR LETRA - (Autor: Flavius Gorgonio) -->
+// <-- Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util.c -->
 int ehLetra(char c) {
     if (c >= 'A' && c <= 'Z') {
         return 1;
@@ -14,24 +15,21 @@ int ehLetra(char c) {
     } else {
         return 0;
     }
-}// Autor: Flavius Gorgonio
-// referencia: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util.c
+}
 
-// Validar Nome - Peguei do Projeto de Flavius Gorgonio
+// <-- VALIDAR NOME - (Autor: Flavius Gorgonio) -->
+// <-- Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util. -->
 int validarNome(char* nome) {
     for (int i = 0; nome[i] != '\0'; i++) { // percorre até o \0
-        // Se não for letra e não for espaço, retorna 0
-        if (!ehLetra(nome[i]) && nome[i] != ' ') {
+        if (!ehLetra(nome[i]) && nome[i] != ' ') { // Se não for letra e não for espaço, retorna 0
             return 0; // Nome inválido
         }
     }
     return 1; // Nome válido
 } 
-// referencia: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util.
 
-
-// Validar CPF - Peguei do Projeto de João Roberto
-int validar_cpf(const char *cpf) {
+// <-- VALIDAR CPF - (Autor: João Roberto) -->
+int validarCpf(const char *cpf) {
     // Remove caracteres não numéricos e verifica o comprimento
     char numeros[12];
     int j = 0;

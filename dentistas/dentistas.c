@@ -10,12 +10,13 @@ void menu_dentista(void) {
         printf("=================================================================================\n");
         printf("-----                          Menu dos Dentistas                           -----\n");
         printf("=================================================================================\n");
-        printf("------      (1) - Cadastrar novo dentista                                  ------\n");
-        printf("------      (2) - Visualizar dados de um dentista                          ------\n");
-        printf("------      (3) - Editar dados de um dentista                              ------\n");
-        printf("------      (4) - Excluir dentista                                         ------\n");
+        printf("------      (1) - Cadastrar Novo Dentista                                  ------\n");
+        printf("------      (2) - Visualizar Dados de um Dentista                          ------\n");
+        printf("------      (3) - Editar Dados de um Dentista                              ------\n");
+        printf("------      (4) - Excluir Dentista                                         ------\n");
         printf("------      (0) - Retornar ao Menu Principal                               ------\n");
         printf("=================================================================================\n");
+        printf("    - (Opção desejada): ");
         scanf("%d", &opcao_dentista);
         getchar();
         switch (opcao_dentista) {
@@ -34,7 +35,7 @@ void menu_dentista(void) {
                 excluir_dentista();
                 break;
             default:
-                printf("Numero digitado nao condiz com nenhuma opcao do sistema");
+                printf("Número digitado não condiz com nenhuma opção do sistema");
             break;
         }
     } while (opcao_dentista != 0);
@@ -64,7 +65,7 @@ void cadastro_dentista (void) {
     scanf("%s", cro);
     getchar(); 
     printf("=================================================================================\n");
-    printf("-----                  Dentista cadastrado(a) com sucesso!                  -----\n");
+    printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
@@ -97,7 +98,7 @@ void editar_dentista (void) {
     printf("------      (Especialidade):                                                 ------"); 
     printf("------      (Numero do CRO):                                                 ------"); 
     printf("=================================================================================\n");
-    printf("-----               Dados do(a) Dentista editados com sucesso!              -----\n");
+    printf("-----               Dados do(a) Dentista Editados com Sucesso!              -----\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
@@ -117,15 +118,15 @@ void excluir_dentista (void) {
     printf("------      (Especialidade):                                                 ------"); 
     printf("------      (Numero do CRO):                                                 ------"); 
     printf("------                                                                     ------\n"); 
-    printf("------     Tem certeza que deseja excluir esse paciente? (S)IM | (N)AO     ------\n");
+    printf("------     Tem certeza que deseja Excluir esse Dentista? (S)IM | (N)AO     ------\n");
 
     scanf(" %c", confirmacao);
     if (confirmacao == 'S' || confirmacao == 's'){
-        printf("------                   Paciente excluído com sucesso!                    ------\n");
+        printf("------                   Dentista Excluído com Sucesso!                    ------\n");
     } else if (confirmacao == 'N' || confirmacao == 'n'){
-        printf("------                        Operacao cancelada!                          ------\n");
+        printf("------                        Operação Cancelada!                          ------\n");
     } else{
-        printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
+        printf("------      Número digitado não condiz com nenhuma opção do sistema        ------\n");
     }                     
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
