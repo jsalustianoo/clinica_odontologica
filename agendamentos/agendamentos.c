@@ -53,9 +53,9 @@ void agendar (void) {
     printf("------      (ID): ");
     scanf("%s", id);
     getchar();
-    validar_nome(nome);
+    salvar_nome(nome);
     getchar();
-    validar_cpf(cpf);
+    salvar_cpf(cpf);
     getchar();
     printf("------      (Dentista): "); 
     scanf("%s", dentista);
@@ -130,7 +130,7 @@ void editar_agendamento (void) {
     printf("------      (Situação): ");
     scanf("%s", situacao);
     printf("=================================================================================\n");
-    printf("------               Dados do Agendamento editados com sucesso!            ------\n");
+    printf("------               Dados do Agendamento Editados com Sucesso!            ------\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
@@ -152,42 +152,48 @@ void excluir_agendamento (void) {
     printf("------      (Forma de Pagamento):                                          ------\n"); 
     printf("------      (Situação):                                                    ------\n");
     printf("------                                                                     ------\n"); 
-    printf("------     Tem certeza que deseja Excluir esse Paciente? (S)IM | (N)AO     ------\n");
+    printf("------   Tem certeza que deseja Excluir esse Agendamento? (S)IM | (N)AO    ------\n");
 
     scanf(" %c", &confirmacao);
     if (confirmacao == 'S' || confirmacao == 's'){
-        printf("------                   Paciente excluído com sucesso!                    ------\n");
+        printf("------                  Agendamento excluído com sucesso!                  ------\n");
     } else if (confirmacao == 'N' || confirmacao == 'n'){
         printf("------                        Operacao cancelada!                          ------\n");
     } else{
-        printf("------      Numero digitado nao condiz com nenhuma opcao do sistema        ------\n");
+        printf("------      Número digitado não condiz com nenhuma opção do sistema        ------\n");
     }                     
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
-// (Autor: João Roberto)
-void validar_nome(char *nome) {
-    int valido = 0; // Inicializando como não válido
-    do {
+// O chatGPT fez uma dessas funções de validação e fui alterando o necessário para as outras
+
+void salvar_nome(char *nome) {
+    int valido = 0; // Não válido
+    while (!valido) {
         printf("------      (Nome do Paciente): ");
         scanf(" %[^\n]", nome);
         getchar();
-        if (validarNome(nome)==1) { 
-            valido = 1; // Marca como válido
+        
+        if (validarNome(nome) == 1) { 
+            valido = 1; // Válido
         } else {
-            printf("------      (Tente Novamente (Digite apenas Letras e Espaços, sem acentos)\n");
-            printf("      Tecle <ENTER> para continuar...");
-            valido = 0; // Marca como não válido
-            while (getchar() != '\n'); // Limpar o buffer
+            printf("------      (Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n");
+            while (getchar() != '\n'); 
         }
-    } while (!valido); // até ser valido
+    }
 }
 
-void validar_cpf(char *cpf){
-    printf("------      (CPF): " );
-    scanf("%s", cpf);
-    getchar();
-    return 0;
+void salvar_cpf(char *cpf){
+    int valido = 0;
+    while (!valido){
+        printf("------      (CPF): ");
+        scanf("%s", cpf);
+        if(validar_cpf(cpf)){
+            valido = 1;
+        } else{
+            printf("CPF inválido");
+        }
+    }
 }
