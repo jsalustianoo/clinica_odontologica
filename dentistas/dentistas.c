@@ -43,14 +43,18 @@ void menu_dentista(void) {
 }
 
 void cadastro_dentista (void) {
-    char nome[100], cpf[13], telefone[13], especialidade[30], cro[12];
+    char nome[45];
+    char cpf[14];
+    char telefone[14];
+    char especialidade[30];
+    char cro[7];
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Dentista                        ------\n");
     printf("=================================================================================\n");
-    printf("------      (Nome): ");
-    scanf("%s", nome);
+    salvar_nome(nome);
     getchar();
     printf("------      (CPF): ");
     scanf("%s", cpf);
@@ -131,4 +135,19 @@ void excluir_dentista (void) {
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
+}
+
+void salvar_nome(char *nome){
+    int valido = 0; // Não válido
+    while (!valido) {
+        printf("------      (Nome do Paciente): ");
+        scanf(" %[^\n]", nome);
+        
+        if (validarNome(nome) == 1) { 
+            valido = 1; // Válido
+        } else {
+            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
+            while (getchar() != '\n'); 
+        }
+    }
 }
