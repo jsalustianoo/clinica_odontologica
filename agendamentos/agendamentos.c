@@ -11,7 +11,7 @@ void menu_agendamento (void) {
         printf("-----                           Menu Agendamentos                           -----\n");
         printf("=================================================================================\n");
         printf("-----      (1) Realizar Agendamento                                         -----\n");
-        printf("-----      (2) Visualizar Agendamentos                                      -----\n");
+        printf("-----      (2) Visualizar Agendamento                                       -----\n");
         printf("-----      (3) Editar Agendamento                                           -----\n");
         printf("-----      (4) Excluir Agendamento                                          -----\n");
         printf("-----      (0) Retornar ao Menu Anterior                                    -----\n");
@@ -43,7 +43,14 @@ void menu_agendamento (void) {
 }
 
 void agendar (void) {
-    char id[10], nome[100], cpf[14], dentista[13], data[13], horario[9], pagamento[20], situacao[20];
+    char id[10]; 
+    char nome[45]; 
+    char cpf[14]; 
+    char dentista[45]; 
+    char horario[6];
+    char pagamento[9]; 
+    char situacao[20];
+    int dia, mes, ano;
 
     system("clear||cls");
     printf("\n");
@@ -53,21 +60,16 @@ void agendar (void) {
     printf("------      (ID): ");
     scanf("%s", id);
     getchar();
-    salvar_nome(nome);
+    salvar_nome_paciente(nome);
     getchar();
     salvar_cpf(cpf);
     getchar();
-    printf("------      (Dentista): "); 
-    scanf("%s", dentista);
+    salvar_dentista(dentista);
     getchar();
-    printf("------      (Data): ");
-    scanf("%s", data);
+    salvar_data(&dia, &mes, &ano);
+    salvar_horario(horario);
     getchar();
-    printf("------      (Horário): ");
-    scanf("%s", horario);
-    getchar();
-    printf("------      (Pagamento): ");
-    scanf("%s", pagamento);
+    salvar_pagamento(pagamento);
     getchar();
     printf("------      (Situação): ");
     scanf("%s", situacao);
@@ -99,7 +101,14 @@ void exibir_dados_agendamento (void) {
     getchar();
 }
 void editar_agendamento (void) {
-    char id[10], nome[100], cpf[14], dentista[50], data[13], horario[9], pagamento[20], situacao[20];
+    char id[10]; 
+    char nome[45]; 
+    char cpf[14]; 
+    char dentista[45]; 
+    char horario[6];
+    char pagamento[9]; 
+    char situacao[20];
+    int dia, mes, ano;
 
     system("clear||cls");
     printf("\n");
@@ -119,7 +128,7 @@ void editar_agendamento (void) {
     scanf("%s", dentista);
     getchar();
     printf("------      (Data): ");
-    scanf("%s", data);
+    scanf("%s", &dia, &mes, &ano);
     getchar();
     printf("------      (Horário): ");
     scanf("%s", horario);
@@ -169,17 +178,16 @@ void excluir_agendamento (void) {
 
 // O chatGPT fez uma dessas funções de validação e fui alterando o necessário para as outras
 
-void salvar_nome(char *nome) {
+void salvar_nome_paciente(char *nome) {
     int valido = 0; // Não válido
     while (!valido) {
         printf("------      (Nome do Paciente): ");
         scanf(" %[^\n]", nome);
-        getchar();
         
         if (validarNome(nome) == 1) { 
             valido = 1; // Válido
         } else {
-            printf("------      (Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n");
+            printf("\n             Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n\n");
             while (getchar() != '\n'); 
         }
     }
@@ -196,4 +204,89 @@ void salvar_cpf(char *cpf){
             printf("CPF inválido");
         }
     }
+}
+
+void salvar_dentista(char *nome) {
+    int valido = 0; // Não válido
+    while (!valido) {
+        printf("------      (Dentista): ");
+        scanf(" %[^\n]", nome);
+        
+        if (validarNome(nome) == 1) { 
+            valido = 1; // Válido
+        } else {
+            printf("\n            (Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n\n");
+            while (getchar() != '\n'); 
+        }
+    }
+}
+
+void salvar_data(int *dia, int *mes, int *ano) {
+    char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
+    int data_valida = 0;
+
+    while (!data_valida) {
+        printf("------      (Data, no formato MM/DD/AAAA ou MMDDAAAA): ");
+        scanf("%10s", data); // Lê até 10 caracteres
+
+        // Remover barras, se existirem
+        char data_limpa[9];
+        int j = 0;
+        for (int i = 0; data[i] != '\0'; i++) {
+            if (data[i] != '/') {
+                data_limpa[j++] = data[i];
+            }
+        }
+        data_limpa[j] = '\0';
+
+        // Verificar se a data tem exatamente 8 caracteres após limpeza
+        if (strlen(data_limpa) == 8) {
+            *mes = atoi(strndup(data_limpa, 2));     // Extrai MM
+            *dia = atoi(strndup(data_limpa + 2, 2)); // Extrai DD
+            *ano = atoi(data_limpa + 4);            // Extrai YYYY
+
+            if (validar_data(*dia, *mes, *ano)) {
+                data_valida = 1;
+            } else {
+                printf("\n             Data inválida, Tente Novamente!\n\n");
+            }
+        } else {
+            printf("\n             Formato incorreto. Tente novamente.\n\n");
+        }
+    }
+}
+
+void salvar_horario(char *horario) {
+    int horario_valido = 0;
+
+    while (!horario_valido) {
+        printf("Digite o horário no formato HH:MM: ");
+        scanf("%5s", horario); // Lê no máximo 5 caracteres para "HH:MM"
+
+        if (validar_horario(horario)) {
+            horario_valido = 1;
+            printf("Horário válido!\n");
+        } else {
+            printf("Horário inválido. Certifique-se de usar o formato HH:MM.\n");
+        }
+    }
+}
+
+void salvar_pagamento(char *pagamento){
+    int pagamento_valido = 0;
+    while(!pagamento_valido){
+        printf("------      (Forma de Pagamento): ");
+        scanf("%s", pagamento);
+
+        if(strcmp(pagamento, "Pix") == 0 || strcmp(pagamento, "pix") == 0 || strcmp(pagamento, "PIX") == 0){
+            pagamento_valido = 1;
+        }else if(strcmp(pagamento, "Dinheiro") == 0 || strcmp(pagamento, "dinheiro") == 0 || strcmp(pagamento, "DINHEIRO") == 0){
+            pagamento_valido = 1;
+        }else if(strcmp(pagamento, "Cartão") == 0 || strcmp(pagamento, "cartão") == 0 || strcmp(pagamento, "CARTÃO") == 0){
+            pagamento_valido = 1;
+        }else{
+            printf("\n             Forma de Pagamento Inválida!\n");
+        }
+    }    
+    
 }

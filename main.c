@@ -67,6 +67,6 @@ void informacoes (void) {
     printf("------           Sistema de Agendamento para Clínicas Dentárias            ------\n");                   
     printf("------           Desenvolvido por: José Salustiano e Raul Araujo           ------\n");
     printf("=================================================================================\n");
+    printf("\nTecle <ENTER> para continuar...");
     getchar();
-    printf("Tecle <ENTER> para continuar...");
 }
