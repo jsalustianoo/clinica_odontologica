@@ -49,7 +49,7 @@ void agendar (void) {
     char dentista[45]; 
     char horario[6];
     char pagamento[9]; 
-    char situacao[20];
+    char situacao[11];
     int dia, mes, ano;
 
     system("clear||cls");
@@ -71,8 +71,7 @@ void agendar (void) {
     getchar();
     salvar_pagamento(pagamento);
     getchar();
-    printf("------      (Situação): ");
-    scanf("%s", situacao);
+    salvar_situacao(situacao);
     getchar();
     printf("=================================================================================\n");
     printf("------                 Agendamento Realizado com Sucesso!                  ------\n");
@@ -118,26 +117,19 @@ void editar_agendamento (void) {
     printf("------      (ID): ");
     scanf("%s", id);
     getchar();
-    printf("------      (Nome do Paciente): ");
-    scanf("%s", nome);
+    salvar_nome_paciente(nome);
     getchar();
-    printf("------      (CPF): "); 
-    scanf("%s", cpf);
+    salvar_cpf(cpf);
     getchar();
-    printf("------      (Dentista): "); 
-    scanf("%s", dentista);
+    salvar_dentista(dentista);
     getchar();
-    printf("------      (Data): ");
-    scanf("%s", &dia, &mes, &ano);
+    salvar_data(&dia, &mes, &ano);
+    salvar_horario(horario);
     getchar();
-    printf("------      (Horário): ");
-    scanf("%s", horario);
+    salvar_pagamento(pagamento);
     getchar();
-    printf("------      (Forma de Pagamento): ");
-    scanf("%s", pagamento);
+    salvar_situacao(situacao);
     getchar();
-    printf("------      (Situação): ");
-    scanf("%s", situacao);
     printf("=================================================================================\n");
     printf("------               Dados do Agendamento Editados com Sucesso!            ------\n");
     printf("=================================================================================\n");
@@ -176,8 +168,6 @@ void excluir_agendamento (void) {
     getchar();
 }
 
-// O chatGPT fez uma dessas funções de validação e fui alterando o necessário para as outras
-
 void salvar_nome_paciente(char *nome) {
     int valido = 0; // Não válido
     while (!valido) {
@@ -187,7 +177,7 @@ void salvar_nome_paciente(char *nome) {
         if (validarNome(nome) == 1) { 
             valido = 1; // Válido
         } else {
-            printf("\n             Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n\n");
+            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
             while (getchar() != '\n'); 
         }
     }
@@ -201,7 +191,7 @@ void salvar_cpf(char *cpf){
         if(validar_cpf(cpf)){
             valido = 1;
         } else{
-            printf("CPF inválido");
+            printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
@@ -215,18 +205,19 @@ void salvar_dentista(char *nome) {
         if (validarNome(nome) == 1) { 
             valido = 1; // Válido
         } else {
-            printf("\n            (Tente Novamente! (Não coloque acentos) Tecle <ENTER> para continuar...\n\n");
+            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
             while (getchar() != '\n'); 
         }
     }
 }
 
+// Usei chatGPT
 void salvar_data(int *dia, int *mes, int *ano) {
     char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
     int data_valida = 0;
 
     while (!data_valida) {
-        printf("------      (Data, no formato MM/DD/AAAA ou MMDDAAAA): ");
+        printf("------      (Data, MM/DD/AAAA ou MMDDAAAA): ");
         scanf("%10s", data); // Lê até 10 caracteres
 
         // Remover barras, se existirem
@@ -248,26 +239,27 @@ void salvar_data(int *dia, int *mes, int *ano) {
             if (validar_data(*dia, *mes, *ano)) {
                 data_valida = 1;
             } else {
-                printf("\n             Data inválida, Tente Novamente!\n\n");
+                printf("\n=========== Data Inválida! Tente Novamente! ===========\n\n");
             }
         } else {
-            printf("\n             Formato incorreto. Tente novamente.\n\n");
+            printf("\n=========== Formato Incorreto! Tente Novamente! ===========\n\n");
+
         }
     }
 }
 
+// Usei chatGPT
 void salvar_horario(char *horario) {
     int horario_valido = 0;
 
     while (!horario_valido) {
-        printf("Digite o horário no formato HH:MM: ");
+        printf("------      (Horário, HH:MM): ");
         scanf("%5s", horario); // Lê no máximo 5 caracteres para "HH:MM"
 
         if (validar_horario(horario)) {
             horario_valido = 1;
-            printf("Horário válido!\n");
         } else {
-            printf("Horário inválido. Certifique-se de usar o formato HH:MM.\n");
+            printf("\n=========== Horário Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
@@ -275,18 +267,44 @@ void salvar_horario(char *horario) {
 void salvar_pagamento(char *pagamento){
     int pagamento_valido = 0;
     while(!pagamento_valido){
-        printf("------      (Forma de Pagamento): ");
+        printf("\nEscolha dentre as opções: \n");
+        printf("\n      1 - Pix");
+        printf("\n      2 - Dinheiro");
+        printf("\n      3 - Cartão");
+        printf("\n\n------      (Forma de Pagamento): ");
         scanf("%s", pagamento);
 
-        if(strcmp(pagamento, "Pix") == 0 || strcmp(pagamento, "pix") == 0 || strcmp(pagamento, "PIX") == 0){
+        if(strcmp(pagamento, "1") == 0){
             pagamento_valido = 1;
-        }else if(strcmp(pagamento, "Dinheiro") == 0 || strcmp(pagamento, "dinheiro") == 0 || strcmp(pagamento, "DINHEIRO") == 0){
+        }else if(strcmp(pagamento, "2") == 0){
             pagamento_valido = 1;
-        }else if(strcmp(pagamento, "Cartão") == 0 || strcmp(pagamento, "cartão") == 0 || strcmp(pagamento, "CARTÃO") == 0){
+        }else if(strcmp(pagamento, "3") == 0){
             pagamento_valido = 1;
         }else{
-            printf("\n             Forma de Pagamento Inválida!\n");
+            printf("\n=========== Forma de Pagamento Inválida! Tente Novamente! ===========\n\n");
         }
     }    
     
+}
+
+void salvar_situacao(char *situacao){
+    int situacao_valida = 0;
+    while(!situacao_valida){
+        printf("\nEscolha dentre as opções: \n");
+        printf("\n      1 - Agendado");
+        printf("\n      2 - Finalizado");
+        printf("\n      3 - Cancelado");
+        printf("\n\n------      (Situação): ");
+        scanf("%s", situacao);
+
+        if(strcmp(situacao, "1") == 0){
+            situacao_valida = 1;
+        }else if(strcmp(situacao, "2") == 0){
+            situacao_valida = 1;
+        }else if(strcmp(situacao, "3") == 0){
+            situacao_valida = 1;
+        }else{
+            printf("\n=========== Situação Inválida! Tente Novamente! ===========\n\n");
+        }
+    }
 }
