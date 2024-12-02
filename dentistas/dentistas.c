@@ -56,8 +56,7 @@ void cadastro_dentista (void) {
     printf("=================================================================================\n");
     salvar_nome(nome);
     getchar();
-    printf("------      (CPF): ");
-    scanf("%s", cpf);
+    salvar_cpf(cpf);
     getchar();
     printf("------      (Telefone): ");
     scanf("%s", telefone);
@@ -148,6 +147,19 @@ void salvar_nome(char *nome){
         } else {
             printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
             while (getchar() != '\n'); 
+        }
+    }
+}
+
+void salvar_cpf_dentista(char *cpf){
+    int valido = 0;
+    while (!valido){
+        printf("------      (CPF): ");
+        scanf("%s", cpf);
+        if(validar_cpf(cpf)){
+            valido = 1;
+        } else{
+            printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
