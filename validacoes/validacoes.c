@@ -180,3 +180,30 @@ int validar_especialidades(const char *especialidades) {
     }
     return 1; // Todos os caracteres são válidos
 }
+
+int ehNumero(char c) {
+    return (c >= '0' && c <= '9');
+}
+
+// Função para validar o CRO
+int validar_cro(const char *cro) {
+    int tamanho = strlen(cro);
+
+    // Verificar tamanho
+    if (tamanho < 4 || tamanho > 8) {
+        return 0; // CRO inválido
+    }
+
+    // Verificar se os primeiros caracteres são números
+    int i = 0;
+    while (i < tamanho - 2 && ehNumero(cro[i])) {
+        i++;
+    }
+
+    // Verificar se os últimos dois caracteres são letras maiúsculas
+    if (tamanho - i != 2 || !isupper(cro[i]) || !isupper(cro[i + 1])) {
+        return 0; // CRO inválido
+    }
+
+    return 1; // CRO válido
+}

@@ -62,8 +62,7 @@ void cadastro_dentista (void) {
     getchar();
     salvar_especialidade(especialidades);
     getchar(); 
-    printf("------      (Numero do CRO): ");
-    scanf("%s", cro);
+    salvar_cro(cro);
     getchar(); 
     printf("=================================================================================\n");
     printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
@@ -189,6 +188,21 @@ void salvar_especialidade(char *especialidades){
 
         if (!especialidade_valida) {
             printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
+        }
+    }
+}
+
+void salvar_cro(char *cro){
+    int cro_valido = 0;
+
+    while(!cro_valido){
+        printf("------      (CRO): ");
+        scanf("%s", cro);
+
+        cro_valido = validar_cro(cro);
+
+        if(!cro_valido){
+            printf("\n=========== CRO Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
