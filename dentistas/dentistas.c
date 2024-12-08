@@ -166,7 +166,7 @@ void salvar_telefone_dentista(char *telefone){
     int telefone_valido = 0;
 
     while(!telefone_valido){
-        printf("------      (Telefone, (xx)xxxxx-xxxx ou xxxxxxxxxxx)");
+        printf("------      (Telefone, (xx)xxxxx-xxxx ou xxxxxxxxxxx): ");
         scanf("%s", telefone);
 
         telefone_valido = validar_telefone(telefone);
