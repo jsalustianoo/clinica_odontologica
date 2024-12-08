@@ -138,7 +138,7 @@ void excluir_dentista (void) {
 void salvar_nome(char *nome){
     int valido = 0; // Não válido
     while (!valido) {
-        printf("------      (Nome do Paciente): ");
+        printf("------      (Nome do Dentista): ");
         scanf(" %[^\n]", nome);
         
         if (validarNome(nome) == 1) { 
