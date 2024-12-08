@@ -45,7 +45,7 @@ void menu_dentista(void) {
 void cadastro_dentista (void) {
     char nome[45];
     char cpf[14];
-    char telefone[14];
+    char telefone[15];
     char especialidade[30];
     char cro[7];
 
@@ -56,10 +56,9 @@ void cadastro_dentista (void) {
     printf("=================================================================================\n");
     salvar_nome(nome);
     getchar();
-    salvar_cpf(cpf);
+    salvar_cpf_dentista(cpf);
     getchar();
-    printf("------      (Telefone): ");
-    scanf("%s", telefone);
+    salvar_telefone_dentista(telefone);
     getchar();
     printf("------      (Especialidade): ");
     scanf("%s", especialidade);
@@ -162,4 +161,20 @@ void salvar_cpf_dentista(char *cpf){
             printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
         }
     }
+}
+
+void salvar_telefone_dentista(char *telefone){
+    int telefone_valido = 0;
+
+    while(!telefone_valido){
+        printf("------      (Telefone, (xx)xxxxx-xxxx ou xxxxxxxxxxx)");
+        scanf("%s", telefone);
+
+        telefone_valido = validar_telefone(telefone);
+
+        if (!telefone_valido) {
+            printf("\n=========== Telefone Inválido! Tente Novamente! ===========\n\n");
+        }
+    }
+        
 }

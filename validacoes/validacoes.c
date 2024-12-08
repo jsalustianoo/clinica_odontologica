@@ -123,13 +123,12 @@ int validar_data(int dia, int mes, int ano) {
 int validar_horario(const char *horario) {
     int horas, minutos;
 
-    // Verifica se o formato está correto e se contém o separador ':'
-    if (sscanf(horario, "%d:%d", &horas, &minutos) != 2) {
+    
+    if (sscanf(horario, "%d:%d", &horas, &minutos) != 2) { // Verifica se o formato está correto e se contém o separador ':'
         return 0; // Formato inválido
     }
-
-    // Verifica se as horas e minutos estão dentro dos limites válidos
-    if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
+    
+    if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) { // Verifica se as horas e minutos estão dentro dos limites válidos
         return 0; // Horas ou minutos fora do intervalo permitido
     }
 
@@ -142,4 +141,32 @@ int validar_horario(const char *horario) {
     }
 
     return 1; // Horário válido
+}
+
+int validar_telefone(const char *telefone) {
+    int tamanho = strlen(telefone);
+
+    // Verifica o formato "(xx)xxxxx-xxxx"
+    if (tamanho == 14 && telefone[0] == '(' && telefone[3] == ')' && telefone[9] == '-') {
+        for (int i = 1; i < 3; i++) {
+            if (!isdigit(telefone[i])) return 0;
+        }
+        for (int i = 4; i < 9; i++) {
+            if (!isdigit(telefone[i])) return 0;
+        }
+        for (int i = 10; i < 14; i++) {
+            if (!isdigit(telefone[i])) return 0;
+        }
+        return 1;
+    }
+
+    // Verifica o formato "xxxxxxxxxxx"
+    if (tamanho == 11) {
+        for (int i = 0; i < tamanho; i++) {
+            if (!isdigit(telefone[i])) return 0;
+        }
+        return 1;
+    }
+
+    return 0; // Não está em nenhum dos formatos válidos
 }
