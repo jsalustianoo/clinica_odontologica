@@ -170,3 +170,13 @@ int validar_telefone(const char *telefone) {
 
     return 0; // Não está em nenhum dos formatos válidos
 }
+
+int validar_especialidades(const char *especialidades) {
+    for (int i = 0; especialidades[i] != '\0'; i++) {
+        char c = especialidades[i];
+        if (!ehLetra(c) && c != ' ' && c != ',') {
+            return 0; // Caractere inválido encontrado
+        }
+    }
+    return 1; // Todos os caracteres são válidos
+}

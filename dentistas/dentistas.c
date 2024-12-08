@@ -46,7 +46,7 @@ void cadastro_dentista (void) {
     char nome[45];
     char cpf[14];
     char telefone[15];
-    char especialidade[30];
+    char especialidades[70];
     char cro[7];
 
     system("clear||cls");
@@ -60,8 +60,7 @@ void cadastro_dentista (void) {
     getchar();
     salvar_telefone_dentista(telefone);
     getchar();
-    printf("------      (Especialidade): ");
-    scanf("%s", especialidade);
+    salvar_especialidade(especialidades);
     getchar(); 
     printf("------      (Numero do CRO): ");
     scanf("%s", cro);
@@ -177,4 +176,19 @@ void salvar_telefone_dentista(char *telefone){
         }
     }
         
+}
+
+void salvar_especialidade(char *especialidades){
+    int especialidade_valida = 0;
+
+    while(!especialidade_valida){
+        printf("------      (Especialidade(s)): ");
+        scanf(" %[^\n]", especialidades); // Lê uma linha inteira com espaços e vírgulas
+
+        especialidade_valida = validar_especialidades(especialidades);
+
+        if (!especialidade_valida) {
+            printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
+        }
+    }
 }
