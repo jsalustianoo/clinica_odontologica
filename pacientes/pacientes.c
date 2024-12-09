@@ -57,8 +57,7 @@ void cadastro_paciente (void) {
     getchar();
     salvar_data_nascimento(&dia, &mes, &ano);
     getchar();
-    printf("\n        - (CPF): ");
-    scanf("%s", cpf_paciente);
+    salvar_cpf_paciente(cpf_paciente);
     getchar();
     printf("\n        - (Telefone): "); 
     scanf("%s", telefone_paciente);
@@ -168,7 +167,21 @@ void salvar_data_nascimento(int *dia, int *mes, int *ano){
 
             data_valida = validar_data_nascimento(data, dia, mes, ano);
             if (!data_valida) {
-                printf("\n=========== Inválida Inválida! Tente Novamente! ===========\n\n");
+                printf("\n=========== Data de Nascimento Inválida! Tente Novamente! ===========\n\n");
             }
         }
+}
+
+void salvar_cpf_paciente(char *cpf_paciente){
+    int cpf_paciente_valido = 0;
+    while(!cpf_paciente_valido){
+        printf("------      (CPF): ");
+        scanf("%s", cpf_paciente);
+
+        if(validar_cpf(cpf_paciente)){
+            cpf_paciente_valido = 1;
+        } else{
+            printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
+        }
+    }
 }
