@@ -41,9 +41,9 @@ void menu_paciente(void) {
     }while(opcao_paciente != 0);
 }
 void cadastro_paciente (void) {
-    char nome[45];
-    char cpf[14];
-    char telefone[15];
+    char nome_paciente[45];
+    char cpf_paciente[14];
+    char telefone_paciente[15];
     char doencas[200]; 
     char contraindicacao[200];
     int dia, mes, ano;
@@ -53,16 +53,15 @@ void cadastro_paciente (void) {
     printf("=================================================================================\n");
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
-    printf("\n        - (Nome): ");
-    scanf("%s", nome);
+    salvar_nome_paciente(nome_paciente);
     getchar();
     printf("\n        - (Data de nascimento): ");
     getchar();
     printf("\n        - (CPF): ");
-    scanf("%s", cpf);
+    scanf("%s", cpf_paciente);
     getchar();
     printf("\n        - (Telefone): "); 
-    scanf("%s", telefone);
+    scanf("%s", telefone_paciente);
     getchar();
     printf("\n        - (Doenças preexistentes): ");
     scanf("%s", doencas);
