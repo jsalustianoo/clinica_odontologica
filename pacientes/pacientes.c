@@ -59,8 +59,7 @@ void cadastro_paciente (void) {
     getchar();
     salvar_cpf_paciente(cpf_paciente);
     getchar();
-    printf("\n        - (Telefone): "); 
-    scanf("%s", telefone_paciente);
+    salvar_telefone_paciente(telefone_paciente);
     getchar();
     printf("\n        - (Doenças preexistentes): ");
     scanf("%s", doencas);
@@ -182,6 +181,20 @@ void salvar_cpf_paciente(char *cpf_paciente){
             cpf_paciente_valido = 1;
         } else{
             printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
+        }
+    }
+}
+
+void salvar_telefone_paciente(char *telefone_paciente){
+    int telefone_paciente_valido = 0;
+    while(!telefone_paciente_valido){
+        printf("------      (Telefone): "); 
+        scanf("%s", telefone_paciente);
+
+        telefone_paciente_valido = validar_telefone(telefone_paciente);
+
+        if (!telefone_paciente) {
+            printf("\n=========== Telefone Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
