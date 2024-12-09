@@ -44,7 +44,7 @@ void cadastro_paciente (void) {
     char nome_paciente[45];
     char cpf_paciente[14];
     char telefone_paciente[15];
-    char doencas[200]; 
+    char doencas_preexistentes[200]; 
     char contraindicacao[200];
     int dia, mes, ano;
 
@@ -61,8 +61,7 @@ void cadastro_paciente (void) {
     getchar();
     salvar_telefone_paciente(telefone_paciente);
     getchar();
-    printf("\n        - (Doenças preexistentes): ");
-    scanf("%s", doencas);
+    salvar_doencas_preexistentes(doencas_preexistentes);
     getchar();
     printf("\n        - (Contra indição de remédio(s)): ");
     scanf("%s", contraindicacao);
@@ -195,6 +194,20 @@ void salvar_telefone_paciente(char *telefone_paciente){
 
         if (!telefone_paciente) {
             printf("\n=========== Telefone Inválido! Tente Novamente! ===========\n\n");
+        }
+    }
+}
+
+void salvar_doencas_preexistentes(char *doencas_preexistentes){
+    int doencas_preexistentes_validas = 0;
+    while(!doencas_preexistentes_validas){
+        printf("------      (Doenças Preexistentes): ");
+        scanf(" %[^\n]", doencas_preexistentes); 
+
+        doencas_preexistentes_validas = validar_doencas_preexistentes(doencas_preexistentes);
+
+        if (!doencas_preexistentes_validas) {
+            printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
         }
     }
 }

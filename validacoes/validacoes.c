@@ -232,3 +232,13 @@ int validar_data_nascimento(const char *data, int *dia, int *mes, int *ano) {
 
     return *dia <= dia_max;
 }
+
+int validar_doencas_preexistentes(const char *doencas_preexistentes) {
+    for (int i = 0; doencas_preexistentes[i] != '\0'; i++) {
+        char c = doencas_preexistentes[i];
+        if (!ehLetra(c) && c != ' ' && c != ',') {
+            return 0; // Caractere inválido encontrado
+        }
+    }
+    return 1; // Todos os caracteres são válidos
+}
