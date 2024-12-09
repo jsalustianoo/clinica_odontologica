@@ -55,7 +55,7 @@ void cadastro_paciente (void) {
     printf("=================================================================================\n");
     salvar_nome(nome_paciente);
     getchar();
-    printf("\n        - (Data de nascimento): ");
+    salvar_data_nascimento(&dia, &mes, &ano);
     getchar();
     printf("\n        - (CPF): ");
     scanf("%s", cpf_paciente);
@@ -156,4 +156,19 @@ void salvar_nome(char *nome_paciente){
             while (getchar() != '\n'); 
         }
     }
+}
+
+void salvar_data_nascimento(int *dia, int *mes, int *ano){
+    char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
+    int data_valida = 0;
+
+    while (!data_valida) {
+            printf("------      (Data de Nascimento, MM/DD/AAAA ou MMDDAAAA): ");
+            scanf("%10s", data); // Limita a entrada para evitar overflow
+
+            data_valida = validar_data_nascimento(data, dia, mes, ano);
+            if (!data_valida) {
+                printf("\n=========== Inválida Inválida! Tente Novamente! ===========\n\n");
+            }
+        }
 }

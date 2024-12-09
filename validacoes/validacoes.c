@@ -85,33 +85,28 @@ int validar_cpf(const char *cpf) {
 
 // Função para validar a data
 int validar_data(int dia, int mes, int ano) {
-    // Verifica se o ano está dentro de um intervalo razoável
-    if (ano < 1900 || ano > 2100) return 0;
+   
+    if (ano < 1900 || ano > 2100) return 0; // Verifica se o ano está dentro de um intervalo razoável
 
-    // Verifica se o mês é válido
-    if (mes < 1 || mes > 12) return 0;
+    if (mes < 1 || mes > 12) return 0; // Verifica se o mês é válido
 
-    // Array com o número de dias de cada mês (considerando ano não bissexto)
-    int dias_no_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int dias_no_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // Array com o número de dias de cada mês (considerando ano não bissexto)
 
-    // Ajusta fevereiro para 29 dias se o ano for bissexto
-    if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) {
+    if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) { // Ajusta fevereiro para 29 dias se o ano for bissexto
         dias_no_mes[1] = 29;
     }
 
-    // Verifica se o dia está dentro do limite para o mês dado
-    if (dia < 1 || dia > dias_no_mes[mes - 1]) return 0;
+    if (dia < 1 || dia > dias_no_mes[mes - 1]) return 0; // Verifica se o dia está dentro do limite para o mês dado
 
     // Obtém a data atual
-    time_t t = time(NULL);
+    time_t t = time(NULL); 
     struct tm *data_atual = localtime(&t);
 
     int dia_atual = data_atual->tm_mday;
     int mes_atual = data_atual->tm_mon + 1; // Meses vão de 0 a 11
     int ano_atual = data_atual->tm_year + 1900;
 
-    // Verifica se a data fornecida é anterior à data atual
-    if (ano < ano_atual ||
+    if (ano < ano_atual ||// Verifica se a data fornecida é anterior à data atual
         (ano == ano_atual && mes < mes_atual) ||
         (ano == ano_atual && mes == mes_atual && dia < dia_atual)) {
         return 0;
@@ -206,4 +201,34 @@ int validar_cro(const char *cro) {
     }
 
     return 1; // CRO válido
+}
+
+int eh_bissexto(int ano) {
+    return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+}
+
+// Função para validar a data fornecida
+int validar_data_nascimento(const char *data, int *dia, int *mes, int *ano) {
+    int dia_max;
+    if (strlen(data) == 8) { // Formato "MMDDYYYY"
+        if (sscanf(data, "%2d%2d%4d", mes, dia, ano) != 3)
+            return 0;
+    } else if (strlen(data) == 10) { // Formato "MM/DD/YYYY"
+        if (data[2] != '/' || data[5] != '/' ||
+            sscanf(data, "%2d/%2d/%4d", mes, dia, ano) != 3)
+            return 0;
+    } else {
+        return 0; // Tamanho inválido
+    }
+
+    if (*mes < 1 || *mes > 12 || *dia < 1 || *ano < 1)
+        return 0;
+
+    switch (*mes) {
+        case 4: case 6: case 9: case 11: dia_max = 30; break;
+        case 2: dia_max = eh_bissexto(*ano) ? 29 : 28; break;
+        default: dia_max = 31;
+    }
+
+    return *dia <= dia_max;
 }
