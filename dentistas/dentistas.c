@@ -54,7 +54,7 @@ void cadastro_dentista (void) {
     printf("=================================================================================\n");
     printf("------                         Cadastro de Dentista                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome(nome);
+    salvar_nome_dentista(nome);
     getchar();
     salvar_cpf_dentista(cpf);
     getchar();
@@ -133,7 +133,7 @@ void excluir_dentista (void) {
     getchar();
 }
 
-void salvar_nome(char *nome){
+void salvar_nome_dentista(char *nome){
     int valido = 0; // Não válido
     while (!valido) {
         printf("------      (Nome do Dentista): ");

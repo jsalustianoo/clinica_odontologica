@@ -53,7 +53,7 @@ void cadastro_paciente (void) {
     printf("=================================================================================\n");
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome_paciente(nome_paciente);
+    salvar_nome(nome_paciente);
     getchar();
     printf("\n        - (Data de nascimento): ");
     getchar();
@@ -140,4 +140,20 @@ void excluir_paciente (void) {
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
+}
+
+
+void salvar_nome(char *nome_paciente){
+    int nome_valido = 0; // Não válido
+    while (!nome_valido) {
+        printf("------      (Nome do Dentista): ");
+        scanf(" %[^\n]", nome_paciente);
+        
+        if (validarNome(nome_paciente) == 1) { 
+            nome_valido = 1; // Válido
+        } else {
+            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
+            while (getchar() != '\n'); 
+        }
+    }
 }
