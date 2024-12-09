@@ -41,7 +41,13 @@ void menu_paciente(void) {
     }while(opcao_paciente != 0);
 }
 void cadastro_paciente (void) {
-    char nome[100], data_nascimento[13], cpf[13], telefone[13], doencas[200], contraindicacao[200];
+    char nome[45];
+    char cpf[14];
+    char telefone[15];
+    char doencas[200]; 
+    char contraindicacao[200];
+    int dia, mes, ano;
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
@@ -51,7 +57,6 @@ void cadastro_paciente (void) {
     scanf("%s", nome);
     getchar();
     printf("\n        - (Data de nascimento): ");
-    scanf("%s", data_nascimento);
     getchar();
     printf("\n        - (CPF): ");
     scanf("%s", cpf);
