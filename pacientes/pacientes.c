@@ -63,8 +63,7 @@ void cadastro_paciente (void) {
     getchar();
     salvar_doencas_preexistentes(doencas_preexistentes);
     getchar();
-    printf("\n        - (Contra indição de remédio(s)): ");
-    scanf("%s", contraindicacao);
+    salvar_contraindacacao(contraindicacao);
     getchar();
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
@@ -208,6 +207,21 @@ void salvar_doencas_preexistentes(char *doencas_preexistentes){
 
         if (!doencas_preexistentes_validas) {
             printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
+        }
+    }
+}
+
+void salvar_contraindacacao(char *contraindicacao){
+    int contraindacacao_valida = 0;
+    while(!contraindacacao_valida){
+        printf("------     (Contraindicação de Medicamento(s)): ");
+        scanf(" %[^\n]", contraindicacao);
+        printf("Contraindicação recebida: %s\n", contraindicacao);
+
+        contraindacacao_valida = validar_contraindicacao(contraindicacao);
+
+        if (!contraindacacao_valida) {
+            printf("\n=========== Contraindicação Inválida! Valor: '%s' Tente Novamente! ===========\n\n", contraindicacao);
         }
     }
 }

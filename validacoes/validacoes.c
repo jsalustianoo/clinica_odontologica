@@ -242,3 +242,13 @@ int validar_doencas_preexistentes(const char *doencas_preexistentes) {
     }
     return 1; // Todos os caracteres são válidos
 }
+
+int validar_contraindicacao(const char *contraindicacao) {
+    for (int i = 0; contraindicacao[i] != '\0'; i++) {
+        char c = contraindicacao[i];
+        if (!ehLetra(c) && c != ' ' && c != ',') {
+            return 0; // Caractere inválido encontrado
+        }
+    }
+    return 1; // Todos os caracteres são válidos
+}
