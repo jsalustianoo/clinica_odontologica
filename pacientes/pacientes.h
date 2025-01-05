@@ -1,6 +1,16 @@
 #ifndef PACIENTES_H
 #define PACIENTES_H
 
+struct pacientes
+{
+    char nome_paciente[45];
+    char cpf_paciente[14];
+    char telefone_paciente[15];
+    char doencas_preexistentes[200]; 
+    char contraindicacao[200];
+    int dia, mes, ano;
+};
+
 void menu_paciente (void);
 void cadastro_paciente (void);
 void exibir_dados_paciente (void);

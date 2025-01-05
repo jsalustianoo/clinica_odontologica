@@ -2,17 +2,7 @@
 #include <stdlib.h>
 #include "pacientes.h"
 
-struct pacientes
-{
-    char nome_paciente[45];
-    char cpf_paciente[14];
-    char telefone_paciente[15];
-    char doencas_preexistentes[200]; 
-    char contraindicacao[200];
-    int dia, mes, ano;
-};
-
-typedef struct pacientes pacientes;
+typedef struct pacientes Paciente;
 
 void menu_paciente(void) {
     int opcao_paciente;
@@ -53,23 +43,23 @@ void menu_paciente(void) {
     }while(opcao_paciente != 0);
 }
 void cadastro_paciente (void) {
-    pacientes paciente1;
+    Paciente paciente;
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome(paciente1.nome_paciente);
+    salvar_nome(paciente.nome_paciente);
     getchar();
-    salvar_data_nascimento(&paciente1.dia, &paciente1.mes, &paciente1.ano);
+    salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
     getchar();
-    salvar_cpf_paciente(paciente1.cpf_paciente);
+    salvar_cpf_paciente(paciente.cpf_paciente);
     getchar();
-    salvar_telefone_paciente(paciente1.telefone_paciente);
+    salvar_telefone_paciente(paciente.telefone_paciente);
     getchar();
-    salvar_doencas_preexistentes(paciente1.doencas_preexistentes);
+    salvar_doencas_preexistentes(paciente.doencas_preexistentes);
     getchar();
-    salvar_contraindacacao(paciente1.contraindicacao);
+    salvar_contraindacacao(paciente.contraindicacao);
     getchar();
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
