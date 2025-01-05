@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include "pacientes.h"
 
+struct pacientes
+{
+    char nome_paciente[45];
+    char cpf_paciente[14];
+    char telefone_paciente[15];
+    char doencas_preexistentes[200]; 
+    char contraindicacao[200];
+    int dia, mes, ano;
+};
+
+typedef struct pacientes pacientes;
+
 void menu_paciente(void) {
     int opcao_paciente;
     do{
@@ -41,29 +53,23 @@ void menu_paciente(void) {
     }while(opcao_paciente != 0);
 }
 void cadastro_paciente (void) {
-    char nome_paciente[45];
-    char cpf_paciente[14];
-    char telefone_paciente[15];
-    char doencas_preexistentes[200]; 
-    char contraindicacao[200];
-    int dia, mes, ano;
-
+    pacientes paciente1;
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome(nome_paciente);
+    salvar_nome(paciente1.nome_paciente);
     getchar();
-    salvar_data_nascimento(&dia, &mes, &ano);
+    salvar_data_nascimento(&paciente1.dia, &paciente1.mes, &paciente1.ano);
     getchar();
-    salvar_cpf_paciente(cpf_paciente);
+    salvar_cpf_paciente(paciente1.cpf_paciente);
     getchar();
-    salvar_telefone_paciente(telefone_paciente);
+    salvar_telefone_paciente(paciente1.telefone_paciente);
     getchar();
-    salvar_doencas_preexistentes(doencas_preexistentes);
+    salvar_doencas_preexistentes(paciente1.doencas_preexistentes);
     getchar();
-    salvar_contraindacacao(contraindicacao);
+    salvar_contraindacacao(paciente1.contraindicacao);
     getchar();
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
@@ -216,12 +222,11 @@ void salvar_contraindacacao(char *contraindicacao){
     while(!contraindacacao_valida){
         printf("------     (Contraindicação de Medicamento(s)): ");
         scanf(" %[^\n]", contraindicacao);
-        printf("Contraindicação recebida: %s\n", contraindicacao);
 
         contraindacacao_valida = validar_contraindicacao(contraindicacao);
 
         if (!contraindacacao_valida) {
-            printf("\n=========== Contraindicação Inválida! Valor: '%s' Tente Novamente! ===========\n\n", contraindicacao);
+            printf("\n=========== Contraindicação Inválida! Tente Novamente! ===========\n\n");
         }
     }
 }
