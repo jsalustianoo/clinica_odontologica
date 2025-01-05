@@ -79,24 +79,31 @@ void exibir_dados_paciente (void) {
     printf("------      (CPF):                                                           ------");
     printf("------      (Telefone):                                                      ------"); 
     printf("------      (Doencas preexistentes):                                         ------");
-    printf("------      (Contra indicação de remédio(s)):                                  ------");
+    printf("------      (Contra indicação de remédio(s)):                                ------");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
 
 void editar_paciente (void) {
+    Paciente paciente;
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                          Editar de Paciente                         ------\n");
     printf("=================================================================================\n");
-    printf("------      (Nome):                                                        ------\n");
-    printf("------      (Data de nascimento):                                          ------\n");
-    printf("------      (CPF):                                                         ------\n");
-    printf("------      (Telefone):                                                    ------\n"); 
-    printf("------      (Doencas preexistentes):                                       ------\n");
-    printf("------      (Contra indicação de remédio(s)):                                ------\n");
+    salvar_nome(paciente.nome_paciente);
+    getchar();
+    salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
+    getchar();
+    salvar_cpf_paciente(paciente.cpf_paciente);
+    getchar();
+    salvar_telefone_paciente(paciente.telefone_paciente);
+    getchar();
+    salvar_doencas_preexistentes(paciente.doencas_preexistentes);
+    getchar();
+    salvar_contraindacacao(paciente.contraindicacao);
+    getchar();
     printf("=================================================================================\n");
     printf("------              Dados do(a) Paciente Editados com Sucesso!             ------\n");
     printf("=================================================================================\n");
