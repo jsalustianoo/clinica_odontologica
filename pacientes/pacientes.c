@@ -46,12 +46,15 @@ void menu_paciente(void) {
 void cadastro_paciente(void) {
     Paciente paciente;
 
-    // ler_nomes_arquivo("pacientes.txt");
-
-    // Aloca memória para o nome do paciente
-    paciente.nome_paciente = (char*)malloc(100 * sizeof(char));
+    paciente.nome_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
     if (paciente.nome_paciente == NULL) {
         printf("Erro ao alocar memória para o nome do paciente.\n");
+        exit(1);
+    }
+
+    paciente.cpf_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
+    if (paciente.cpf_paciente == NULL) {
+        printf("Erro ao alocar memória para o CPF do paciente.\n");
         exit(1);
     }
 
@@ -62,12 +65,11 @@ void cadastro_paciente(void) {
     printf("=================================================================================\n");
 
     salvar_nome_do_paciente(paciente.nome_paciente); // Nome do paciente é um ponteiro
-    
-    getchar();  // Aguardar pressionar Enter
+    getchar(); 
+    salvar_cpf_paciente(paciente.cpf_paciente);
+    getchar();
 
     salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
-    getchar();
-    salvar_cpf_paciente(paciente.cpf_paciente);
     getchar();
     salvar_telefone_paciente(paciente.telefone_paciente);
     getchar();
@@ -84,6 +86,7 @@ void cadastro_paciente(void) {
 
     // Libera a memória alocada
     free(paciente.nome_paciente);
+    free(paciente.cpf_paciente);
 }
 
 void exibir_dados_paciente (void) {
@@ -159,7 +162,7 @@ void excluir_paciente (void) {
     getchar();
 }
 
-// NOME PACIENTE
+// NOME 
     void salvar_nome_do_paciente(char* nome_paciente) {
         int nome_valido = 0;
 
@@ -190,6 +193,35 @@ void excluir_paciente (void) {
         fclose(fp); // Fecha o arquivo
     }
 
+// CPF 
+    void salvar_cpf_paciente(char* cpf_paciente){
+        int cpf_paciente_valido = 0;
+        while(!cpf_paciente_valido){
+            printf("------      (CPF): ");
+            scanf("%s", cpf_paciente);
+
+            if(validar_cpf(cpf_paciente)){
+                cpf_paciente_valido = 1;
+            } else{
+                printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
+            }
+        }
+
+        // Agora salva o nome no arquivo
+        salvar_nome_arquivo(cpf_paciente, "pacientes.txt");
+    }
+
+    void salvar_cpf_arquivo(const char* cpf_paciente, const char* arquivo) {
+        FILE* fp = fopen(arquivo, "a"); // Abre o arquivo em modo de adição (append)
+        if (fp == NULL) {
+            perror("Erro ao abrir o arquivo");
+            exit(1);
+        }
+
+        fprintf(fp, "%s\n", cpf_paciente); // Escreve o nome no arquivo, seguido de nova linha
+        fclose(fp); // Fecha o arquivo
+    }
+
 void salvar_data_nascimento(int *dia, int *mes, int *ano){
     char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
     int data_valida = 0;
@@ -203,20 +235,6 @@ void salvar_data_nascimento(int *dia, int *mes, int *ano){
                 printf("\n=========== Data de Nascimento Inválida! Tente Novamente! ===========\n\n");
             }
         }
-}
-
-void salvar_cpf_paciente(char *cpf_paciente){
-    int cpf_paciente_valido = 0;
-    while(!cpf_paciente_valido){
-        printf("------      (CPF): ");
-        scanf("%s", cpf_paciente);
-
-        if(validar_cpf(cpf_paciente)){
-            cpf_paciente_valido = 1;
-        } else{
-            printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
-        }
-    }
 }
 
 void salvar_telefone_paciente(char *telefone_paciente){
