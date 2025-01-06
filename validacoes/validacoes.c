@@ -5,9 +5,9 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <time.h>
+#include <ctype.h>
 
-// <-- VALIDAR LETRA - (Autor: Flavius Gorgonio + modicação do chatGPT) -->
-// <-- Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util.c -->
+// VALIDAR LETRA - (Autor: Flavius Gorgonio + modicação do chatGPT) --> Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util.c
 int ehLetra(char c) {
     // Verifica letras maiúsculas e minúsculas
     if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
@@ -25,8 +25,9 @@ int ehLetra(char c) {
     return 0; // Não é letra
 }
 
-// <-- VALIDAR NOME - (Autor: Flavius Gorgonio) -->
-// <-- Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util. -->
+// VALIDAR NOME - (Autor: Flavius Gorgonio) --> Referência: https://github.com/FlaviusGorgonio/LinguaSolta_2021/blob/main/util. 
+
+// Usado no Módulo Paciente(salvar_nome_do_paciente), 
 int validarNome(char* nome) {
     for (int i = 0; nome[i] != '\0'; i++) {
         // Se não for letra e não for espaço, retorna 0
@@ -37,7 +38,7 @@ int validarNome(char* nome) {
     return 1; // Nome válido
 }
 
-// <-- VALIDAR CPF - (Autor: João Roberto) -->
+// VALIDAR CPF - (Autor: João Roberto)
 int validar_cpf(const char *cpf) {
     // Remove caracteres não numéricos e verifica o comprimento
     char numeros[12];
@@ -83,61 +84,6 @@ int validar_cpf(const char *cpf) {
     return 1; // CPF válido
 } 
 
-// Função para validar a data
-int validar_data(int dia, int mes, int ano) {
-   
-    if (ano < 1900 || ano > 2100) return 0; // Verifica se o ano está dentro de um intervalo razoável
-
-    if (mes < 1 || mes > 12) return 0; // Verifica se o mês é válido
-
-    int dias_no_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // Array com o número de dias de cada mês (considerando ano não bissexto)
-
-    if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) { // Ajusta fevereiro para 29 dias se o ano for bissexto
-        dias_no_mes[1] = 29;
-    }
-
-    if (dia < 1 || dia > dias_no_mes[mes - 1]) return 0; // Verifica se o dia está dentro do limite para o mês dado
-
-    // Obtém a data atual
-    time_t t = time(NULL); 
-    struct tm *data_atual = localtime(&t);
-
-    int dia_atual = data_atual->tm_mday;
-    int mes_atual = data_atual->tm_mon + 1; // Meses vão de 0 a 11
-    int ano_atual = data_atual->tm_year + 1900;
-
-    if (ano < ano_atual ||// Verifica se a data fornecida é anterior à data atual
-        (ano == ano_atual && mes < mes_atual) ||
-        (ano == ano_atual && mes == mes_atual && dia < dia_atual)) {
-        return 0;
-    }
-
-    return 1; // Data válida
-}
-
-int validar_horario(const char *horario) {
-    int horas, minutos;
-
-    
-    if (sscanf(horario, "%d:%d", &horas, &minutos) != 2) { // Verifica se o formato está correto e se contém o separador ':'
-        return 0; // Formato inválido
-    }
-    
-    if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) { // Verifica se as horas e minutos estão dentro dos limites válidos
-        return 0; // Horas ou minutos fora do intervalo permitido
-    }
-
-    // Verifica se há exatamente dois dígitos antes e depois do ':'
-    char temp[6];
-    snprintf(temp, sizeof(temp), "%02d:%02d", horas, minutos);
-
-    if (strcmp(horario, temp) != 0) {
-        return 0; // Formato inválido
-    }
-
-    return 1; // Horário válido
-}
-
 int validar_telefone(const char *telefone) {
     int tamanho = strlen(telefone);
 
@@ -166,89 +112,144 @@ int validar_telefone(const char *telefone) {
     return 0; // Não está em nenhum dos formatos válidos
 }
 
-int validar_especialidades(const char *especialidades) {
-    for (int i = 0; especialidades[i] != '\0'; i++) {
-        char c = especialidades[i];
-        if (!ehLetra(c) && c != ' ' && c != ',') {
-            return 0; // Caractere inválido encontrado
+// MÓDULOS AGENDAMENTOS
+    int validar_data(int dia, int mes, int ano) {
+    
+        if (ano < 1900 || ano > 2100) return 0; // Verifica se o ano está dentro de um intervalo razoável
+
+        if (mes < 1 || mes > 12) return 0; // Verifica se o mês é válido
+
+        int dias_no_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // Array com o número de dias de cada mês (considerando ano não bissexto)
+
+        if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) { // Ajusta fevereiro para 29 dias se o ano for bissexto
+            dias_no_mes[1] = 29;
         }
-    }
-    return 1; // Todos os caracteres são válidos
-}
 
-int ehNumero(char c) {
-    return (c >= '0' && c <= '9');
-}
+        if (dia < 1 || dia > dias_no_mes[mes - 1]) return 0; // Verifica se o dia está dentro do limite para o mês dado
 
-// Função para validar o CRO
-int validar_cro(const char *cro) {
-    int tamanho = strlen(cro);
+        // Obtém a data atual
+        time_t t = time(NULL); 
+        struct tm *data_atual = localtime(&t);
 
-    // Verificar tamanho
-    if (tamanho < 4 || tamanho > 8) {
-        return 0; // CRO inválido
-    }
+        int dia_atual = data_atual->tm_mday;
+        int mes_atual = data_atual->tm_mon + 1; // Meses vão de 0 a 11
+        int ano_atual = data_atual->tm_year + 1900;
 
-    // Verificar se os primeiros caracteres são números
-    int i = 0;
-    while (i < tamanho - 2 && ehNumero(cro[i])) {
-        i++;
-    }
-
-    // Verificar se os últimos dois caracteres são letras maiúsculas
-    if (tamanho - i != 2 || !isupper(cro[i]) || !isupper(cro[i + 1])) {
-        return 0; // CRO inválido
-    }
-
-    return 1; // CRO válido
-}
-
-int eh_bissexto(int ano) {
-    return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
-}
-
-// Função para validar a data fornecida
-int validar_data_nascimento(const char *data, int *dia, int *mes, int *ano) {
-    int dia_max;
-    if (strlen(data) == 8) { // Formato "MMDDYYYY"
-        if (sscanf(data, "%2d%2d%4d", mes, dia, ano) != 3)
+        if (ano < ano_atual ||// Verifica se a data fornecida é anterior à data atual
+            (ano == ano_atual && mes < mes_atual) ||
+            (ano == ano_atual && mes == mes_atual && dia < dia_atual)) {
             return 0;
-    } else if (strlen(data) == 10) { // Formato "MM/DD/YYYY"
-        if (data[2] != '/' || data[5] != '/' ||
-            sscanf(data, "%2d/%2d/%4d", mes, dia, ano) != 3)
+        }
+
+        return 1; // Data válida
+    }
+
+    int validar_horario(const char *horario) {
+        int horas, minutos;
+
+        
+        if (sscanf(horario, "%d:%d", &horas, &minutos) != 2) { // Verifica se o formato está correto e se contém o separador ':'
+            return 0; // Formato inválido
+        }
+        
+        if (horas < 0 || horas > 23 || minutos < 0 || minutos > 59) { // Verifica se as horas e minutos estão dentro dos limites válidos
+            return 0; // Horas ou minutos fora do intervalo permitido
+        }
+
+        // Verifica se há exatamente dois dígitos antes e depois do ':'
+        char temp[6];
+        snprintf(temp, sizeof(temp), "%02d:%02d", horas, minutos);
+
+        if (strcmp(horario, temp) != 0) {
+            return 0; // Formato inválido
+        }
+
+        return 1; // Horário válido
+    }
+
+// MÓDULO DENTISTAS
+    int validar_especialidades(const char *especialidades) {
+        for (int i = 0; especialidades[i] != '\0'; i++) {
+            char c = especialidades[i];
+            if (!ehLetra(c) && c != ' ' && c != ',') {
+                return 0; // Caractere inválido encontrado
+            }
+        }
+        return 1; // Todos os caracteres são válidos
+    }
+
+    int ehNumero(char c) {
+        return (c >= '0' && c <= '9');
+    }
+
+    int validar_cro(const char *cro) {
+        int tamanho = strlen(cro);
+
+        // Verificar tamanho
+        if (tamanho < 4 || tamanho > 8) {
+            return 0; // CRO inválido
+        }
+
+        // Verificar se os primeiros caracteres são números
+        int i = 0;
+        while (i < tamanho - 2 && ehNumero(cro[i])) {
+            i++;
+        }
+
+        // Verificar se os últimos dois caracteres são letras maiúsculas
+        if (tamanho - i != 2 || !isupper(cro[i]) || !isupper(cro[i + 1])) {
+            return 0; // CRO inválido
+        }
+
+        return 1; // CRO válido
+    }
+
+// MÓDULO PACIENTES
+    int eh_bissexto(int ano) {
+        return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+    }
+    
+    int validar_data_nascimento(const char *data, int *dia, int *mes, int *ano) {
+        int dia_max;
+        if (strlen(data) == 8) { // Formato "MMDDYYYY"
+            if (sscanf(data, "%2d%2d%4d", mes, dia, ano) != 3)
+                return 0;
+        } else if (strlen(data) == 10) { // Formato "MM/DD/YYYY"
+            if (data[2] != '/' || data[5] != '/' ||
+                sscanf(data, "%2d/%2d/%4d", mes, dia, ano) != 3)
+                return 0;
+        } else {
+            return 0; // Tamanho inválido
+        }
+
+        if (*mes < 1 || *mes > 12 || *dia < 1 || *ano < 1)
             return 0;
-    } else {
-        return 0; // Tamanho inválido
-    }
 
-    if (*mes < 1 || *mes > 12 || *dia < 1 || *ano < 1)
-        return 0;
-
-    switch (*mes) {
-        case 4: case 6: case 9: case 11: dia_max = 30; break;
-        case 2: dia_max = eh_bissexto(*ano) ? 29 : 28; break;
-        default: dia_max = 31;
-    }
-
-    return *dia <= dia_max;
-}
-
-int validar_doencas_preexistentes(const char *doencas_preexistentes) {
-    for (int i = 0; doencas_preexistentes[i] != '\0'; i++) {
-        char c = doencas_preexistentes[i];
-        if (!ehLetra(c) && c != ' ' && c != ',') {
-            return 0; // Caractere inválido encontrado
+        switch (*mes) {
+            case 4: case 6: case 9: case 11: dia_max = 30; break;
+            case 2: dia_max = eh_bissexto(*ano) ? 29 : 28; break;
+            default: dia_max = 31;
         }
-    }
-    return 1; // Todos os caracteres são válidos
-}
 
-int validar_contraindicacao(const char *contraindicacao) {
-    for (int i = 0; contraindicacao[i] != '\0'; i++) {
-        char c = contraindicacao[i];
-        if (!ehLetra(c) && c != ' ' && c != ',') {
-            return 0; // Caractere inválido encontrado
-        }
+        return *dia <= dia_max;
     }
-    return 1; // Todos os caracteres são válidos
-}
+
+    int validar_doencas_preexistentes(const char *doencas_preexistentes) {
+        for (int i = 0; doencas_preexistentes[i] != '\0'; i++) {
+            char c = doencas_preexistentes[i];
+            if (!ehLetra(c) && c != ' ' && c != ',') {
+                return 0; // Caractere inválido encontrado
+            }
+        }
+        return 1; // Todos os caracteres são válidos
+    }
+
+    int validar_contraindicacao(const char *contraindicacao) {
+        for (int i = 0; contraindicacao[i] != '\0'; i++) {
+            char c = contraindicacao[i];
+            if (!ehLetra(c) && c != ' ' && c != ',') {
+                return 0; // Caractere inválido encontrado
+            }
+        }
+        return 1; // Todos os caracteres são válidos
+    }

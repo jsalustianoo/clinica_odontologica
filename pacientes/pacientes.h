@@ -3,7 +3,7 @@
 
 struct pacientes
 {
-    char nome_paciente[45];
+    char *nome_paciente;
     char cpf_paciente[14];
     char telefone_paciente[15];
     char doencas_preexistentes[200]; 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "pacientes.h"
 
 typedef struct pacientes Paciente;
@@ -42,15 +43,28 @@ void menu_paciente(void) {
         }
     }while(opcao_paciente != 0);
 }
-void cadastro_paciente (void) {
+void cadastro_paciente(void) {
     Paciente paciente;
+
+    // ler_nomes_arquivo("pacientes.txt");
+
+    // Aloca memória para o nome do paciente
+    paciente.nome_paciente = (char*)malloc(100 * sizeof(char));
+    if (paciente.nome_paciente == NULL) {
+        printf("Erro ao alocar memória para o nome do paciente.\n");
+        exit(1);
+    }
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome(paciente.nome_paciente);
-    getchar();
+
+    salvar_nome_do_paciente(paciente.nome_paciente); // Nome do paciente é um ponteiro
+    
+    getchar();  // Aguardar pressionar Enter
+
     salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
     getchar();
     salvar_cpf_paciente(paciente.cpf_paciente);
@@ -61,11 +75,15 @@ void cadastro_paciente (void) {
     getchar();
     salvar_contraindacacao(paciente.contraindicacao);
     getchar();
+
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...\n");
     getchar();
+
+    // Libera a memória alocada
+    free(paciente.nome_paciente);
 }
 
 void exibir_dados_paciente (void) {
@@ -92,7 +110,7 @@ void editar_paciente (void) {
     printf("=================================================================================\n");
     printf("------                          Editar de Paciente                         ------\n");
     printf("=================================================================================\n");
-    salvar_nome(paciente.nome_paciente);
+    salvar_nome_paciente(paciente.nome_paciente);
     getchar();
     salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
     getchar();
@@ -141,21 +159,36 @@ void excluir_paciente (void) {
     getchar();
 }
 
+// NOME PACIENTE
+    void salvar_nome_do_paciente(char* nome_paciente) {
+        int nome_valido = 0;
 
-void salvar_nome(char *nome_paciente){
-    int nome_valido = 0; // Não válido
-    while (!nome_valido) {
-        printf("------      (Nome do Dentista): ");
-        scanf(" %[^\n]", nome_paciente);
-        
-        if (validarNome(nome_paciente) == 1) { 
-            nome_valido = 1; // Válido
-        } else {
-            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
-            while (getchar() != '\n'); 
+        while (!nome_valido) {
+            printf("------      (Nome do Paciente): ");
+            fgets(nome_paciente, 100, stdin); // Usa o ponteiro alocado
+            nome_paciente[strcspn(nome_paciente, "\n")] = '\0'; // Remove o '\n'
+
+            nome_valido = validarNome(nome_paciente);
+
+            if (!nome_valido) {
+                printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
+            }
         }
+
+        // Agora salva o nome no arquivo
+        salvar_nome_arquivo(nome_paciente, "pacientes.txt");
     }
-}
+
+    void salvar_nome_arquivo(const char* nome_paciente, const char* arquivo) {
+        FILE* fp = fopen(arquivo, "a"); // Abre o arquivo em modo de adição (append)
+        if (fp == NULL) {
+            perror("Erro ao abrir o arquivo");
+            exit(1);
+        }
+
+        fprintf(fp, "%s\n", nome_paciente); // Escreve o nome no arquivo, seguido de nova linha
+        fclose(fp); // Fecha o arquivo
+    }
 
 void salvar_data_nascimento(int *dia, int *mes, int *ano){
     char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
@@ -217,7 +250,7 @@ void salvar_doencas_preexistentes(char *doencas_preexistentes){
 void salvar_contraindacacao(char *contraindicacao){
     int contraindacacao_valida = 0;
     while(!contraindacacao_valida){
-        printf("------     (Contraindicação de Medicamento(s)): ");
+        printf("------      (Contraindicação de Medicamento(s)): ");
         scanf(" %[^\n]", contraindicacao);
 
         contraindacacao_valida = validar_contraindicacao(contraindicacao);
@@ -227,3 +260,4 @@ void salvar_contraindacacao(char *contraindicacao){
         }
     }
 }
+
