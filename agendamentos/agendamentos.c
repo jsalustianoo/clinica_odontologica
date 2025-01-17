@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "agendamentos.h"
 
+typedef struct agendamentos Agendamento;
+
 void menu_agendamento (void) {
     int opcao_agendamento;
     do{
@@ -43,14 +45,7 @@ void menu_agendamento (void) {
 }
 
 void agendar (void) {
-    char id[10]; 
-    char nome[45]; 
-    char cpf[14]; 
-    char dentista[45]; 
-    char horario[6];
-    char pagamento[9]; 
-    char situacao[11];
-    int dia, mes, ano;
+    Agendamento agendamento;
 
     system("clear||cls");
     printf("\n");
@@ -58,20 +53,20 @@ void agendar (void) {
     printf("------                         Realizar Agendamento                        ------\n");
     printf("=================================================================================\n");
     printf("------      (ID): ");
-    scanf("%s", id);
+    scanf("%s", agendamento.id);
     getchar();
-    salvar_nome_paciente(nome);
+    salvar_nome_paciente(agendamento.nome);
     getchar();
-    salvar_cpf(cpf);
+    salvar_cpf(agendamento.cpf);
     getchar();
-    salvar_dentista(dentista);
+    salvar_dentista(agendamento.dentista);
     getchar();
-    salvar_data(&dia, &mes, &ano);
-    salvar_horario(horario);
+    salvar_data(&agendamento.dia, &agendamento.mes, &agendamento.ano);
+    salvar_horario(agendamento.horario);
     getchar();
-    salvar_pagamento(pagamento);
+    salvar_pagamento(agendamento.pagamento);
     getchar();
-    salvar_situacao(situacao);
+    salvar_situacao(agendamento.situacao);
     getchar();
     printf("=================================================================================\n");
     printf("------                 Agendamento Realizado com Sucesso!                  ------\n");

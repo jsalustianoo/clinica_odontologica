@@ -1,8 +1,7 @@
 #ifndef PACIENTES_H
 #define PACIENTES_H
 
-struct pacientes
-{
+struct pacientes{
     char *nome_paciente;
     char *cpf_paciente;
     char telefone_paciente[15];
