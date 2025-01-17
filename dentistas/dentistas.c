@@ -85,16 +85,23 @@ void exibir_dados_dentista (void) {
 }
 
 void editar_dentista (void) {
+    Dentista dentista;
+    
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                      Editar dados de um Dentista                    ------\n");
     printf("=================================================================================\n");
-    printf("------      (Nome):                                                          ------");
-    printf("------      (CPF):                                                           ------");
-    printf("------      (Telefone):                                                      ------"); 
-    printf("------      (Especialidade):                                                 ------"); 
-    printf("------      (Numero do CRO):                                                 ------"); 
+    salvar_nome_dentista(dentista.nome);
+    getchar();
+    salvar_cpf_dentista(dentista.cpf);
+    getchar();
+    salvar_telefone_dentista(dentista.telefone);
+    getchar();
+    salvar_especialidade(dentista.especialidades);
+    getchar(); 
+    salvar_cro(dentista.cro);
+    getchar(); 
     printf("=================================================================================\n");
     printf("-----               Dados do(a) Dentista Editados com Sucesso!              -----\n");
     printf("=================================================================================\n");
