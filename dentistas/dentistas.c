@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "dentistas.h"
 
+typedef struct dentistas Dentista;
+
 void menu_dentista(void) {
     int opcao_dentista;
     do{
@@ -43,26 +45,22 @@ void menu_dentista(void) {
 }
 
 void cadastro_dentista (void) {
-    char nome[45];
-    char cpf[14];
-    char telefone[15];
-    char especialidades[70];
-    char cro[7];
+    Dentista dentista;
 
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Dentista                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome_dentista(nome);
+    salvar_nome_dentista(dentista.nome);
     getchar();
-    salvar_cpf_dentista(cpf);
+    salvar_cpf_dentista(dentista.cpf);
     getchar();
-    salvar_telefone_dentista(telefone);
+    salvar_telefone_dentista(dentista.telefone);
     getchar();
-    salvar_especialidade(especialidades);
+    salvar_especialidade(dentista.especialidades);
     getchar(); 
-    salvar_cro(cro);
+    salvar_cro(dentista.cro);
     getchar(); 
     printf("=================================================================================\n");
     printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
