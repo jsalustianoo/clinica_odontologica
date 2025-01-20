@@ -69,6 +69,9 @@ void cadastro_dentista (void) {
     printf("=================================================================================\n");
     printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
     printf("=================================================================================\n");
+    ultimo = criar;
+    salvar_em_arquivo_txt(criar->nome, criar->cpf, criar->telefone, criar->especialidades, criar->cro, "dentistas.txt", ultimo);
+
     printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
@@ -214,4 +217,16 @@ void salvar_cro(char *cro){
             printf("\n=========== CRO Inválido! Tente Novamente! ===========\n\n");
         }
     }
+}
+
+void salvar_em_arquivo_txt(char *nome, char *cpf, char *telefone, char *especialidades, char *cro, char *nome_arquivo, Dentista* ultimo){
+    FILE* arquivo_dentistas = fopen(nome_arquivo, "a");
+
+    Dentista* auxiliar = ultimo;
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->nome);
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->cpf);
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->telefone);
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->especialidades);
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->cro);
+    fclose(arquivo_dentistas);
 }
