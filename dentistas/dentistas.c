@@ -45,22 +45,26 @@ void menu_dentista(void) {
 }
 
 void cadastro_dentista (void) {
-    Dentista dentista;
+
+    Dentista* criar;
+    Dentista* ultimo;
+
+    criar = (Dentista*)malloc(sizeof(Dentista));
 
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Cadastro de Dentista                        ------\n");
     printf("=================================================================================\n");
-    salvar_nome_dentista(dentista.nome);
+    salvar_nome_dentista(criar->nome);
     getchar();
-    salvar_cpf_dentista(dentista.cpf);
+    salvar_cpf_dentista(criar->cpf);
     getchar();
-    salvar_telefone_dentista(dentista.telefone);
+    salvar_telefone_dentista(criar->telefone);
     getchar();
-    salvar_especialidade(dentista.especialidades);
+    salvar_especialidade(criar->especialidades);
     getchar(); 
-    salvar_cro(dentista.cro);
+    salvar_cro(criar->cro);
     getchar(); 
     printf("=================================================================================\n");
     printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
