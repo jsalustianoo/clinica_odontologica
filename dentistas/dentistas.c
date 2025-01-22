@@ -136,59 +136,89 @@ void exibir_dados_dentista(void) {
     getchar();
 }
 
-void editar_dentista (void) {
-    Dentista dentista;
-    
-    system("clear||cls");
-    printf("\n");
-    printf("=================================================================================\n");
-    printf("------                      Editar dados de um Dentista                    ------\n");
-    printf("=================================================================================\n");
-    salvar_nome_dentista(dentista.nome);
-    getchar();
-    salvar_cpf_dentista(dentista.cpf);
-    getchar();
-    salvar_telefone_dentista(dentista.telefone);
-    getchar();
-    salvar_especialidade(dentista.especialidades);
-    getchar(); 
-    salvar_cro(dentista.cro);
-    getchar(); 
-    printf("=================================================================================\n");
-    printf("-----               Dados do(a) Dentista Editados com Sucesso!              -----\n");
-    printf("=================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
+void editar_dentista(void) {
+    printf("cls||clear");
+    printf("Não implementado");
+    printf("\nTecle <ENTER> para continuar...");
     getchar();
 }
 
-void excluir_dentista (void) {
-    char confirmacao; 
-
+void excluir_dentista(void) {
     system("clear||cls");
     printf("\n");
-    printf("=================================================================================\n");
-    printf("------                           Excluir Dentista                          ------\n");
-    printf("=================================================================================\n");
-    printf("------      (Nome):                                                          ------");
-    printf("------      (CPF):                                                           ------");
-    printf("------      (Telefone):                                                      ------"); 
-    printf("------      (Especialidade):                                                 ------"); 
-    printf("------      (Numero do CRO):                                                 ------"); 
-    printf("------                                                                     ------\n"); 
-    printf("------     Tem certeza que deseja Excluir esse Dentista? (S)IM | (N)AO     ------\n");
 
-    scanf(" %c", confirmacao);
-    if (confirmacao == 'S' || confirmacao == 's'){
-        printf("------                   Dentista Excluído com Sucesso!                    ------\n");
-    } else if (confirmacao == 'N' || confirmacao == 'n'){
-        printf("------                        Operação Cancelada!                          ------\n");
-    } else{
-        printf("------      Número digitado não condiz com nenhuma opção do sistema        ------\n");
-    }                     
-    printf("=================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
+    char cpf_procurado[15];
+    char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
+    int encontrado = 0;
+    int confirmacao;
+
+    printf("==================================================================================\n");
+    printf("------                            Excluir Dentista                          ------\n");
+    printf("==================================================================================\n");
+    printf("------      (CPF): ");
+    fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
+    cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0'; // Remove quebra de linha
+
+    FILE *arquivo = fopen("dentistas.txt", "r");
+    FILE *temp = fopen("temp.txt", "w");
+
+    if (arquivo == NULL || temp == NULL) {
+        printf("\nErro ao abrir o arquivo!\n");
+        return;
+    }
+
+    while (fgets(nome, sizeof(nome), arquivo) != NULL) {
+        fgets(cpf, sizeof(cpf), arquivo);
+        fgets(telefone, sizeof(telefone), arquivo);
+        fgets(especialidades, sizeof(especialidades), arquivo);
+        fgets(cro, sizeof(cro), arquivo);
+
+        nome[strcspn(nome, "\n")] = '\0';
+        cpf[strcspn(cpf, "\n")] = '\0';
+        telefone[strcspn(telefone, "\n")] = '\0';
+        especialidades[strcspn(especialidades, "\n")] = '\0';
+        cro[strcspn(cro, "\n")] = '\0';
+
+        if (strcmp(cpf, cpf_procurado) == 0) {
+            printf("\n=================================================================================\n");
+            printf("Nome: %s\n", nome);
+            printf("CPF: %s\n", cpf);
+            printf("Telefone: %s\n", telefone);
+            printf("Especialidade(s): %s\n", especialidades);
+            printf("Número do CRO: %s\n", cro);
+            printf("=================================================================================\n");
+
+            printf("\nDeseja realmente excluir? (1 - Sim / 0 - Não): ");
+            scanf("%d", &confirmacao);
+            getchar(); // Limpar buffer do teclado
+
+            if (confirmacao == 1) {
+                encontrado = 1;
+                printf("\nDentista excluído com sucesso!\n");
+                continue;  // Pula a gravação deste registro
+            } else {
+                printf("\nExclusão cancelada.\n");
+            }
+        }
+
+        fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, especialidades, cro);
+    }
+
+    fclose(arquivo);
+    fclose(temp);
+
+    if (encontrado) {
+        remove("dentistas.txt");
+        rename("temp.txt", "dentistas.txt");
+    } else {
+        remove("temp.txt");
+        printf("\nDentista com CPF %s não encontrado.\n", cpf_procurado);
+    }
+
+    printf("\nTecle <ENTER> para continuar...");
     getchar();
 }
+
 
 void salvar_nome_dentista(char *nome){
     int valido = 0; // Não válido
