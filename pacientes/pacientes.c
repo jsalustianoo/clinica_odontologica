@@ -13,11 +13,11 @@ void menu_paciente(void) {
         printf("=================================================================================\n");
         printf("------                         Menu dos Pacientes                          ------\n");
         printf("=================================================================================\n");
-        printf("------        (1) - Cadastrar Novo Paciente                                ------\n");
-        printf("------        (2) - Visualizar Dados de um Paciente                        ------\n");
-        printf("------        (3) - Editar Dados de um Paciente                            ------\n");
-        printf("------        (4) - Excluir Paciente                                       ------\n");
-        printf("------        (0) - Retornar ao Menu Principal                             ------\n");
+        printf("------                         |1| - Cadastrar                             ------\n");
+        printf("------                         |2| - Visualizar                            ------\n");
+        printf("------                         |3| - Editar                                ------\n");
+        printf("------                         |4| - Excluir                               ------\n");
+        printf("------                         |0| - Voltar                                ------\n");
         printf("=================================================================================\n");
         printf("    - (Opção desejada): ");
         scanf("%d", &opcao_paciente);
@@ -44,16 +44,19 @@ void menu_paciente(void) {
     }while(opcao_paciente != 0);
 }
 void cadastro_paciente(void) {
-    Paciente paciente;
+    Paciente* criar;
+    Paciente* ultimo;
 
-    paciente.nome_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
-    if (paciente.nome_paciente == NULL) {
+    criar = (Paciente*)malloc(sizeof(Paciente));
+
+    criar->nome_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
+    if (criar->nome_paciente == NULL) {
         printf("Erro ao alocar memória para o nome do paciente.\n");
         exit(1);
     }
 
-    paciente.cpf_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
-    if (paciente.cpf_paciente == NULL) {
+    criar->cpf_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
+    if (criar->cpf_paciente == NULL) {
         printf("Erro ao alocar memória para o CPF do paciente.\n");
         exit(1);
     }
@@ -64,18 +67,17 @@ void cadastro_paciente(void) {
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
 
-    salvar_nome_do_paciente(paciente.nome_paciente); // Nome do paciente é um ponteiro
+    salvar_nome_do_paciente(criar->nome_paciente); // Nome do paciente é um ponteiro
     getchar(); 
-    salvar_cpf_paciente(paciente.cpf_paciente);
+    salvar_cpf_paciente(criar->cpf_paciente);
     getchar();
-
-    salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
+    salvar_data_nascimento(&criar->dia, &criar->mes, &criar->ano);
     getchar();
-    salvar_telefone_paciente(paciente.telefone_paciente);
+    salvar_telefone_paciente(criar->telefone_paciente);
     getchar();
-    salvar_doencas_preexistentes(paciente.doencas_preexistentes);
+    salvar_doencas_preexistentes(criar->doencas_preexistentes);
     getchar();
-    salvar_contraindacacao(paciente.contraindicacao);
+    salvar_contraindacacao(criar->contraindicacao);
     getchar();
 
     printf("=================================================================================\n");
@@ -85,8 +87,8 @@ void cadastro_paciente(void) {
     getchar();
 
     // Libera a memória alocada
-    free(paciente.nome_paciente);
-    free(paciente.cpf_paciente);
+    free(criar->nome_paciente);
+    free(criar->cpf_paciente);
 }
 
 void exibir_dados_paciente (void) {
@@ -107,24 +109,12 @@ void exibir_dados_paciente (void) {
 }
 
 void editar_paciente (void) {
-    Paciente paciente;
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                          Editar de Paciente                         ------\n");
     printf("=================================================================================\n");
-    salvar_nome_paciente(paciente.nome_paciente);
-    getchar();
-    salvar_data_nascimento(&paciente.dia, &paciente.mes, &paciente.ano);
-    getchar();
-    salvar_cpf_paciente(paciente.cpf_paciente);
-    getchar();
-    salvar_telefone_paciente(paciente.telefone_paciente);
-    getchar();
-    salvar_doencas_preexistentes(paciente.doencas_preexistentes);
-    getchar();
-    salvar_contraindacacao(paciente.contraindicacao);
-    getchar();
+    
     printf("=================================================================================\n");
     printf("------              Dados do(a) Paciente Editados com Sucesso!             ------\n");
     printf("=================================================================================\n");

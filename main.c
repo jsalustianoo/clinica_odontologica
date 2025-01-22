@@ -47,14 +47,16 @@ void menu_principal (void) {
     printf("=================================================================================\n");
     printf("-----                  SIG-Dentistry: Clínica Odontológica                  -----\n");
     printf("=================================================================================\n");
-    printf("-----                     (1) - Módulo dos Agendamentos                     -----\n");
-    printf("-----                     (2) - Módulo dos Pacientes                        -----\n");
-    printf("-----                     (3) - Módulo dos Dentistas                        -----\n"); 
-    printf("-----                     (4) - Módulo dos Relatórios                       -----\n");
-    printf("-----                     (5) - Módulo das Informações                      -----\n");
-    printf("-----                     (0) - Desligar Sistema                            -----\n");
+    printf("-----                                                                       -----\n");
+    printf("-----                     |1| - Módulo dos Agendamentos                     -----\n");
+    printf("-----                     |2| - Módulo dos Pacientes                        -----\n");
+    printf("-----                     |3| - Módulo dos Dentistas                        -----\n"); 
+    printf("-----                     |4| - Módulo dos Relatórios                       -----\n");
+    printf("-----                     |5| - Módulo das Informações                      -----\n");
+    printf("-----                     |0| - Desligar Sistema                            -----\n");
+    printf("-----                                                                       -----\n");
     printf("=================================================================================\n");
-    printf("      - (Opção desejada): ");
+    printf("- (Opção desejada): ");
 }
 
 void informacoes (void) {
@@ -63,9 +65,11 @@ void informacoes (void) {
     printf("=================================================================================\n");
     printf("------                         Área de Informações                         ------\n");
     printf("=================================================================================\n");
+    printf("-----                                                                       -----\n");
     printf("------                       Projeto SIG-Dentistry:                        ------\n");                   
     printf("------           Sistema de Agendamento para Clínicas Dentárias            ------\n");                   
-    printf("------           Desenvolvido por: José Salustiano e Raul Araujo           ------\n");
+    printf("------           Desenvolvido por: José Salustiano Neto Júnior             ------\n");
+    printf("-----                                                                       -----\n");
     printf("=================================================================================\n");
     printf("\nTecle <ENTER> para continuar...");
     getchar();
