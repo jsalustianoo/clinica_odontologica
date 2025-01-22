@@ -3,4 +3,5 @@
 
 void relatorios (void); 
 
+void exibir_todos_dentistas(void);
 #endif
