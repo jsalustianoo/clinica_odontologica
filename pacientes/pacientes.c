@@ -115,6 +115,8 @@ void cadastro_paciente(void) {
     free(criar->telefone_paciente);
     free(criar->doencas_preexistentes);
     free(criar->contraindicacao);
+    free(criar);
+    free(ultimo);
 }
 
 void exibir_dados_paciente (void) {
