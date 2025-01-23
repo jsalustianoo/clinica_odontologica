@@ -118,19 +118,52 @@ void cadastro_paciente(void) {
 void exibir_dados_paciente (void) {
     system("clear||cls");
     printf("\n");
+
+    char cpf_busca[100];
+    char nome[100], cpf[100], telefone[100], doencas[100], contraindicacao[100];
+    int dia, mes, ano;
+    int encontrado = 0;
+
+    system("clear||cls");
+    printf("\n=================================================================================\n");
+    printf("------                         Consulta de Paciente                        ------\n");
     printf("=================================================================================\n");
-    printf("------                         Dados de um Paciente                        ------\n");
-    printf("=================================================================================\n");
-    printf("------      (Nome):                                                          ------");
-    printf("------      (Data de nascimento):                                            ------");
-    printf("------      (CPF):                                                           ------");
-    printf("------      (Telefone):                                                      ------"); 
-    printf("------      (Doencas preexistentes):                                         ------");
-    printf("------      (Contra indicação de remédio(s)):                                ------");
-    printf("=================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
+    printf("------      Informe o CPF do paciente: ");
+    scanf("%s", cpf_busca);
+    getchar();
+
+    FILE* arquivo_pacientes = fopen("pacientes.txt", "r");
+    if (arquivo_pacientes == NULL) {
+        printf("Erro ao abrir o arquivo de pacientes.\n");
+        return;
+    }
+
+    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
+                  nome, cpf, telefone, &dia, &mes, &ano, doencas, contraindicacao) != EOF) {
+        if (strcmp(cpf, cpf_busca) == 0) {
+            encontrado = 1;
+            printf("=================================================================================\n");
+            printf("------      Nome:                %s\n", nome);
+            printf("------      CPF:                 %s\n", cpf);
+            printf("------      Telefone:            %s\n", telefone);
+            printf("------      Data de nascimento:  %02d/%02d/%04d\n", dia, mes, ano);
+            printf("------      Doenças preexistentes: %s\n", doencas);
+            printf("------      Contraindicação:     %s\n", contraindicacao);
+            printf("=================================================================================\n");
+            break;
+        }
+    }
+
+    fclose(arquivo_pacientes);
+
+    if (!encontrado) {
+        printf("Paciente com CPF %s não encontrado.\n", cpf_busca);
+    }
+
+    printf("Tecle <ENTER> para continuar...");
     getchar();
 }
+
 
 void editar_paciente (void) {
     system("clear||cls");
@@ -175,6 +208,7 @@ void excluir_paciente (void) {
     printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
+
 
 // NOME 
     void salvar_nome_do_paciente(char* nome_paciente) {
