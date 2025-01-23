@@ -49,14 +49,32 @@ void cadastro_paciente(void) {
 
     criar = (Paciente*)malloc(sizeof(Paciente));
 
-    criar->nome_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
+    criar->nome_paciente = (char*)malloc(100 * sizeof(char)); 
     if (criar->nome_paciente == NULL) {
         printf("Erro ao alocar memória para o nome do paciente.\n");
         exit(1);
     }
 
-    criar->cpf_paciente = (char*)malloc(100 * sizeof(char)); // Aloca memória para o nome do paciente
+    criar->cpf_paciente = (char*)malloc(100 * sizeof(char)); 
     if (criar->cpf_paciente == NULL) {
+        printf("Erro ao alocar memória para o CPF do paciente.\n");
+        exit(1);
+    }
+
+    criar->telefone_paciente = (char*)malloc(100 * sizeof(char)); 
+    if (criar->telefone_paciente == NULL) {
+        printf("Erro ao alocar memória para o nome do paciente.\n");
+        exit(1);
+    }
+
+    criar->doencas_preexistentes = (char*)malloc(100 * sizeof(char)); 
+    if (criar->doencas_preexistentes == NULL) {
+        printf("Erro ao alocar memória para o CPF do paciente.\n");
+        exit(1);
+    }
+
+    criar->contraindicacao = (char*)malloc(100 * sizeof(char)); 
+    if (criar->contraindicacao == NULL) {
         printf("Erro ao alocar memória para o CPF do paciente.\n");
         exit(1);
     }
@@ -67,7 +85,7 @@ void cadastro_paciente(void) {
     printf("------                         Cadastro de Paciente                        ------\n");
     printf("=================================================================================\n");
 
-    salvar_nome_do_paciente(criar->nome_paciente); // Nome do paciente é um ponteiro
+    salvar_nome_do_paciente(criar->nome_paciente);
     getchar(); 
     salvar_cpf_paciente(criar->cpf_paciente);
     getchar();
@@ -80,15 +98,21 @@ void cadastro_paciente(void) {
     salvar_contraindacacao(criar->contraindicacao);
     getchar();
 
+    ultimo = criar;
+    salvar_pacientes_em_arquivo_txt(criar->nome_paciente, criar->cpf_paciente, criar->telefone_paciente, criar->doencas_preexistentes, criar->contraindicacao, criar->dia, criar->mes, criar->ano, "pacientes.txt", ultimo);
+
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...\n");
     getchar();
 
-    // Libera a memória alocada
+    // Liberando Memória Alocada para Variáveis
     free(criar->nome_paciente);
     free(criar->cpf_paciente);
+    free(criar->telefone_paciente);
+    free(criar->doencas_preexistentes);
+    free(criar->contraindicacao);
 }
 
 void exibir_dados_paciente (void) {
@@ -167,20 +191,6 @@ void excluir_paciente (void) {
                 printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
             }
         }
-
-        // Agora salva o nome no arquivo
-        salvar_nome_arquivo(nome_paciente, "pacientes.txt");
-    }
-
-    void salvar_nome_arquivo(const char* nome_paciente, const char* arquivo) {
-        FILE* fp = fopen(arquivo, "a"); // Abre o arquivo em modo de adição (append)
-        if (fp == NULL) {
-            perror("Erro ao abrir o arquivo");
-            exit(1);
-        }
-
-        fprintf(fp, "%s\n", nome_paciente); // Escreve o nome no arquivo, seguido de nova linha
-        fclose(fp); // Fecha o arquivo
     }
 
 // CPF 
@@ -196,20 +206,6 @@ void excluir_paciente (void) {
                 printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
             }
         }
-
-        // Agora salva o nome no arquivo
-        salvar_nome_arquivo(cpf_paciente, "pacientes.txt");
-    }
-
-    void salvar_cpf_arquivo(const char* cpf_paciente, const char* arquivo) {
-        FILE* fp = fopen(arquivo, "a"); // Abre o arquivo em modo de adição (append)
-        if (fp == NULL) {
-            perror("Erro ao abrir o arquivo");
-            exit(1);
-        }
-
-        fprintf(fp, "%s\n", cpf_paciente); // Escreve o nome no arquivo, seguido de nova linha
-        fclose(fp); // Fecha o arquivo
     }
 
 void salvar_data_nascimento(int *dia, int *mes, int *ano){
@@ -269,3 +265,20 @@ void salvar_contraindacacao(char *contraindicacao){
     }
 }
 
+void salvar_pacientes_em_arquivo_txt(char* nome_paciente, char* cpf_paciente, char* telefone_paciente, char* doencas_preexistentes, char* contraincacao, int dia, int mes, int ano, char *nome_arquivo, Paciente* ultimo){
+    FILE* arquivo_pacientes = fopen(nome_arquivo, "a");
+    if (arquivo_pacientes == NULL) {
+        printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
+        return;
+    }
+
+    Paciente* auxiliar = ultimo;
+    fprintf(arquivo_pacientes, "%s\n", auxiliar->nome_paciente);
+    fprintf(arquivo_pacientes, "%s\n", auxiliar->cpf_paciente);
+    fprintf(arquivo_pacientes, "%s\n", auxiliar->telefone_paciente);
+    fprintf(arquivo_pacientes, "%02d/%02d/%04d\n", dia, mes, ano);
+    fprintf(arquivo_pacientes, "%s\n", auxiliar->doencas_preexistentes);
+    fprintf(arquivo_pacientes, "%s\n", auxiliar->contraindicacao);
+    
+    fclose(arquivo_pacientes);
+}

@@ -269,7 +269,7 @@ void excluir_dentista(void) {
             if (confirmacao == 1) {
                 encontrado = 1;
                 printf("=================================================================================\n");
-                printf("-----                     Dentista excluido com sucesso!                    -----\n");
+                printf("-----                    Dentista excluido com sucesso!                     -----\n");
                 printf("=================================================================================\n");
                 continue;  // Pula a gravação deste registro
             } else {
