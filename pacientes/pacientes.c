@@ -180,32 +180,56 @@ void editar_paciente (void) {
 }
 
 void excluir_paciente (void) {
-    char confirmacao;
 
     system("clear||cls");
     printf("\n");
-    printf("=================================================================================\n");
-    printf("------                           Excluir Paciente                          ------\n");
-    printf("=================================================================================\n");
-    printf("------      (Nome):                                                        ------\n");
-    printf("------      (Data de nascimento):                                          ------\n");
-    printf("------      (CPF):                                                         ------\n");
-    printf("------      (Telefone):                                                    ------\n"); 
-    printf("------      (Doenças preexistentes):                                       ------\n");
-    printf("------      (Contra indicacao de remedios):                                ------\n");
-    printf("------                                                                     ------\n"); 
-    printf("------     Tem certeza que deseja Excluir esse Paciente? (S)IM | (N)AO     ------\n");
 
-    scanf(" %c", &confirmacao);
-    if (confirmacao == 'S' || confirmacao == 's'){
-        printf("------                   Paciente excluído com sucesso!                    ------\n");
-    } else if (confirmacao == 'N' || confirmacao == 'n'){
-        printf("------                        Operação Cancelada!                          ------\n");
-    } else{
-        printf("------      Némero digitado não condiz com nenhuma opção do sistema        ------\n");
-    }                     
+    char cpf_busca[100];
+    char nome[100], cpf[100], telefone[100], doencas[100], contraindicacao[100];
+    int dia, mes, ano;
+    int encontrado = 0;
+
+    system("clear||cls");
+    printf("\n=================================================================================\n");
+    printf("------                         Exclusão de Paciente                        ------\n");
     printf("=================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
+    printf("------      Informe o CPF do paciente a ser excluído: ");
+    scanf("%s", cpf_busca);
+    getchar();
+
+    FILE* arquivo_pacientes = fopen("pacientes.txt", "r");
+    FILE* arquivo_temp = fopen("temp.txt", "w");
+
+    if (arquivo_pacientes == NULL || arquivo_temp == NULL) {
+        printf("Erro ao abrir os arquivos.\n");
+        return;
+    }
+
+    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
+                  nome, cpf, telefone, &dia, &mes, &ano, doencas, contraindicacao) != EOF) {
+        if (strcmp(cpf, cpf_busca) == 0) {
+            encontrado = 1;
+            printf("=================================================================================\n");
+            printf("------      Paciente encontrado e excluído com sucesso!                     ------\n");
+            printf("=================================================================================\n");
+        } else {
+            fprintf(arquivo_temp, "%s\n%s\n%s\n%02d/%02d/%04d\n%s\n%s\n", 
+                    nome, cpf, telefone, dia, mes, ano, doencas, contraindicacao);
+        }
+    }
+
+    fclose(arquivo_pacientes);
+    fclose(arquivo_temp);
+
+    if (encontrado) {
+        remove("pacientes.txt");
+        rename("temp.txt", "pacientes.txt");
+    } else {
+        remove("temp.txt");
+        printf("Paciente com CPF %s não encontrado.\n", cpf_busca);
+    }
+
+    printf("Tecle <ENTER> para continuar...");
     getchar();
 }
 
