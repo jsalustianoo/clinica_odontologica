@@ -21,7 +21,7 @@ void menu_paciente(void) {
         printf("------                          |0| - Voltar                                 ------\n");
         printf("------                                                                       ------\n");
         printf("===================================================================================\n");
-        printf("    - (Opção desejada): ");
+        printf("- (Opção desejada): ");
         scanf("%d", &opcao_paciente);
         getchar();
         switch (opcao_paciente) {
