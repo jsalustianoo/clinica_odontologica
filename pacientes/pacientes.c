@@ -10,17 +10,17 @@ void menu_paciente(void) {
     do{
         system("clear||cls");
         printf("\n");
-        printf("=================================================================================\n");
-        printf("------                         Menu dos Pacientes                          ------\n");
-        printf("=================================================================================\n");
-        printf("------                                                                     ------\n");
-        printf("------                         |1| - Cadastrar                             ------\n");
-        printf("------                         |2| - Visualizar                            ------\n");
-        printf("------                         |3| - Editar                                ------\n");
-        printf("------                         |4| - Excluir                               ------\n");
-        printf("------                         |0| - Voltar                                ------\n");
-        printf("------                                                                     ------\n");
-        printf("=================================================================================\n");
+        printf("===================================================================================\n");
+        printf("------                          Menu dos Pacientes                           ------\n");
+        printf("===================================================================================\n");
+        printf("------                                                                       ------\n");
+        printf("------                          |1| - Cadastrar                              ------\n");
+        printf("------                          |2| - Visualizar                             ------\n");
+        printf("------                          |3| - Editar                                 ------\n");
+        printf("------                          |4| - Excluir                                ------\n");
+        printf("------                          |0| - Voltar                                 ------\n");
+        printf("------                                                                       ------\n");
+        printf("===================================================================================\n");
         printf("    - (Opção desejada): ");
         scanf("%d", &opcao_paciente);
         getchar();
@@ -110,7 +110,7 @@ void cadastro_paciente(void) {
     salvar_pacientes_em_arquivo_txt(criar->nome_paciente, criar->cpf_paciente, criar->data_nascimento_paciente, criar->telefone_paciente, criar->doencas_preexistentes, criar->contraindicacao, "pacientes.txt", ultimo);
 
     printf("=================================================================================\n");
-    printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
+    printf("------                   Paciente Cadastrado com Sucesso!                   -----\n");
     printf("=================================================================================\n");
     printf("      Tecle <ENTER> para continuar...\n");
     getchar();
@@ -124,7 +124,7 @@ void cadastro_paciente(void) {
 }
 
 void exibir_dados_paciente (void) {
-        system("clear||cls");
+    system("clear||cls");
     printf("\n");
 
     char cpf_busca[100];
@@ -132,10 +132,11 @@ void exibir_dados_paciente (void) {
     int encontrado = 0;
 
     system("clear||cls");
-    printf("\n=================================================================================\n");
-    printf("------                         Consulta de Paciente                        ------\n");
-    printf("=================================================================================\n");
-    printf("------      Informe o CPF do paciente: ");
+    printf("\n");
+    printf("===================================================================================\n");
+    printf("------                        Visualizar Paciente                            ------\n");
+    printf("===================================================================================\n");
+    printf("      - (CPF): ");
     scanf("%s", cpf_busca);
     getchar();
 
@@ -145,18 +146,19 @@ void exibir_dados_paciente (void) {
         return;
     }
 
-    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %[^\n] %[^\n] %[^\n]", 
-                  nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
+    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %[^\n] %[^\n] %[^\n]", nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
         if (strcmp(cpf, cpf_busca) == 0) {
             encontrado = 1;
-            printf("=================================================================================\n");
-            printf("------      Nome:                %s\n", nome);
-            printf("------      CPF:                 %s\n", cpf);
-            printf("------      Data de nascimento:  %s\n", data_nascimento);
-            printf("------      Telefone:            %s\n", telefone);
-            printf("------      Doenças preexistentes: %s\n", doencas);
-            printf("------      Contraindicação:     %s\n", contraindicacao);
-            printf("=================================================================================\n");
+            printf("\n      - (Nome): %s\n", nome);
+            printf("      - (CPF): %s\n", cpf);
+            printf("      - (Data de nascimento):  %s\n", data_nascimento);
+            printf("      - (Telefone): %s\n", telefone);
+            printf("      - (Doença(s) preexistente(s)): %s\n", doencas);
+            printf("      - (Contraindicação de remédio(s)): %s\n", contraindicacao);
+            printf("\n");
+            printf("===================================================================================\n");
+            printf("------                  Paciente visualizado com sucesso!                    ------\n");
+            printf("===================================================================================\n");
             break;
         }
     }
@@ -179,10 +181,10 @@ void editar_paciente(void) {
     char nome[100], cpf[100], data_nascimento[11], telefone[100], doencas[100], contraindicacao[100];
     int encontrado = 0;
 
-    printf("=================================================================================\n");
-    printf("------                         Editar Paciente                           ------\n");
-    printf("=================================================================================\n");
-    printf("------      (CPF): ");
+    printf("==================================================================================\n");
+    printf("------                            Editar Paciente                           ------\n");
+    printf("==================================================================================\n");
+    printf("      - (CPF): ");
     fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
     cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0';
 
@@ -194,8 +196,7 @@ void editar_paciente(void) {
         return;
     }
 
-    while (fscanf(arquivo, " %[^\n] %[^\n] %[^\n] %[^\n] %[^\n] %[^\n]", 
-                  nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
+    while (fscanf(arquivo, " %[^\n] %[^\n] %[^\n] %[^\n] %[^\n] %[^\n]", nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         data_nascimento[strcspn(data_nascimento, "\n")] = '\0';
@@ -205,16 +206,17 @@ void editar_paciente(void) {
 
         if (strcmp(cpf, cpf_procurado) == 0) {
             encontrado = 1;
-            printf("\n=================================================================================\n");
-            printf("------      Nome:                %s\n", nome);
-            printf("------      CPF:                 %s\n", cpf);
-            printf("------      Data de nascimento:  %s\n", data_nascimento);
-            printf("------      Telefone:            %s\n", telefone);
-            printf("------      Doenças preexistentes: %s\n", doencas);
-            printf("------      Contraindicação:     %s\n", contraindicacao);
-            printf("=================================================================================\n");
+            printf("\n===================================================================================\n");
+            printf("      - (Nome): %s\n", nome);
+            printf("      - (CPF): %s\n", cpf);
+            printf("      - (Data de nascimento):  %s\n", data_nascimento);
+            printf("      - (Telefone): %s\n", telefone);
+            printf("      - (Doença(s) preexistente(s)): %s\n", doencas);
+            printf("      - (Contraindicação de remédio(s)): %s\n", contraindicacao);
+            printf("===================================================================================\n");
 
-            printf("\nDigite os novos dados:\n");
+
+            printf("\n - Digite os novos dados:\n\n");
             salvar_nome_do_paciente(nome);
             getchar();
             salvar_data_nascimento_paciente(data_nascimento);
@@ -226,9 +228,10 @@ void editar_paciente(void) {
             salvar_contraindacacao(contraindicacao);
             getchar();
 
-            printf("=================================================================================\n");
-            printf("------        Dados do paciente editados com sucesso!                      ------\n");
-            printf("=================================================================================\n");
+            printf("\n");
+            printf("===================================================================================\n");
+            printf("------                Dados do paciente editados com sucesso!                ------\n");
+            printf("===================================================================================\n");
         }
 
         fprintf(temp, "%s\n%s\n%s\n%s\n%s\n%s\n", nome, cpf, data_nascimento, telefone, doencas, contraindicacao);
@@ -245,7 +248,7 @@ void editar_paciente(void) {
         printf("\nPaciente com CPF %s não encontrado.\n", cpf_procurado);
     }
 
-    printf("\nTecle <ENTER> para continuar...");
+    printf("Tecle <ENTER> para continuar...");
     getchar();
 }
 
@@ -260,9 +263,12 @@ void excluir_paciente (void) {
     int encontrado = 0;
 
     system("clear||cls");
-    printf("\n=================================================================================\n");
-    printf("------                         Exclusão de Paciente                        ------\n");
-    printf("=================================================================================\n");
+    printf("\n");
+    printf("===================================================================================\n");
+    printf("------                          Excluir de Paciente                          ------\n");
+    printf("===================================================================================\n");
+
+
     printf("------      Informe o CPF do paciente a ser excluído: ");
     scanf("%s", cpf_busca);
     getchar();
@@ -279,9 +285,9 @@ void excluir_paciente (void) {
                   nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
         if (strcmp(cpf, cpf_busca) == 0) {
             encontrado = 1;
-            printf("=================================================================================\n");
-            printf("------      Paciente encontrado e excluído com sucesso!                     ------\n");
-            printf("=================================================================================\n");
+            printf("===================================================================================\n");
+            printf("------             Paciente encontrado e excluído com sucesso!               ------\n");
+            printf("===================================================================================\n");
         } else {
             fprintf(arquivo_temp, "%s\n%s\n%s\n%s\n%s\n%s\n", 
                     nome, cpf, data_nascimento, telefone, doencas, contraindicacao);
@@ -339,7 +345,7 @@ void excluir_paciente (void) {
 void salvar_data_nascimento_paciente(char* data_nascimento_paciente) {
     char buffer[20];
     do {
-        printf("Digite a data de nascimento (MM/DD/YYYY): ");
+        printf("------      (Data de nascimento (MM/DD/YYYY)): ");
         scanf("%19s", buffer);
     } while (!validar_data_nascimento_new(buffer));
 

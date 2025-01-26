@@ -9,18 +9,18 @@ void menu_dentista(void) {
     do{
         system("clear||cls");
         printf("\n");
-        printf("=================================================================================\n");
-        printf("------                         Menu dos Dentistas                          ------\n");
-        printf("=================================================================================\n");
-        printf("------                                                                     ------\n");
-        printf("------                         |1| - Cadastrar                             ------\n");
-        printf("------                         |2| - Visualizar                            ------\n");
-        printf("------                         |3| - Editar                                ------\n");
-        printf("------                         |4| - Excluir                               ------\n");
-        printf("------                         |0| - Voltar                                ------\n");
-        printf("------                                                                     ------\n");
-        printf("=================================================================================\n");
-        printf("    - (Opção desejada): ");
+        printf("===================================================================================\n");
+        printf("------                          Menu dos Dentistas                           ------\n");
+        printf("===================================================================================\n");
+        printf("------                                                                       ------\n");
+        printf("------                          |1| - Cadastrar                              ------\n");
+        printf("------                          |2| - Visualizar                             ------\n");
+        printf("------                          |3| - Editar                                 ------\n");
+        printf("------                          |4| - Excluir                                ------\n");
+        printf("------                          |0| - Voltar                                 ------\n");
+        printf("------                                                                       ------\n");
+        printf("===================================================================================\n");
+        printf("- (Opção desejada): ");
         scanf("%d", &opcao_dentista);
         getchar();
         switch (opcao_dentista) {
@@ -54,9 +54,9 @@ void cadastro_dentista (void) {
 
     system("clear||cls");
     printf("\n");
-    printf("=================================================================================\n");
-    printf("------                         Cadastro de Dentista                        ------\n");
-    printf("=================================================================================\n");
+    printf("===================================================================================\n");
+    printf("------                          Cadastro de Dentista                         ------\n");
+    printf("===================================================================================\n");
     salvar_nome_dentista(criar->nome);
     getchar();
     salvar_cpf_dentista(criar->cpf);
@@ -71,9 +71,9 @@ void cadastro_dentista (void) {
     ultimo = criar;
     salvar_em_arquivo_txt(criar->nome, criar->cpf, criar->telefone, criar->especialidades, criar->cro, "dentistas.txt", ultimo);
 
-    printf("=================================================================================\n");
-    printf("-----                  Dentista Cadastrado(a) com Sucesso!                  -----\n");
-    printf("=================================================================================\n");
+    printf("===================================================================================\n");
+    printf("-----                   Dentista cadastrado(a) com sucesso!                   -----\n");
+    printf("===================================================================================\n");
     printf("      Tecle <ENTER> para continuar...");
     getchar();
 }
@@ -146,10 +146,10 @@ void editar_dentista(void) {
     char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
     int encontrado = 0;
 
-    printf("==================================================================================\n");
-    printf("------                            Editar Dentista                           ------\n");
-    printf("==================================================================================\n");
-    printf("------      (CPF): ");
+    printf("===================================================================================\n");
+    printf("------                            Editar Dentista                            ------\n");
+    printf("===================================================================================\n");
+    printf("      - (CPF): ");
     fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
     cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0';
 
@@ -193,9 +193,10 @@ void editar_dentista(void) {
             salvar_cro(cro);
             getchar();
 
-            printf("=================================================================================\n");
-            printf("-----                 Dados do dentista editado com sucesso!                -----\n");
-            printf("=================================================================================\n");
+            printf("===================================================================================\n");
+            printf("-----                  Dados do dentista editado com sucesso!                 -----\n");
+            printf("===================================================================================\n");
+
         }
 
         fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, especialidades, cro);
@@ -226,10 +227,10 @@ void excluir_dentista(void) {
     int encontrado = 0;
     int confirmacao;
 
-    printf("==================================================================================\n");
-    printf("------                            Excluir Dentista                          ------\n");
-    printf("==================================================================================\n");
-    printf("------      (CPF): ");
+    printf("===================================================================================\n");
+    printf("------                            Excluir Dentista                           ------\n");
+    printf("===================================================================================\n");
+    printf("      - (CPF): ");
     fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
     cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0'; 
 
@@ -268,9 +269,9 @@ void excluir_dentista(void) {
 
             if (confirmacao == 1) {
                 encontrado = 1;
-                printf("=================================================================================\n");
-                printf("-----                    Dentista excluido com sucesso!                     -----\n");
-                printf("=================================================================================\n");
+                printf("===================================================================================\n");
+                printf("-----                     Dentista excluido com sucesso!                      -----\n");
+                printf("===================================================================================\n");
                 continue;  
             } else {
                 printf("\nExclusão cancelada.\n");
