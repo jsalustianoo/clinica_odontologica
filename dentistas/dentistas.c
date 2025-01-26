@@ -52,6 +52,36 @@ void cadastro_dentista (void) {
 
     criar = (Dentista*)malloc(sizeof(Dentista));
 
+    criar->nome = (char*)malloc(100 * sizeof(char));
+    if (criar->nome == NULL) {
+        printf("Erro ao alocar memória para o nome do dentista.\n");
+        exit(1);
+    }
+
+    criar->cpf = (char*)malloc(100 * sizeof(char));
+    if(criar->cpf == NULL){
+        printf("Erro ao alocar memória para o CPF do dentista.\n");
+        exit(1);
+    }
+
+    criar->telefone = (char*)malloc(100 * sizeof(char));
+    if(criar->telefone == NULL){
+        printf("Erro ao alocar memória para o telefone do dentista.\n");
+        exit(1);
+    }
+
+    criar->especialidades = (char*)malloc(100 * sizeof(char));
+    if(criar->especialidades == NULL){
+        printf("Erro ao alocar memória para a especialidade do dentista.\n");
+        exit(1);
+    }
+
+    criar->cro = (char*)malloc(100 * sizeof(char));
+    if(criar->cro == NULL){
+        printf("Erro ao alocar memória para o CRO do dentista.\n");
+        exit(1);
+    }
+
     system("clear||cls");
     printf("\n");
     printf("===================================================================================\n");
@@ -74,7 +104,7 @@ void cadastro_dentista (void) {
     printf("===================================================================================\n");
     printf("-----                   Dentista cadastrado(a) com sucesso!                   -----\n");
     printf("===================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
+    printf("Tecle <ENTER> para continuar...");
     getchar();
 }
 
