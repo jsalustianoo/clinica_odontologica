@@ -261,3 +261,43 @@ int validar_telefone(const char *telefone) {
         }
         return 1; // Todos os caracteres são válidos
     }
+
+
+int validar_data_nascimento_new(const char *data) {
+    // Verifica se o comprimento está correto
+    if (strlen(data) != 10) {
+        return 0;
+    }
+
+    // Verifica se o formato está correto (MM/DD/YYYY)
+    if (!(isdigit(data[0]) && isdigit(data[1]) && 
+          data[2] == '/' &&
+          isdigit(data[3]) && isdigit(data[4]) &&
+          data[5] == '/' &&
+          isdigit(data[6]) && isdigit(data[7]) && isdigit(data[8]) && isdigit(data[9]))) {
+        return 0;
+    }
+
+    // Extrai mês, dia e ano da string
+    int mes, dia, ano;
+    sscanf(data, "%2d/%2d/%4d", &mes, &dia, &ano);
+
+    // Verifica se os valores estão dentro dos limites válidos
+    if (mes < 1 || mes > 12 || dia < 1 || dia > 31 || ano < 1900 || ano > 2100) {
+        return 0;
+    }
+
+    // Verificação de dias válidos por mês
+    int dias_por_mes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    // Ajusta para ano bissexto
+    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+        dias_por_mes[2] = 29;
+    }
+
+    if (dia > dias_por_mes[mes]) {
+        return 0;
+    }
+
+    return 1;  // Data válida
+}

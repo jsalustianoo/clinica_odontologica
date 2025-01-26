@@ -102,14 +102,12 @@ void exibir_dados_dentista(void) {
         return;
     }
 
-    // Lê os dados do arquivo e procura pelo CPF
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
         fgets(especialidades, sizeof(especialidades), arquivo);
         fgets(cro, sizeof(cro), arquivo);
 
-        // Remover possíveis quebras de linha nos dados lidos
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         telefone[strcspn(telefone, "\n")] = '\0';
@@ -233,7 +231,7 @@ void excluir_dentista(void) {
     printf("==================================================================================\n");
     printf("------      (CPF): ");
     fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
-    cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0'; // Remove quebra de linha
+    cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0'; 
 
     FILE *arquivo = fopen("dentistas.txt", "r");
     FILE *temp = fopen("temp.txt", "w");
@@ -266,14 +264,14 @@ void excluir_dentista(void) {
 
             printf("\nDeseja realmente excluir? (1 - Sim / 0 - Não): ");
             scanf("%d", &confirmacao);
-            getchar(); // Limpar buffer do teclado
+            getchar();
 
             if (confirmacao == 1) {
                 encontrado = 1;
                 printf("=================================================================================\n");
                 printf("-----                    Dentista excluido com sucesso!                     -----\n");
                 printf("=================================================================================\n");
-                continue;  // Pula a gravação deste registro
+                continue;  
             } else {
                 printf("\nExclusão cancelada.\n");
             }

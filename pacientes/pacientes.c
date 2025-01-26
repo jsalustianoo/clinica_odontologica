@@ -63,21 +63,27 @@ void cadastro_paciente(void) {
         exit(1);
     }
 
+    criar->data_nascimento_paciente = (char*)malloc(100 * sizeof(char)); 
+    if (criar->data_nascimento_paciente == NULL) {
+        printf("Erro ao alocar memória para a data de nascimento do paciente.\n");
+        exit(1);
+    }
+
     criar->telefone_paciente = (char*)malloc(100 * sizeof(char)); 
     if (criar->telefone_paciente == NULL) {
-        printf("Erro ao alocar memória para o nome do paciente.\n");
+        printf("Erro ao alocar memória para o telefone do paciente.\n");
         exit(1);
     }
 
     criar->doencas_preexistentes = (char*)malloc(100 * sizeof(char)); 
     if (criar->doencas_preexistentes == NULL) {
-        printf("Erro ao alocar memória para o CPF do paciente.\n");
+        printf("Erro ao alocar memória para doenças preexistentes do paciente.\n");
         exit(1);
     }
 
     criar->contraindicacao = (char*)malloc(100 * sizeof(char)); 
     if (criar->contraindicacao == NULL) {
-        printf("Erro ao alocar memória para o CPF do paciente.\n");
+        printf("Erro ao alocar memória para contraindicação de remédio do paciente.\n");
         exit(1);
     }
 
@@ -91,7 +97,7 @@ void cadastro_paciente(void) {
     getchar(); 
     salvar_cpf_paciente(criar->cpf_paciente);
     getchar();
-    salvar_data_nascimento(&criar->dia, &criar->mes, &criar->ano);
+    salvar_data_nascimento(criar->data_nascimento_paciente);
     getchar();
     salvar_telefone_paciente(criar->telefone_paciente);
     getchar();
@@ -101,7 +107,7 @@ void cadastro_paciente(void) {
     getchar();
 
     ultimo = criar;
-    salvar_pacientes_em_arquivo_txt(criar->nome_paciente, criar->cpf_paciente, criar->telefone_paciente, criar->doencas_preexistentes, criar->contraindicacao, criar->dia, criar->mes, criar->ano, "pacientes.txt", ultimo);
+    salvar_pacientes_em_arquivo_txt(criar->nome_paciente, criar->cpf_paciente, criar->data_nascimento_paciente, criar->telefone_paciente, criar->doencas_preexistentes, criar->contraindicacao, "pacientes.txt", ultimo);
 
     printf("=================================================================================\n");
     printf("------                    Paciente Cadastrado com Sucesso                   -----\n");
@@ -109,14 +115,12 @@ void cadastro_paciente(void) {
     printf("      Tecle <ENTER> para continuar...\n");
     getchar();
 
-    // Liberando Memória Alocada para Variáveis
     free(criar->nome_paciente);
     free(criar->cpf_paciente);
+    free(criar->data_nascimento_paciente);
     free(criar->telefone_paciente);
     free(criar->doencas_preexistentes);
     free(criar->contraindicacao);
-    free(criar);
-    free(ultimo);
 }
 
 void exibir_dados_paciente (void) {
@@ -124,8 +128,7 @@ void exibir_dados_paciente (void) {
     printf("\n");
 
     char cpf_busca[100];
-    char nome[100], cpf[100], telefone[100], doencas[100], contraindicacao[100];
-    int dia, mes, ano;
+    char nome[100], cpf[100], data_nascimento[11], telefone[100], doencas[100], contraindicacao[100];
     int encontrado = 0;
 
     system("clear||cls");
@@ -142,15 +145,15 @@ void exibir_dados_paciente (void) {
         return;
     }
 
-    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
-                  nome, cpf, telefone, &dia, &mes, &ano, doencas, contraindicacao) != EOF) {
+    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %[^\n] %[^\n] %[^\n]", 
+                  nome, cpf, data_nascimento, telefone, doencas, contraindicacao) != EOF) {
         if (strcmp(cpf, cpf_busca) == 0) {
             encontrado = 1;
             printf("=================================================================================\n");
             printf("------      Nome:                %s\n", nome);
             printf("------      CPF:                 %s\n", cpf);
+            printf("------      Data de nascimento:  %s\n", data_nascimento);
             printf("------      Telefone:            %s\n", telefone);
-            printf("------      Data de nascimento:  %02d/%02d/%04d\n", dia, mes, ano);
             printf("------      Doenças preexistentes: %s\n", doencas);
             printf("------      Contraindicação:     %s\n", contraindicacao);
             printf("=================================================================================\n");
@@ -169,135 +172,12 @@ void exibir_dados_paciente (void) {
 }
 
 void editar_paciente(void) {
-    system("clear||cls");
-    printf("\n");
 
-    char cpf_procurado[100];
-    char nome[100], cpf[100], telefone[100], doencas[100], contraindicacao[100];
-    int dia, mes, ano;
-    int encontrado = 0;
-
-    printf("=================================================================================\n");
-    printf("------                         Editar Paciente                           ------\n");
-    printf("=================================================================================\n");
-    printf("------      (CPF): ");
-    fgets(cpf_procurado, sizeof(cpf_procurado), stdin);
-    cpf_procurado[strcspn(cpf_procurado, "\n")] = '\0';
-
-    FILE *arquivo = fopen("pacientes.txt", "r");
-    FILE *temp = fopen("temp.txt", "w");
-
-    if (arquivo == NULL || temp == NULL) {
-        printf("\nErro ao abrir o arquivo!\n");
-        return;
-    }
-
-    while (fscanf(arquivo, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
-                  nome, cpf, telefone, &dia, &mes, &ano, doencas, contraindicacao) != EOF) {
-        nome[strcspn(nome, "\n")] = '\0';
-        cpf[strcspn(cpf, "\n")] = '\0';
-        telefone[strcspn(telefone, "\n")] = '\0';
-        doencas[strcspn(doencas, "\n")] = '\0';
-        contraindicacao[strcspn(contraindicacao, "\n")] = '\0';
-
-        if (strcmp(cpf, cpf_procurado) == 0) {
-            encontrado = 1;
-            printf("\n=================================================================================\n");
-            printf("------      Nome:                %s\n", nome);
-            printf("------      CPF:                 %s\n", cpf);
-            printf("------      Telefone:            %s\n", telefone);
-            printf("------      Data de nascimento:  %02d/%02d/%04d\n", dia, mes, ano);
-            printf("------      Doenças preexistentes: %s\n", doencas);
-            printf("------      Contraindicação:     %s\n", contraindicacao);
-            printf("=================================================================================\n");
-
-            printf("\nDigite os novos dados:\n");
-            salvar_nome_do_paciente(nome);
-            getchar();
-            salvar_telefone_paciente(telefone);
-            getchar();
-            salvar_doencas_preexistentes(doencas);
-            getchar();
-            salvar_contraindacacao(contraindicacao);
-            getchar();
-            salvar_data_nascimento(&dia, &mes, &ano);
-
-            printf("=================================================================================\n");
-            printf("------        Dados do paciente editados com sucesso!                      ------\n");
-            printf("=================================================================================\n");
-        }
-
-        fprintf(temp, "%s\n%s\n%s\n%02d/%02d/%04d\n%s\n%s\n", nome, cpf, telefone, dia, mes, ano, doencas, contraindicacao);
-    }
-
-    fclose(arquivo);
-    fclose(temp);
-
-    if (encontrado) {
-        remove("pacientes.txt");
-        rename("temp.txt", "pacientes.txt");
-    } else {
-        remove("temp.txt");
-        printf("\nPaciente com CPF %s não encontrado.\n", cpf_procurado);
-    }
-
-    printf("\nTecle <ENTER> para continuar...");
-    getchar();
 }
 
 
 void excluir_paciente (void) {
 
-    system("clear||cls");
-    printf("\n");
-
-    char cpf_busca[100];
-    char nome[100], cpf[100], telefone[100], doencas[100], contraindicacao[100];
-    int dia, mes, ano;
-    int encontrado = 0;
-
-    system("clear||cls");
-    printf("\n=================================================================================\n");
-    printf("------                         Exclusão de Paciente                        ------\n");
-    printf("=================================================================================\n");
-    printf("------      Informe o CPF do paciente a ser excluído: ");
-    scanf("%s", cpf_busca);
-    getchar();
-
-    FILE* arquivo_pacientes = fopen("pacientes.txt", "r");
-    FILE* arquivo_temp = fopen("temp.txt", "w");
-
-    if (arquivo_pacientes == NULL || arquivo_temp == NULL) {
-        printf("Erro ao abrir os arquivos.\n");
-        return;
-    }
-
-    while (fscanf(arquivo_pacientes, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
-                  nome, cpf, telefone, &dia, &mes, &ano, doencas, contraindicacao) != EOF) {
-        if (strcmp(cpf, cpf_busca) == 0) {
-            encontrado = 1;
-            printf("=================================================================================\n");
-            printf("------      Paciente encontrado e excluído com sucesso!                     ------\n");
-            printf("=================================================================================\n");
-        } else {
-            fprintf(arquivo_temp, "%s\n%s\n%s\n%02d/%02d/%04d\n%s\n%s\n", 
-                    nome, cpf, telefone, dia, mes, ano, doencas, contraindicacao);
-        }
-    }
-
-    fclose(arquivo_pacientes);
-    fclose(arquivo_temp);
-
-    if (encontrado) {
-        remove("pacientes.txt");
-        rename("temp.txt", "pacientes.txt");
-    } else {
-        remove("temp.txt");
-        printf("Paciente com CPF %s não encontrado.\n", cpf_busca);
-    }
-
-    printf("Tecle <ENTER> para continuar...");
-    getchar();
 }
 
 
@@ -307,8 +187,8 @@ void excluir_paciente (void) {
 
         while (!nome_valido) {
             printf("------      (Nome do Paciente): ");
-            fgets(nome_paciente, 100, stdin); // Usa o ponteiro alocado
-            nome_paciente[strcspn(nome_paciente, "\n")] = '\0'; // Remove o '\n'
+            fgets(nome_paciente, 100, stdin); 
+            nome_paciente[strcspn(nome_paciente, "\n")] = '\0'; 
 
             nome_valido = validarNome(nome_paciente);
 
@@ -333,19 +213,14 @@ void excluir_paciente (void) {
         }
     }
 
-void salvar_data_nascimento(int *dia, int *mes, int *ano){
-    char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
-    int data_valida = 0;
+void salvar_data_nascimento(char* data_nascimento_paciente) {
+    char buffer[20];
+    do {
+        printf("Digite a data de nascimento (MM/DD/YYYY): ");
+        scanf("%19s", buffer);
+    } while (!validar_data_nascimento_new(buffer));
 
-    while (!data_valida) {
-            printf("------      (Data de Nascimento, MM/DD/AAAA ou MMDDAAAA): ");
-            scanf("%10s", data); // Limita a entrada para evitar overflow
-
-            data_valida = validar_data_nascimento(data, dia, mes, ano);
-            if (!data_valida) {
-                printf("\n=========== Data de Nascimento Inválida! Tente Novamente! ===========\n\n");
-            }
-        }
+    strcpy(data_nascimento_paciente, buffer);
 }
 
 void salvar_telefone_paciente(char *telefone_paciente){
@@ -390,7 +265,7 @@ void salvar_contraindacacao(char *contraindicacao){
     }
 }
 
-void salvar_pacientes_em_arquivo_txt(char* nome_paciente, char* cpf_paciente, char* telefone_paciente, char* doencas_preexistentes, char* contraincacao, int dia, int mes, int ano, char *nome_arquivo, Paciente* ultimo){
+void salvar_pacientes_em_arquivo_txt(char* nome_paciente, char* cpf_paciente, char* data_nascimento_paciente, char* telefone_paciente, char* doencas_preexistentes, char* contraincacao, char *nome_arquivo, Paciente* ultimo){
     FILE* arquivo_pacientes = fopen(nome_arquivo, "a");
     if (arquivo_pacientes == NULL) {
         printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
@@ -400,8 +275,8 @@ void salvar_pacientes_em_arquivo_txt(char* nome_paciente, char* cpf_paciente, ch
     Paciente* auxiliar = ultimo;
     fprintf(arquivo_pacientes, "%s\n", auxiliar->nome_paciente);
     fprintf(arquivo_pacientes, "%s\n", auxiliar->cpf_paciente);
+    fprintf(arquivo_pacientes, "%s\n", data_nascimento_paciente);
     fprintf(arquivo_pacientes, "%s\n", auxiliar->telefone_paciente);
-    fprintf(arquivo_pacientes, "%02d/%02d/%04d\n", dia, mes, ano);
     fprintf(arquivo_pacientes, "%s\n", auxiliar->doencas_preexistentes);
     fprintf(arquivo_pacientes, "%s\n", auxiliar->contraindicacao);
     

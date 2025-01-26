@@ -4,10 +4,10 @@
 struct pacientes{
     char* nome_paciente;
     char* cpf_paciente;
+    char* data_nascimento_paciente;
     char* telefone_paciente;
     char* doencas_preexistentes; 
     char* contraindicacao;
-    int dia, mes, ano;
 };
 
 void menu_paciente (void);

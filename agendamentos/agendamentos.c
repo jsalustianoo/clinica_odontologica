@@ -13,11 +13,11 @@ void menu_agendamento (void) {
         printf("=================================================================================\n");
         printf("-----                           Menu Agendamentos                           -----\n");
         printf("=================================================================================\n");
-        printf("-----      (1) Realizar Agendamento                                         -----\n");
-        printf("-----      (2) Visualizar Agendamento                                       -----\n");
-        printf("-----      (3) Editar Agendamento                                           -----\n");
-        printf("-----      (4) Excluir Agendamento                                          -----\n");
-        printf("-----      (0) Retornar ao Menu Anterior                                    -----\n");
+        printf("-----                          |1| - Cadastrar                              -----\n");
+        printf("-----                          |2| - Visualizar                             -----\n");
+        printf("-----                          |3| - Editar                                 -----\n");
+        printf("-----                          |4| - Excluir                                -----\n");
+        printf("-----                          |0| - Voltar                                 -----\n");
         printf("=================================================================================\n");
         printf("    - (Opção desejada): ");
         scanf("%d", &opcao_agendamento);
@@ -75,8 +75,7 @@ void agendar (void) {
 
     ultimo = criar;
     salvar_agendamento_em_arquivo_txt(criar->id, criar->nome, criar->cpf, criar->dentista, criar->dia, criar->mes, criar->ano, criar->horario, criar->pagamento, criar->situacao, "agendamentos.txt", ultimo);
-    free(criar);
-    free(ultimo);
+
     printf("=================================================================================\n");
     printf("------                 Agendamento Realizado com Sucesso!                  ------\n");
     printf("=================================================================================\n");
@@ -88,12 +87,10 @@ void exibir_dados_agendamento (void) {
     system("clear||cls");
     printf("\n");
 
-    char id_busca[100];
-    char id[10], nome[45], cpf[14], dentista[45], horario[6], pagamento[9], situacao[11];
-    int dia, mes, ano;
+    char id_busca[10];
+    char id[10], nome[45], cpf[14], dentista[45], data[11], horario[6], pagamento[2], situacao[2];
     int encontrado = 0;
 
-    system("clear||cls");
     printf("\n=================================================================================\n");
     printf("------                        Visualizar Agendamentos                       ------\n");
     printf("=================================================================================\n");
@@ -107,14 +104,35 @@ void exibir_dados_agendamento (void) {
         return;
     }
 
-    while (fscanf(arquivo_agendamentos, " %[^\n] %[^\n] %[^\n] %d/%d/%d %[^\n] %[^\n]", 
-                  id, nome, cpf, dentista, &dia, &mes, &ano, horario, pagamento, situacao) != EOF) {
+    while (fgets(id, sizeof(id), arquivo_agendamentos) != NULL) {
+        fgets(nome, sizeof(nome), arquivo_agendamentos);
+        fgets(cpf, sizeof(cpf), arquivo_agendamentos);
+        fgets(dentista, sizeof(dentista), arquivo_agendamentos);
+        fgets(data, sizeof(data), arquivo_agendamentos);
+        fgets(horario, sizeof(horario), arquivo_agendamentos);
+        fgets(pagamento, sizeof(pagamento), arquivo_agendamentos);
+        fgets(situacao, sizeof(situacao), arquivo_agendamentos);
+
+
+        id[strcspn(id, "\n")] = '\0';
+        nome[strcspn(nome, "\n")] = '\0';
+        cpf[strcspn(cpf, "\n")] = '\0';
+        dentista[strcspn(dentista, "\n")] = '\0';
+        data[strcspn(data, "\n")] = '\0';
+        horario[strcspn(horario, "\n")] = '\0';
+        pagamento[strcspn(pagamento, "\n")] = '\0';
+        situacao[strcspn(situacao, "\n")] = '\0';
+
         if (strcmp(id, id_busca) == 0) {
             encontrado = 1;
             printf("=================================================================================\n");
             printf("------      Nome:                %s\n", nome);
             printf("------      CPF:                 %s\n", cpf);
-            printf("------      Data de nascimento:  %02d/%02d/%04d\n", dia, mes, ano);
+            printf("------      Dentista:            %s\n", dentista);
+            printf("------      Data do agendamento: %s\n", data);
+            printf("------      Horário:             %s\n", horario);
+            printf("------      Pagamento:            %s\n", pagamento);
+            printf("------      Situação:             %s\n", situacao);
             printf("=================================================================================\n");
             break;
         }
@@ -129,6 +147,7 @@ void exibir_dados_agendamento (void) {
     printf("Tecle <ENTER> para continuar...");
     getchar();
 }
+
 void editar_agendamento (void) {
 
     system("clear||cls");
