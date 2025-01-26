@@ -99,7 +99,7 @@ void cadastro_dentista (void) {
     getchar(); 
 
     ultimo = criar;
-    salvar_em_arquivo_txt(criar->nome, criar->cpf, criar->telefone, criar->especialidades, criar->cro, "dentistas.txt", ultimo);
+    salvar_em_arquivo_txt(criar->nome, criar->cpf, criar->telefone, criar->cro, criar->especialidades, "dentistas.txt", ultimo);
 
     printf("===================================================================================\n");
     printf("-----                   Dentista cadastrado(a) com sucesso!                   -----\n");
@@ -113,7 +113,7 @@ void exibir_dados_dentista(void) {
     printf("\n");
 
     char cpf_procurado[15];
-    char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
+    char nome[100], cpf[15], telefone[20], cro[20], especialidades[100];
     int encontrado = 0;
 
     system("clear||cls");
@@ -135,22 +135,22 @@ void exibir_dados_dentista(void) {
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
-        fgets(especialidades, sizeof(especialidades), arquivo);
         fgets(cro, sizeof(cro), arquivo);
+        fgets(especialidades, sizeof(especialidades), arquivo);
 
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         telefone[strcspn(telefone, "\n")] = '\0';
-        especialidades[strcspn(especialidades, "\n")] = '\0';
         cro[strcspn(cro, "\n")] = '\0';
+        especialidades[strcspn(especialidades, "\n")] = '\0';
 
         if (strcmp(cpf, cpf_procurado) == 0) {
             encontrado = 1;
             printf("\n      - (Nome): %s\n", nome);
             printf("      - (CPF): %s\n", cpf);
             printf("      - (Telefone): %s\n", telefone);
-            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("      - (Número do CRO): %s\n", cro);
+            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("=================================================================================\n");
             printf("-----                   Dentista visualizado com sucesso!                   -----\n");
             printf("=================================================================================\n");
@@ -173,7 +173,7 @@ void editar_dentista(void) {
     printf("\n");
 
     char cpf_procurado[15];
-    char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
+    char nome[100], cpf[15], telefone[20], cro[20], especialidades[100];
     int encontrado = 0;
 
     printf("===================================================================================\n");
@@ -194,14 +194,14 @@ void editar_dentista(void) {
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
-        fgets(especialidades, sizeof(especialidades), arquivo);
         fgets(cro, sizeof(cro), arquivo);
+        fgets(especialidades, sizeof(especialidades), arquivo);
 
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         telefone[strcspn(telefone, "\n")] = '\0';
-        especialidades[strcspn(especialidades, "\n")] = '\0';
         cro[strcspn(cro, "\n")] = '\0';
+        especialidades[strcspn(especialidades, "\n")] = '\0';
 
         if (strcmp(cpf, cpf_procurado) == 0) {
             encontrado = 1;
@@ -209,8 +209,8 @@ void editar_dentista(void) {
             printf("      - (Nome): %s\n", nome);
             printf("      - (CPF): %s\n", cpf);
             printf("      - (Telefone): %s\n", telefone);
-            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("      - (Número do CRO): %s\n", cro);
+            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("=================================================================================\n");
 
             printf("\nDigite os novos dados:\n");
@@ -218,10 +218,11 @@ void editar_dentista(void) {
             getchar();
             salvar_telefone_dentista(telefone);
             getchar();
-            salvar_especialidade(especialidades);
-            getchar();
             salvar_cro(cro);
             getchar();
+            salvar_especialidade(especialidades);
+            getchar();
+
 
             printf("===================================================================================\n");
             printf("-----                  Dados do dentista editado com sucesso!                 -----\n");
@@ -229,7 +230,7 @@ void editar_dentista(void) {
 
         }
 
-        fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, especialidades, cro);
+        fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, cro, especialidades);
     }
 
     fclose(arquivo);
@@ -253,7 +254,7 @@ void excluir_dentista(void) {
     printf("\n");
 
     char cpf_procurado[15];
-    char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
+    char nome[100], cpf[15], telefone[20], cro[20], especialidades[100];
     int encontrado = 0;
     int confirmacao;
 
@@ -275,22 +276,22 @@ void excluir_dentista(void) {
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
-        fgets(especialidades, sizeof(especialidades), arquivo);
         fgets(cro, sizeof(cro), arquivo);
+        fgets(especialidades, sizeof(especialidades), arquivo);
 
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         telefone[strcspn(telefone, "\n")] = '\0';
-        especialidades[strcspn(especialidades, "\n")] = '\0';
         cro[strcspn(cro, "\n")] = '\0';
+        especialidades[strcspn(especialidades, "\n")] = '\0';
 
         if (strcmp(cpf, cpf_procurado) == 0) {
             printf("\n=================================================================================\n");
             printf("      - (Nome): %s\n", nome);
             printf("      - (CPF): %s\n", cpf);
             printf("      - (Telefone): %s\n", telefone);
-            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("      - (Número do CRO): %s\n", cro);
+            printf("      - (Especialidade(s)): %s\n", especialidades);
             printf("=================================================================================\n");
 
             printf("\nDeseja realmente excluir? (1 - Sim / 0 - Não): ");
@@ -308,7 +309,7 @@ void excluir_dentista(void) {
             }
         }
 
-        fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, especialidades, cro);
+        fprintf(temp, "%s\n%s\n%s\n%s\n%s\n", nome, cpf, telefone, cro, especialidades);
     }
 
     fclose(arquivo);
@@ -371,21 +372,6 @@ void salvar_telefone_dentista(char *telefone){
         
 }
 
-void salvar_especialidade(char *especialidades){
-    int especialidade_valida = 0;
-
-    while(!especialidade_valida){
-        printf("------      (Especialidade(s)): ");
-        scanf(" %[^\n]", especialidades); // Lê uma linha inteira com espaços e vírgulas
-
-        especialidade_valida = validar_especialidades(especialidades);
-
-        if (!especialidade_valida) {
-            printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
-        }
-    }
-}
-
 void salvar_cro(char *cro){
     int cro_valido = 0;
 
@@ -401,14 +387,29 @@ void salvar_cro(char *cro){
     }
 }
 
-void salvar_em_arquivo_txt(char *nome, char *cpf, char *telefone, char *especialidades, char *cro, char *nome_arquivo, Dentista* ultimo){
+void salvar_especialidade(char *especialidades){
+    int especialidade_valida = 0;
+
+    while(!especialidade_valida){
+        printf("------      (Especialidade(s)): ");
+        scanf(" %[^\n]", especialidades); // Lê uma linha inteira com espaços e vírgulas
+
+        especialidade_valida = validar_especialidades(especialidades);
+
+        if (!especialidade_valida) {
+            printf("\n=========== Especialidade Inválida! Tente Novamente! ===========\n\n");
+        }
+    }
+}
+
+void salvar_em_arquivo_txt(char* nome, char* cpf, char* telefone, char* cro, char* especialidades, char* nome_arquivo, Dentista* ultimo){
     FILE* arquivo_dentistas = fopen(nome_arquivo, "a");
 
     Dentista* auxiliar = ultimo;
     fprintf(arquivo_dentistas, "%s\n", auxiliar->nome);
     fprintf(arquivo_dentistas, "%s\n", auxiliar->cpf);
     fprintf(arquivo_dentistas, "%s\n", auxiliar->telefone);
-    fprintf(arquivo_dentistas, "%s\n", auxiliar->especialidades);
     fprintf(arquivo_dentistas, "%s\n", auxiliar->cro);
+    fprintf(arquivo_dentistas, "%s\n", auxiliar->especialidades);
     fclose(arquivo_dentistas);
 }
