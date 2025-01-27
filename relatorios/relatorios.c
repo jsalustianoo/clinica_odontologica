@@ -69,7 +69,6 @@ void todos_os_agendamentos(void) {
         return;
     }
 
-    // Lê o arquivo linha por linha e exibe os dados de cada agendamento
     while (fscanf(arquivo, "%s\n%s\n%[^\n]\n%s\n%[^\n]\n%s\n%s\n%s\n%s\n", 
                   id, 
                   cpf_paci, 
@@ -106,17 +105,6 @@ void todos_os_agendamentos(void) {
     getchar();
 }
 
-
-void agendamentos_por_dentista(void){
-    system("clear||cls");
-    printf("\n");
-    printf("===================================================================================\n");
-    printf("------                        < Em desenvolvimento >                         ------\n");
-    printf("===================================================================================\n");
-    printf("Tecle <ENTER> para continuar...");
-    getchar();
-}
-
 void exibir_todos_pacientes(void) {
     char nome[100], cpf[15], telefone[20], doencas_preexistentes[100], contraindicacao[20];
     int contador = 0;
@@ -134,7 +122,6 @@ void exibir_todos_pacientes(void) {
         return;
     }
 
-    // Lê o arquivo linha por linha e exibe os dados de cada dentista
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
@@ -142,7 +129,6 @@ void exibir_todos_pacientes(void) {
         fgets(doencas_preexistentes, sizeof(doencas_preexistentes), arquivo);
         fgets(contraindicacao, sizeof(contraindicacao), arquivo);
 
-        // Remove possíveis quebras de linha dos dados lidos
         nome[strcspn(nome, "\n")] = '\0';
         cpf[strcspn(cpf, "\n")] = '\0';
         telefone[strcspn(telefone, "\n")] = '\0';
@@ -169,9 +155,10 @@ void exibir_todos_pacientes(void) {
     getchar();
 }
 
-void exibir_pacientes_por_ordem_alfabetica(void) {
-    char nome[100], cpf[15], telefone[20], doencas_preexistentes[100], contraindicacao[20];
-    char pacientes[100][100]; 
+void exibir_pacientes_por_ordem_alfabetica(void) { 
+    char nome[100], cpf[15], telefone[20], data_nascimento[20], doencas_preexistentes[100], contraindicacao[20];
+    char pacientes[100][100];  
+    char dados_pacientes[100][6][100];  
     int contador = 0;
 
     system("clear||cls");
@@ -190,12 +177,25 @@ void exibir_pacientes_por_ordem_alfabetica(void) {
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
-        fgets(doencas_preexistentes, sizeof(doencas_preexistentes), arquivo);
+        fgets(data_nascimento, sizeof(data_nascimento), arquivo);
         fgets(doencas_preexistentes, sizeof(doencas_preexistentes), arquivo);
         fgets(contraindicacao, sizeof(contraindicacao), arquivo);
 
-        nome[strcspn(nome, "\n")] = '\0';
+        nome[strcspn(nome, "\n")] = '\0'; 
+        cpf[strcspn(cpf, "\n")] = '\0';
+        telefone[strcspn(telefone, "\n")] = '\0';
+        data_nascimento[strcspn(data_nascimento, "\n")] = '\0';
+        doencas_preexistentes[strcspn(doencas_preexistentes, "\n")] = '\0';
+        contraindicacao[strcspn(contraindicacao, "\n")] = '\0';
+
         strcpy(pacientes[contador], nome);
+        strcpy(dados_pacientes[contador][0], nome);
+        strcpy(dados_pacientes[contador][1], cpf);
+        strcpy(dados_pacientes[contador][2], telefone);
+        strcpy(dados_pacientes[contador][3], data_nascimento);
+        strcpy(dados_pacientes[contador][4], doencas_preexistentes);
+        strcpy(dados_pacientes[contador][5], contraindicacao);
+        
         contador++;
     }
 
@@ -207,16 +207,29 @@ void exibir_pacientes_por_ordem_alfabetica(void) {
         for (int i = 0; i < contador - 1; i++) {
             for (int j = i + 1; j < contador; j++) {
                 if (strcmp(pacientes[i], pacientes[j]) > 0) {
-                    char temp[100];
-                    strcpy(temp, pacientes[i]);
+                    char temp_nome[100];
+                    strcpy(temp_nome, pacientes[i]);
                     strcpy(pacientes[i], pacientes[j]);
-                    strcpy(pacientes[j], temp);
+                    strcpy(pacientes[j], temp_nome);
+
+                    char temp_dados[6][100];
+                    for (int k = 0; k < 6; k++) {
+                        strcpy(temp_dados[k], dados_pacientes[i][k]);
+                        strcpy(dados_pacientes[i][k], dados_pacientes[j][k]);
+                        strcpy(dados_pacientes[j][k], temp_dados[k]);
+                    }
                 }
             }
         }
 
         for (int i = 0; i < contador; i++) {
-            printf("    - Nome: %s\n", pacientes[i]);
+            printf("    - Nome: %s\n", dados_pacientes[i][0]);
+            printf("    - CPF: %s\n", dados_pacientes[i][1]);
+            printf("    - Telefone: %s\n", dados_pacientes[i][2]);
+            printf("    - Data de Nascimento: %s\n", dados_pacientes[i][3]);
+            printf("    - Doença(s) preexistente(s): %s\n", dados_pacientes[i][4]);
+            printf("    - Contraindicação: %s\n", dados_pacientes[i][5]);
+            printf("-----------------------------------------------------------------------------------\n");
         }
     }
 
@@ -279,7 +292,7 @@ void exibir_todos_dentistas(void) {
 void exibir_dentistas_por_ordem_alfabetica(void) {
     char nome[100], cpf[15], telefone[20], especialidades[100], cro[20];
     char dentistas[100][100];
-    char dados_dentistas[100][5][100];  // Armazenar os dados dos dentistas (nome, cpf, telefone, especialidades, cro)
+    char dados_dentistas[100][5][100]; 
     int contador = 0;
 
     system("clear||cls");
@@ -295,7 +308,6 @@ void exibir_dentistas_por_ordem_alfabetica(void) {
         return;
     }
 
-    // Lê todos os dentistas do arquivo e armazena as informações
     while (fgets(nome, sizeof(nome), arquivo) != NULL) {
         fgets(cpf, sizeof(cpf), arquivo);
         fgets(telefone, sizeof(telefone), arquivo);
@@ -308,7 +320,6 @@ void exibir_dentistas_por_ordem_alfabetica(void) {
         especialidades[strcspn(especialidades, "\n")] = '\0';
         cro[strcspn(cro, "\n")] = '\0';
 
-        // Armazena os dados do dentista
         strcpy(dentistas[contador], nome);
         strcpy(dados_dentistas[contador][0], nome);
         strcpy(dados_dentistas[contador][1], cpf);
@@ -324,7 +335,6 @@ void exibir_dentistas_por_ordem_alfabetica(void) {
     if (contador == 0) {
         printf("\nNenhum dentista cadastrado.\n");
     } else {
-        // Ordena os dentistas por nome (ordem alfabética)
         for (int i = 0; i < contador - 1; i++) {
             for (int j = i + 1; j < contador; j++) {
                 if (strcmp(dentistas[i], dentistas[j]) > 0) {
@@ -334,7 +344,6 @@ void exibir_dentistas_por_ordem_alfabetica(void) {
                     strcpy(dentistas[i], dentistas[j]);
                     strcpy(dentistas[j], temp_nome);
 
-                    // Troca os dados relacionados ao dentista
                     char temp_dados[5][100];
                     for (int k = 0; k < 5; k++) {
                         strcpy(temp_dados[k], dados_dentistas[i][k]);
@@ -345,7 +354,6 @@ void exibir_dentistas_por_ordem_alfabetica(void) {
             }
         }
 
-        // Exibe os dentistas ordenados
         for (int i = 0; i < contador; i++) {
             printf("    - Nome: %s\n", dados_dentistas[i][0]);
             printf("    - CPF: %s\n", dados_dentistas[i][1]);

@@ -85,17 +85,17 @@ int validar_cpf(const char *cpf) {
     }
 
     if ((cpf[10] - '0') != digito2) {
-        return 0;  // CPF inválido
+        return 0;  
     }
 
-    return 1;  // CPF válido
+    return 1;  
 }
 
 
 int validar_telefone(const char *telefone) {
     int tamanho = strlen(telefone);
 
-    // Verifica o formato "(xx)xxxxx-xxxx"
+
     if (tamanho == 14 && telefone[0] == '(' && telefone[3] == ')' && telefone[9] == '-') {
         for (int i = 1; i < 3; i++) {
             if (!isdigit(telefone[i])) return 0;
@@ -109,7 +109,6 @@ int validar_telefone(const char *telefone) {
         return 1;
     }
 
-    // Verifica o formato "xxxxxxxxxxx"
     if (tamanho == 11) {
         for (int i = 0; i < tamanho; i++) {
             if (!isdigit(telefone[i])) return 0;
@@ -117,7 +116,7 @@ int validar_telefone(const char *telefone) {
         return 1;
     }
 
-    return 0; // Não está em nenhum dos formatos válidos
+    return 0; 
 }
 
 // MÓDULOS AGENDAMENTOS
