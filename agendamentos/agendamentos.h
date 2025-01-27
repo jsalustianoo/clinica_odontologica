@@ -2,7 +2,7 @@
 #define AGENDAMENTOS_H
 
 struct agendamentos{
-    int* id; 
+    char* id; 
     char* cpf_paci; 
     char* cpf_dent; 
     char* data_agendamento;

@@ -121,36 +121,28 @@ int validar_telefone(const char *telefone) {
 }
 
 // MÓDULOS AGENDAMENTOS
-    int validar_data(int dia, int mes, int ano) {
+int validar_data_agendamento(char* data_agendamento) {
+    int mes, dia, ano;
     
-        if (ano < 1900 || ano > 2100) return 0; // Verifica se o ano está dentro de um intervalo razoável
-
-        if (mes < 1 || mes > 12) return 0; // Verifica se o mês é válido
-
-        int dias_no_mes[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; // Array com o número de dias de cada mês (considerando ano não bissexto)
-
-        if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) { // Ajusta fevereiro para 29 dias se o ano for bissexto
-            dias_no_mes[1] = 29;
-        }
-
-        if (dia < 1 || dia > dias_no_mes[mes - 1]) return 0; // Verifica se o dia está dentro do limite para o mês dado
-
-        // Obtém a data atual
-        time_t t = time(NULL); 
-        struct tm *data_atual = localtime(&t);
-
-        int dia_atual = data_atual->tm_mday;
-        int mes_atual = data_atual->tm_mon + 1; // Meses vão de 0 a 11
-        int ano_atual = data_atual->tm_year + 1900;
-
-        if (ano < ano_atual ||// Verifica se a data fornecida é anterior à data atual
-            (ano == ano_atual && mes < mes_atual) ||
-            (ano == ano_atual && mes == mes_atual && dia < dia_atual)) {
-            return 0;
-        }
-
-        return 1; // Data válida
+    // Verificando se a data está no formato MM/DD/AAAA
+    if (sscanf(data_agendamento, "%2d/%2d/%4d", &mes, &dia, &ano) != 3) {
+        return 0; // Formato inválido
     }
+
+    // Obtendo a data atual
+    time_t t = time(NULL);
+    struct tm data_atual = *localtime(&t);
+
+    // Verificando se a data digitada é maior ou igual à data atual
+    if (ano < data_atual.tm_year + 1900 || 
+        (ano == data_atual.tm_year + 1900 && mes < data_atual.tm_mon + 1) || 
+        (ano == data_atual.tm_year + 1900 && mes == data_atual.tm_mon + 1 && dia < data_atual.tm_mday)) {
+        return 0; // Data no passado
+    }
+
+    return 1; // Data válida
+}
+
 
     int validar_horario(const char *horario) {
         int horas, minutos;
