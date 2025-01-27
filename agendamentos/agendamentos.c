@@ -171,7 +171,6 @@ void exibir_dados_agendamento(void) {
         fgets(pagamento, sizeof(pagamento), arquivo);
         fgets(situacao, sizeof(situacao), arquivo);
 
-        // Remove o '\n' de cada linha lida
         id[strcspn(id, "\n")] = '\0';
         cpf_paci[strcspn(cpf_paci, "\n")] = '\0';
         nome_paci[strcspn(nome_paci, "\n")] = '\0';
@@ -182,22 +181,22 @@ void exibir_dados_agendamento(void) {
         pagamento[strcspn(pagamento, "\n")] = '\0';
         situacao[strcspn(situacao, "\n")] = '\0';
 
-        // Verifica se o ID do agendamento corresponde ao solicitado
         if (strcmp(id, id_procurado) == 0) {
             encontrado = 1;
-            // Exibe os dados do agendamento
-            printf("\n============================== Agendamento ==============================\n");
-            printf("ID: %s\n", id);
-            printf("CPF do Paciente: %s\n", cpf_paci);
-            printf("Nome do Paciente: %s\n", nome_paci);
-            printf("CPF do Dentista: %s\n", cpf_dent);
-            printf("Nome do Dentista: %s\n", nome_dent);
-            printf("Data do Agendamento: %s\n", data_agendamento);
-            printf("Horário: %s\n", horario);
-            printf("Forma de Pagamento: %s\n", pagamento);
-            printf("Situação: %s\n", situacao);
-            printf("==========================================================================\n");
-            printf("-----                   Agendamento visualizado com sucesso!            -----\n");
+
+            printf("\n");
+            printf("      - (ID): %s\n", id);
+            printf("      - (CPF do Paciente): %s\n", cpf_paci);
+            printf("      - (Nome do Paciente): %s\n", nome_paci);
+            printf("      - (CPF do Dentista): %s\n", cpf_dent);
+            printf("      - (Nome do Dentista): %s\n", nome_dent);
+            printf("      - (Data do Agendamento): %s\n", data_agendamento);
+            printf("      - (Horário): %s\n", horario);
+            printf("      - (Forma de Pagamento): %s\n", pagamento);
+            printf("      - (Situação): %s\n", situacao);
+            printf("===============================================================================\n");
+            printf("-----                   Agendamento visualizado com sucesso!              -----\n");
+            printf("===============================================================================\n");
             break;
         }
     }
@@ -235,9 +234,9 @@ void excluir_agendamento(void) {
     int confirmacao;
 
     // Solicita o ID do agendamento
-    printf("=================================================================================\n");
+    printf("===================================================================================\n");
     printf("------                            Excluir Agendamento                        ------\n");
-    printf("=================================================================================\n");
+    printf("===================================================================================\n");
     printf("      - (ID do Agendamento): ");
     fgets(id_procurado, sizeof(id_procurado), stdin);
     id_procurado[strcspn(id_procurado, "\n")] = '\0'; 
@@ -291,7 +290,7 @@ void excluir_agendamento(void) {
             if (confirmacao == 1) {
                 encontrado = 1;
                 printf("===================================================================================\n");
-                printf("-----                 Agendamento excluído com sucesso!                       -----\n");
+                printf("-----                    Agendamento excluído com sucesso!                     -----\n");
                 printf("===================================================================================\n");
                 continue;  // Não escreve o agendamento no arquivo temporário
             } else {
