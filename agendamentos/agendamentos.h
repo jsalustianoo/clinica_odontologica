@@ -2,14 +2,15 @@
 #define AGENDAMENTOS_H
 
 struct agendamentos{
-    char id[10]; 
-    char nome[45]; 
-    char cpf[14]; 
-    char dentista[45]; 
-    char horario[6];
-    char pagamento[9]; 
-    char situacao[11];
-    int dia, mes, ano;
+    int* id; 
+    char* cpf_paci; 
+    char* cpf_dent; 
+    char* data_agendamento;
+    char* horario;
+    char* pagamento; 
+    char* situacao;
+    char* nome_paci; 
+    char* nome_dent; 
 };
 
 void menu_agendamento (void);

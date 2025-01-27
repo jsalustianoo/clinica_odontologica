@@ -53,30 +53,69 @@ void agendar (void) {
 
     criar = (Agendamento*)malloc(sizeof(Agendamento));
 
+    criar->id = (int*)malloc(sizeof(int));
+    if (criar->id == NULL) {
+        printf("Erro na alocação de memória do ID!");
+    }
+
+    criar->cpf_paci = (char*)malloc(100 * sizeof(char));
+    if(criar->cpf_paci == NULL){
+        printf("Erro na alocação de memória do CPF do Paciente!");
+    }
+
+    criar->cpf_dent = (char*)malloc(100 * sizeof(char));
+    if(criar->cpf_dent == NULL){
+        printf("Erro na alocação de memória do CPF do Dentista!");
+    }
+
+    criar->data_agendamento = (char*)malloc(100 * sizeof(char));
+    if(criar->data_agendamento == NULL){
+        printf("Erro na alocação de memória da Data do Agendamento!");
+    }
+
+    criar->horario = (char*)malloc(100 * sizeof(char));
+    if(criar->horario == NULL){
+        printf("Erro na alocação de memória do Horário!");
+    }
+
+    criar->pagamento = (char*)malloc(100 * sizeof(char));
+    if(criar->pagamento == NULL){
+        printf("Erro na alocação de memória do Pagamento!");
+    }
+
+    criar->situacao = (char*)malloc(100 * sizeof(char));
+    if(criar->situacao == NULL){
+        printf("Erro na alocação de memória da Situação!");
+    }
+
+    criar->nome_paci = (char*)malloc(100 * sizeof(char));
+    if(criar->nome_paci == NULL){
+        printf("Erro na alocação de memória do Nome do Paciente!");
+    }
+
+    criar->nome_dent = (char*)malloc(100 * sizeof(char));
+    if(criar->nome_dent == NULL){
+        printf("Erro na alocação de memória do Nome do Dentista!");
+    }
+
     system("clear||cls");
     printf("\n");
     printf("=================================================================================\n");
     printf("------                         Realizar Agendamento                        ------\n");
     printf("=================================================================================\n");
-    printf("------      (ID): ");
-    scanf("%s", criar->id);
-    getchar();
-    salvar_nome_paciente(criar->nome);
-    getchar();
-    salvar_cpf(criar->cpf);
-    getchar();
-    salvar_dentista(criar->dentista);
-    getchar();
-    salvar_data(&criar->dia, &criar->mes, &criar->ano);
-    salvar_horario(criar->horario);
-    getchar();
-    salvar_pagamento(criar->pagamento);
-    getchar();
-    salvar_situacao(criar->situacao);
+
+    salvar_cpf_paci(criar->cpf_paci);
+    verificar_cpf_paciente(criar->cpf_paci, criar->nome_paci);
     getchar();
 
+    salvar_cpf_dent(criar->cpf_dent);
+    verificar_cpf_dentista(criar->cpf_dent, criar->nome_dent);
+    printf("%s", criar->nome_dent);
+    getchar();
+
+
     ultimo = criar;
-    salvar_agendamento_em_arquivo_txt(criar->id, criar->nome, criar->cpf, criar->dentista, criar->dia, criar->mes, criar->ano, criar->horario, criar->pagamento, criar->situacao, "agendamentos.txt", ultimo);
+    salvar_agendamento_em_arquivo_txt(criar->cpf_paci, criar->nome_paci, criar->cpf_dent, criar->nome_dent, "agendamentos.txt", ultimo);
 
     printf("=================================================================================\n");
     printf("------                 Agendamento Realizado com Sucesso!                  ------\n");
@@ -86,68 +125,7 @@ void agendar (void) {
 }
 
 void exibir_dados_agendamento (void) {
-    system("clear||cls");
-    printf("\n");
 
-    char id_busca[10];
-    char id[10], nome[45], cpf[14], dentista[45], data[11], horario[6], pagamento[2], situacao[2];
-    int encontrado = 0;
-
-    printf("\n=================================================================================\n");
-    printf("------                        Visualizar Agendamentos                       ------\n");
-    printf("=================================================================================\n");
-    printf("------      Informe o ID do agendamento: ");
-    scanf("%s", id_busca);
-    getchar();
-
-    FILE* arquivo_agendamentos = fopen("agendamentos.txt", "r");
-    if (arquivo_agendamentos == NULL) {
-        printf("Erro ao abrir o arquivo de agendamentos.\n");
-        return;
-    }
-
-    while (fgets(id, sizeof(id), arquivo_agendamentos) != NULL) {
-        fgets(nome, sizeof(nome), arquivo_agendamentos);
-        fgets(cpf, sizeof(cpf), arquivo_agendamentos);
-        fgets(dentista, sizeof(dentista), arquivo_agendamentos);
-        fgets(data, sizeof(data), arquivo_agendamentos);
-        fgets(horario, sizeof(horario), arquivo_agendamentos);
-        fgets(pagamento, sizeof(pagamento), arquivo_agendamentos);
-        fgets(situacao, sizeof(situacao), arquivo_agendamentos);
-
-
-        id[strcspn(id, "\n")] = '\0';
-        nome[strcspn(nome, "\n")] = '\0';
-        cpf[strcspn(cpf, "\n")] = '\0';
-        dentista[strcspn(dentista, "\n")] = '\0';
-        data[strcspn(data, "\n")] = '\0';
-        horario[strcspn(horario, "\n")] = '\0';
-        pagamento[strcspn(pagamento, "\n")] = '\0';
-        situacao[strcspn(situacao, "\n")] = '\0';
-
-        if (strcmp(id, id_busca) == 0) {
-            encontrado = 1;
-            printf("=================================================================================\n");
-            printf("------      Nome:                %s\n", nome);
-            printf("------      CPF:                 %s\n", cpf);
-            printf("------      Dentista:            %s\n", dentista);
-            printf("------      Data do agendamento: %s\n", data);
-            printf("------      Horário:             %s\n", horario);
-            printf("------      Pagamento:            %s\n", pagamento);
-            printf("------      Situação:             %s\n", situacao);
-            printf("=================================================================================\n");
-            break;
-        }
-    }
-
-    fclose(arquivo_agendamentos);
-
-    if (!encontrado) {
-        printf("Agendamento com ID %s não encontrado.\n", id_busca);
-    }
-
-    printf("Tecle <ENTER> para continuar...");
-    getchar();
 }
 
 void editar_agendamento (void) {
@@ -165,57 +143,15 @@ void editar_agendamento (void) {
 }
 
 void excluir_agendamento (void) {
-    char confirmacao;
-    system("clear||cls");
-    printf("\n");
-    printf("=================================================================================\n");
-    printf("-----                          Excluir Agendamento                          -----\n");
-    printf("=================================================================================\n");
-    printf("------      (ID):                                                          ------\n");
-    printf("------      (Nome do Paciente):                                            ------\n");
-    printf("------      (CPF):                                                         ------\n"); 
-    printf("------      (Dentista):                                                    ------\n"); 
-    printf("------      (Data):                                                        ------\n");
-    printf("------      (Horário):                                                     ------\n");
-    printf("------      (Forma de Pagamento):                                          ------\n"); 
-    printf("------      (Situação):                                                    ------\n");
-    printf("------                                                                     ------\n"); 
-    printf("------   Tem certeza que deseja Excluir esse Agendamento? (S)IM | (N)AO    ------\n");
 
-    scanf(" %c", &confirmacao);
-    if (confirmacao == 'S' || confirmacao == 's'){
-        printf("------                  Agendamento excluído com sucesso!                  ------\n");
-    } else if (confirmacao == 'N' || confirmacao == 'n'){
-        printf("------                        Operacao cancelada!                          ------\n");
-    } else{
-        printf("------      Número digitado não condiz com nenhuma opção do sistema        ------\n");
-    }                     
-    printf("=================================================================================\n");
-    printf("      Tecle <ENTER> para continuar...");
-    getchar();
 }
 
-void salvar_nome_paciente(char *nome) {
-    int valido = 0; // Não válido
-    while (!valido) {
-        printf("------      (Nome do Paciente): ");
-        scanf(" %[^\n]", nome);
-        
-        if (validarNome(nome) == 1) { 
-            valido = 1; // Válido
-        } else {
-            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
-            while (getchar() != '\n'); 
-        }
-    }
-}
-
-void salvar_cpf(char *cpf){
+void salvar_cpf_paci(char* cpf_paci){
     int valido = 0;
     while (!valido){
-        printf("------      (CPF): ");
-        scanf("%s", cpf);
-        if(validar_cpf(cpf)){
+        printf("------      (CPF do Paciente): ");
+        scanf("%s", cpf_paci);
+        if(validar_cpf(cpf_paci)){
             valido = 1;
         } else{
             printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
@@ -223,120 +159,90 @@ void salvar_cpf(char *cpf){
     }
 }
 
-void salvar_dentista(char *nome) {
-    int valido = 0; // Não válido
-    while (!valido) {
-        printf("------      (Dentista): ");
-        scanf(" %[^\n]", nome);
+#define MAX_LINHA 200
+
+int verificar_cpf_paciente(char* cpf_paci, char* nome_paci) {
+    FILE* arquivo = fopen("pacientes.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo pacientes.txt\n");
+        return 0;
+    }
+
+    char linha[MAX_LINHA];
+    char nome[MAX_LINHA];
+    char cpf_lido[MAX_LINHA];
+
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        strcpy(nome, linha); 
+        if (fgets(cpf_lido, sizeof(cpf_lido), arquivo)) {
+            cpf_lido[strcspn(cpf_lido, "\n")] = '\0'; 
+
+            if (strcmp(cpf_paci, cpf_lido) == 0) {
+                nome[strcspn(nome, "\n")] = '\0'; 
+                strcpy(nome_paci, nome);
+                fclose(arquivo);
+                return 1;
+            }
+        }
         
-        if (validarNome(nome) == 1) { 
-            valido = 1; // Válido
-        } else {
-            printf("\n=========== Nome Inválido! Tente Novamente! ===========\n\n");
-            while (getchar() != '\n'); 
+        for (int i = 0; i < 4; i++) {
+            fgets(linha, sizeof(linha), arquivo);
+        }
+    }
+
+    fclose(arquivo);
+    return 0;
+}
+
+void salvar_cpf_dent(char* cpf_dent){
+    int valido = 0;
+    while (!valido){
+        printf("------      (CPF do Dentista): ");
+        scanf("%s", cpf_dent);
+        if(validar_cpf(cpf_dent)){
+            valido = 1;
+        } else{
+            printf("\n=========== CPF Inválido! Tente Novamente! ===========\n\n");
         }
     }
 }
 
-// Usei chatGPT
-void salvar_data(int *dia, int *mes, int *ano) {
-    char data[11]; // Suporte para "MMDDYYYY" ou "MM/DD/YYYY"
-    int data_valida = 0;
+#define MAX_LINHA 200
 
-    while (!data_valida) {
-        printf("------      (Data, MM/DD/AAAA ou MMDDAAAA): ");
-        scanf("%10s", data); // Lê até 10 caracteres
+int verificar_cpf_dentista(char* cpf_dent, char* nome_dent) {
+    FILE* arquivo = fopen("dentistas.txt", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo dentistas.txt\n");
+        return 0;
+    }
 
-        // Remover barras, se existirem
-        char data_limpa[9];
-        int j = 0;
-        for (int i = 0; data[i] != '\0'; i++) {
-            if (data[i] != '/') {
-                data_limpa[j++] = data[i];
+    char linha[MAX_LINHA];
+    char nome[MAX_LINHA];
+    char cpf_lido[MAX_LINHA];
+
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        strcpy(nome, linha); 
+        if (fgets(cpf_lido, sizeof(cpf_lido), arquivo)) {
+            cpf_lido[strcspn(cpf_lido, "\n")] = '\0'; 
+
+            if (strcmp(cpf_dent, cpf_lido) == 0) {
+                nome[strcspn(nome, "\n")] = '\0'; 
+                strcpy(nome_dent, nome);
+                fclose(arquivo);
+                return 1;
             }
         }
-        data_limpa[j] = '\0';
 
-        // Verificar se a data tem exatamente 8 caracteres após limpeza
-        if (strlen(data_limpa) == 8) {
-            *mes = atoi(strndup(data_limpa, 2));     // Extrai MM
-            *dia = atoi(strndup(data_limpa + 2, 2)); // Extrai DD
-            *ano = atoi(data_limpa + 4);            // Extrai YYYY
-
-            if (validar_data(*dia, *mes, *ano)) {
-                data_valida = 1;
-            } else {
-                printf("\n=========== Data Inválida! Tente Novamente! ===========\n\n");
-            }
-        } else {
-            printf("\n=========== Formato Incorreto! Tente Novamente! ===========\n\n");
-
+        for (int i = 0; i < 3; i++) {
+            fgets(linha, sizeof(linha), arquivo);
         }
     }
+
+    fclose(arquivo);
+    return 0;
 }
 
-// Usei chatGPT
-void salvar_horario(char *horario) {
-    int horario_valido = 0;
-
-    while (!horario_valido) {
-        printf("------      (Horário, HH:MM): ");
-        scanf("%5s", horario); // Lê no máximo 5 caracteres para "HH:MM"
-
-        if (validar_horario(horario)) {
-            horario_valido = 1;
-        } else {
-            printf("\n=========== Horário Inválido! Tente Novamente! ===========\n\n");
-        }
-    }
-}
-
-void salvar_pagamento(char *pagamento){
-    int pagamento_valido = 0;
-    while(!pagamento_valido){
-        printf("\nEscolha dentre as opções: \n");
-        printf("\n      1 - Pix");
-        printf("\n      2 - Dinheiro");
-        printf("\n      3 - Cartão");
-        printf("\n\n------      (Forma de Pagamento): ");
-        scanf("%s", pagamento);
-
-        if(strcmp(pagamento, "1") == 0){
-            pagamento_valido = 1;
-        }else if(strcmp(pagamento, "2") == 0){
-            pagamento_valido = 1;
-        }else if(strcmp(pagamento, "3") == 0){
-            pagamento_valido = 1;
-        }else{
-            printf("\n=========== Forma de Pagamento Inválida! Tente Novamente! ===========\n\n");
-        }
-    }    
-    
-}
-
-void salvar_situacao(char *situacao){
-    int situacao_valida = 0;
-    while(!situacao_valida){
-        printf("\nEscolha dentre as opções: \n");
-        printf("\n      1 - Agendado");
-        printf("\n      2 - Finalizado");
-        printf("\n      3 - Cancelado");
-        printf("\n\n------      (Situação): ");
-        scanf("%s", situacao);
-
-        if(strcmp(situacao, "1") == 0){
-            situacao_valida = 1;
-        }else if(strcmp(situacao, "2") == 0){
-            situacao_valida = 1;
-        }else if(strcmp(situacao, "3") == 0){
-            situacao_valida = 1;
-        }else{
-            printf("\n=========== Situação Inválida! Tente Novamente! ===========\n\n");
-        }
-    }
-}
-
-void salvar_agendamento_em_arquivo_txt(char* id, char* nome, char* cpf, char* dentista, int dia, int mes, int ano, char* horario, char* pagamento, char* situacao, char* nome_arquivo, Agendamento* ultimo){
+void salvar_agendamento_em_arquivo_txt(char* cpf_paci, char* nome_paci, char* cpf_dent, char* nome_dent, char* nome_arquivo, Agendamento* ultimo){
     FILE* arquivo_agendamentos = fopen(nome_arquivo, "a");
     if (arquivo_agendamentos == NULL) {
         printf("Erro ao abrir o arquivo %s\n", nome_arquivo);
@@ -344,14 +250,10 @@ void salvar_agendamento_em_arquivo_txt(char* id, char* nome, char* cpf, char* de
     }
 
     Agendamento* auxiliar = ultimo;
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->id);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->nome);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->cpf);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->dentista);
-    fprintf(arquivo_agendamentos, "%02d/%02d/%04d\n", dia, mes, ano);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->horario);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->pagamento);
-    fprintf(arquivo_agendamentos, "%s\n", auxiliar->situacao);
     
+    fprintf(arquivo_agendamentos, "%s\n", auxiliar->cpf_paci);
+    fprintf(arquivo_agendamentos, "%s\n", auxiliar->nome_paci);
+    fprintf(arquivo_agendamentos, "%s\n", auxiliar->cpf_dent);
+    fprintf(arquivo_agendamentos, "%s\n", auxiliar->nome_dent);
     fclose(arquivo_agendamentos);
 }
